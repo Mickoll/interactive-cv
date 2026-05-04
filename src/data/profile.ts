@@ -23,6 +23,8 @@ export type SkillGroup = {
   name: string;
   level: string;
   icon: LucideIcon;
+  operatingMode: string;
+  output: string;
   items: string[];
 };
 
@@ -41,12 +43,27 @@ export type CaseStudy = {
   eyebrow: string;
   summary: string;
   problem: string;
+  role: string;
+  output: string;
+  constraints: string[];
   built: string[];
   stack: string[];
   value: string[];
   proof: string[];
+  proves: string[];
   metrics: string[];
   icon: LucideIcon;
+  accent: "amber" | "emerald" | "cyan" | "blue";
+};
+
+export type ValueNode = {
+  id: string;
+  label: string;
+  title: string;
+  detail: string;
+  icon: LucideIcon;
+  x: number;
+  y: number;
   accent: "amber" | "emerald" | "cyan" | "blue";
 };
 
@@ -71,7 +88,7 @@ export const profile = {
   ],
   recruiterSnapshot: [
     { label: "Role fit", value: "Implementation, RevOps, Product Ops, BI" },
-    { label: "Salary target", value: "EUR 40k-45k Spain/EU; higher contractor" },
+    { label: "Availability", value: "Open to remote EU, UK, and global roles" },
     { label: "Languages", value: "Spanish native, English C2, Portuguese C1" },
     { label: "Work style", value: "Remote, analytical, stakeholder-facing" },
   ],
@@ -112,39 +129,137 @@ export const signalCards = [
 export const skillGroups: SkillGroup[] = [
   {
     name: "Operations",
-    level: "Lead",
+    level: "Control layer",
     icon: Workflow,
+    operatingMode: "Map the work",
+    output: "Clear workflows, ownership, and KPIs",
     items: ["workflow mapping", "KPI analysis", "QA/QC", "process improvement"],
   },
   {
     name: "Data",
-    level: "Build",
+    level: "Data layer",
     icon: Database,
+    operatingMode: "Structure the mess",
+    output: "Tables, validations, dashboards, reports",
     items: ["SQL", "Python", "ETL", "dashboards", "validation pipelines"],
   },
   {
     name: "SaaS/Product",
-    level: "Translate",
+    level: "Translation layer",
     icon: Sparkles,
+    operatingMode: "Connect users and systems",
+    output: "Better product decisions and implementation clarity",
     items: ["pricing analysis", "product troubleshooting", "customer enablement", "RevOps"],
   },
   {
     name: "Web systems",
-    level: "Ship",
+    level: "Interface layer",
     icon: Network,
+    operatingMode: "Make the workflow usable",
+    output: "React/Next/FastAPI tools people can operate",
     items: ["React", "TypeScript", "Next.js", "FastAPI", "REST APIs"],
   },
   {
     name: "Documents",
-    level: "Automate",
+    level: "Evidence layer",
     icon: FileCheck2,
+    operatingMode: "Turn files into outputs",
+    output: "DOCX/PDF/Excel automation and traceability",
     items: ["PDF extraction", "DOCX generation", "OCR", "Excel normalization"],
   },
   {
     name: "Markets",
-    level: "Analyze",
+    level: "Decision layer",
     icon: BarChart3,
+    operatingMode: "Find the signal",
+    output: "Pricing context, market reports, competitor views",
     items: ["pricing intelligence", "market research", "competitor analysis", "reports"],
+  },
+];
+
+export const valueNodes: ValueNode[] = [
+  {
+    id: "operations",
+    label: "Ops",
+    title: "Operations",
+    detail: "Maps real workflows, bottlenecks, KPIs, stakeholders, and handoffs before building.",
+    icon: Workflow,
+    x: 17,
+    y: 52,
+    accent: "emerald",
+  },
+  {
+    id: "data",
+    label: "Data",
+    title: "Structured data",
+    detail: "Turns spreadsheets, PDFs, market pages, and operational exports into clean tables and checks.",
+    icon: Database,
+    x: 37,
+    y: 24,
+    accent: "cyan",
+  },
+  {
+    id: "product",
+    label: "Product",
+    title: "SaaS/product translation",
+    detail: "Converts customer/product ambiguity into requirements, workflows, and better implementation decisions.",
+    icon: Sparkles,
+    x: 61,
+    y: 33,
+    accent: "amber",
+  },
+  {
+    id: "documents",
+    label: "Docs",
+    title: "Document automation",
+    detail: "Builds repeatable outputs from inspection evidence, QA/QC records, templates, OCR, and reports.",
+    icon: FileCheck2,
+    x: 77,
+    y: 58,
+    accent: "blue",
+  },
+  {
+    id: "markets",
+    label: "Markets",
+    title: "Market intelligence",
+    detail: "Connects pricing, competitor behavior, property data, and confidence signals to decisions.",
+    icon: LineChart,
+    x: 53,
+    y: 76,
+    accent: "cyan",
+  },
+  {
+    id: "web",
+    label: "Web",
+    title: "Usable web tools",
+    detail: "Ships dashboards, PWAs, local-first tools, and interfaces that make the workflow operational.",
+    icon: Network,
+    x: 28,
+    y: 78,
+    accent: "amber",
+  },
+];
+
+export const workflowStages = [
+  {
+    label: "messy inputs",
+    detail: "PDFs, spreadsheets, screenshots, exports, market pages, support questions",
+  },
+  {
+    label: "workflow logic",
+    detail: "rules, ownership, validation, states, source-of-truth decisions",
+  },
+  {
+    label: "structured data",
+    detail: "tables, catalogs, project records, clean entities, confidence signals",
+  },
+  {
+    label: "automated outputs",
+    detail: "dashboards, reports, PWA views, generated documents, exports",
+  },
+  {
+    label: "business decisions",
+    detail: "pricing, follow-up, QA review, implementation, operational action",
   },
 ];
 
@@ -193,6 +308,13 @@ export const caseStudies: CaseStudy[] = [
       "A local-first web platform that turns inspection projects, photos, annotations, OCR, catalogs, and templates into structured DOCX reports.",
     problem:
       "Inspection reporting can collapse into manual file handling, repeated Word edits, inconsistent issue catalogs, and weak traceability between photos, findings, and final reports.",
+    role: "Workflow designer and full-stack builder",
+    output: "Structured inspection report workflow with generated DOCX output",
+    constraints: [
+      "Needed to preserve reliability of an existing document-heavy process.",
+      "Had to keep evidence, annotations, issue catalogs, and report generation traceable.",
+      "Had to work locally without turning a field workflow into a fragile cloud dependency.",
+    ],
     built: [
       "React and TypeScript browser workflow for projects, front matter, assets, annotations, classifications, and generation settings.",
       "FastAPI backend with local-first project storage, uploaded assets, processed images, catalog backups, and generated reports.",
@@ -205,6 +327,11 @@ export const caseStudies: CaseStudy[] = [
       "Created a path from desktop/manual workflows toward a browser-based operations tool.",
     ],
     proof: ["API surface for projects/assets/catalogs/reports", "Local-first storage model", "Generated report workflow"],
+    proves: [
+      "Can model a messy operational process before writing UI.",
+      "Can connect user workflow, file handling, APIs, and document automation.",
+      "Can build tools that feel closer to internal products than one-off scripts.",
+    ],
     metrics: ["DOCX output", "OCR", "asset workflow"],
     icon: FileCheck2,
     accent: "amber",
@@ -218,6 +345,13 @@ export const caseStudies: CaseStudy[] = [
       "A deployed Next.js PWA for renewable-energy project visits, report status, contacts, dashboards, maps, CSV/Excel import, and operational follow-up.",
     problem:
       "Field and advisory workflows need one reliable place to track visits, pending reports, contacts, expenses, project status, and operational handoffs across advisors.",
+    role: "Product builder and workflow organizer",
+    output: "Deployed PWA for visits, reports, contacts, maps, imports, and operational follow-up",
+    constraints: [
+      "Needed to serve daily operational use, not just look good in a demo.",
+      "Had to support several views of the same work: calendar, projects, reports, contacts, maps, and expenses.",
+      "Had to handle practical imports and editable records while remaining deployable on Vercel.",
+    ],
     built: [
       "Next.js 16 and TypeScript PWA with dashboard KPIs, calendar views, project tables, contact directory, maps, expenses, reports, and settings.",
       "CSV/Excel import, editable visit details, filters by year/month/advisor/client/status, and visual report progress.",
@@ -230,6 +364,11 @@ export const caseStudies: CaseStudy[] = [
       "Gives recruiters a live proof point for implementation and product operations roles.",
     ],
     proof: ["Live Vercel app", "PWA", "CSV/Excel import", "dashboard filters", "QA scripts"],
+    proves: [
+      "Can create an organizer around a real business workflow.",
+      "Can translate field operations into product navigation and data states.",
+      "Can ship and verify a deployed Next.js application.",
+    ],
     metrics: ["deployed", "PWA", "multi-view"],
     icon: CalendarCheck,
     accent: "emerald",
@@ -243,6 +382,13 @@ export const caseStudies: CaseStudy[] = [
       "A real-estate pricing intelligence MVP for a fragmented market with scraping, ETL, geospatial storage, deduplication, confidence metrics, dashboards, and reports.",
     problem:
       "Real-estate pricing data is inconsistent, duplicated, geographically messy, and affected by currency volatility. A useful product needs raw observations, normalized metrics, and confidence signals.",
+    role: "Data product designer and pipeline builder",
+    output: "Market intelligence pipeline with geospatial storage, dashboards, and reporting flows",
+    constraints: [
+      "Sources were fragmented, inconsistent, and not equally trustworthy.",
+      "Published metrics needed to stay separate from raw captured observations.",
+      "Geography, currency context, freshness, and duplicate listings all affected trust.",
+    ],
     built: [
       "Multi-source ingestion architecture with source-mode controls, raw archive, and current-state cache.",
       "PostgreSQL/PostGIS data model for listing observations, entities, zone dictionaries, and geospatial analysis.",
@@ -255,6 +401,11 @@ export const caseStudies: CaseStudy[] = [
       "Demonstrated data engineering, analytics, product thinking, and market-domain reasoning.",
     ],
     proof: ["multi-source ingestion", "geospatial model", "freshness metrics", "report generation"],
+    proves: [
+      "Can think like a data product owner, not only a scraper builder.",
+      "Can design around data trust, source quality, and operational usefulness.",
+      "Can connect market logic, databases, dashboards, and reports.",
+    ],
     metrics: ["ETL", "PostGIS", "market reports"],
     icon: Building2,
     accent: "cyan",
@@ -268,6 +419,13 @@ export const caseStudies: CaseStudy[] = [
       "Automated industrial QA/QC and equipment-data workflows by extracting, validating, normalizing, and tracing information from Excel and PDF sources.",
     problem:
       "Industrial documentation often lives across inconsistent spreadsheets, large PDF sets, repeated references, and manual validation, making traceability hard to trust.",
+    role: "Industrial data automation builder",
+    output: "Traceable QA/QC and equipment-data workflow from documents to validated outputs",
+    constraints: [
+      "Inputs were document-heavy, inconsistent, and hard to audit manually.",
+      "Outputs needed to preserve traceability and reviewability.",
+      "The solution had to support validation, not just extraction.",
+    ],
     built: [
       "Master document index generation from Excel and PDF sources.",
       "Closed catalogs, normalization rules, coverage maps, anomaly reports, validation summaries, and final Excel deliverables.",
@@ -280,6 +438,11 @@ export const caseStudies: CaseStudy[] = [
       "Demonstrated fit for implementation, operations analysis, industrial data, and technical product roles.",
     ],
     proof: ["master index", "validation outputs", "coverage map", "QA approval flow"],
+    proves: [
+      "Can bring industrial engineering judgment into data automation work.",
+      "Can build reviewable pipelines for high-friction document workflows.",
+      "Can improve operational trust without inventing fake precision.",
+    ],
     metrics: ["traceability", "validation", "indexed PDFs"],
     icon: ShieldCheck,
     accent: "blue",
@@ -298,4 +461,3 @@ export const roleFit = [
 export function getCaseStudy(slug: string) {
   return caseStudies.find((caseStudy) => caseStudy.slug === slug);
 }
-

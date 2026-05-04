@@ -1,10 +1,11 @@
 import { CommandCenter } from "@/components/CommandCenter";
-import { CaseStudyMap, MissionTimeline, RecruiterPanel, SkillMatrix } from "@/components/Sections";
+import { CaseStudyMap, MissionTimeline, RecruiterPanel, SkillMatrix, ValuePipeline } from "@/components/Sections";
 
 export default function HomePage() {
   return (
     <main>
       <CommandCenter />
+      <ValuePipeline />
       <MissionTimeline />
       <SkillMatrix />
       <CaseStudyMap />
@@ -12,4 +13,3 @@ export default function HomePage() {
     </main>
   );
 }
-

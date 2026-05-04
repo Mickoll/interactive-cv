@@ -50,14 +50,15 @@ export function CaseStudyVisual({
   return (
     <div
       className={clsx(
-        "relative overflow-hidden rounded-md border bg-white shadow-sm",
+        "case-module relative overflow-hidden rounded-xl border bg-white shadow-sm",
         accent.border,
         compact ? "min-h-44" : "min-h-72"
       )}
       aria-label={`${caseStudy.title} visual summary`}
     >
       <div className="absolute inset-0 command-grid opacity-70" />
-      <div className="relative flex h-full min-h-inherit flex-col gap-4 p-4">
+      <div className="absolute inset-x-0 top-0 h-1.5" style={{ background: accent.fill }} />
+      <div className={clsx("relative flex h-full flex-col gap-4 p-4 pt-5", compact ? "min-h-44" : "min-h-72")}>
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className={clsx("inline-flex items-center gap-2 rounded px-2 py-1 text-xs font-semibold", accent.bg, accent.text)}>
@@ -71,7 +72,7 @@ export function CaseStudyVisual({
           </div>
         </div>
 
-        <svg className="h-28 w-full" viewBox="0 0 360 132" role="img" aria-label="Abstract workflow diagram">
+        <svg className="h-28 w-full overflow-visible" viewBox="0 0 360 132" role="img" aria-label="Abstract workflow diagram">
           <defs>
             <pattern id={`dots-${caseStudy.slug}`} x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
               <circle cx="2" cy="2" r="1.4" fill="#cbd5e1" />
@@ -79,7 +80,7 @@ export function CaseStudyVisual({
           </defs>
           <rect width="360" height="132" rx="6" fill="#f8fafc" />
           <rect width="360" height="132" rx="6" fill={`url(#dots-${caseStudy.slug})`} opacity="0.55" />
-          <path d="M53 69 C96 20 132 110 177 63 S251 50 311 81" fill="none" stroke={accent.fill} strokeWidth="5" strokeLinecap="round" />
+          <path className="pulse-path" d="M53 69 C96 20 132 110 177 63 S251 50 311 81" fill="none" stroke={accent.fill} strokeWidth="5" strokeLinecap="round" />
           <path d="M53 92 C110 72 133 98 176 82 S250 105 311 54" fill="none" stroke="#0f172a" strokeWidth="2" strokeDasharray="6 8" opacity="0.28" />
           {[52, 176, 310].map((x, index) => (
             <g key={x}>
@@ -110,7 +111,7 @@ export function FlowStrip() {
     { label: "messy inputs", icon: FileText },
     { label: "structured data", icon: Database },
     { label: "workflow logic", icon: Workflow },
-    { label: "business output", icon: CircleDot },
+    { label: "automated output", icon: CircleDot },
   ];
 
   return (
@@ -118,7 +119,7 @@ export function FlowStrip() {
       {steps.map((step, index) => {
         const Icon = step.icon;
         return (
-          <div key={step.label} className="flex items-center gap-3 rounded-md border border-slate-200 bg-white px-3 py-3 shadow-sm">
+          <div key={step.label} className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md">
             <Icon className="h-5 w-5 text-emerald-600" />
             <span className="text-sm font-semibold text-slate-800">{step.label}</span>
             {index < steps.length - 1 ? <ArrowRight className="ml-auto hidden h-4 w-4 text-slate-300 md:block" /> : null}
@@ -129,3 +130,48 @@ export function FlowStrip() {
   );
 }
 
+export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
+  const accent = accentFor(caseStudy.accent);
+  const blocks = ["Inputs", "Rules", "Data model", "Interface", "Output"];
+
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">System designed</p>
+          <h3 className="mt-1 text-lg font-black text-slate-950">Problem to operating system</h3>
+        </div>
+        <span className={clsx("rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em]", accent.bg, accent.text)}>
+          {caseStudy.shortTitle}
+        </span>
+      </div>
+
+      <svg className="h-56 w-full" viewBox="0 0 720 250" role="img" aria-label={`${caseStudy.title} architecture visualization`}>
+        <defs>
+          <marker id={`arrow-${caseStudy.slug}`} viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill={accent.fill} />
+          </marker>
+        </defs>
+        <rect width="720" height="250" rx="18" fill="#f8fafc" />
+        <path d="M60 124 H660" stroke={accent.fill} strokeWidth="3" strokeDasharray="10 12" markerEnd={`url(#arrow-${caseStudy.slug})`} />
+        {blocks.map((block, index) => {
+          const x = 42 + index * 132;
+          const y = index % 2 === 0 ? 62 : 142;
+          return (
+            <g key={block}>
+              <rect x={x} y={y} width="112" height="54" rx="12" fill="white" stroke={index === 2 ? accent.fill : "#cbd5e1"} strokeWidth={index === 2 ? "3" : "1.5"} />
+              <text x={x + 56} y={y + 23} textAnchor="middle" fontSize="13" fontWeight="800" fill="#0f172a">
+                {block}
+              </text>
+              <text x={x + 56} y={y + 39} textAnchor="middle" fontSize="10" fontWeight="700" fill="#64748b">
+                {index === 0 ? "messy" : index === 4 ? "usable" : "structured"}
+              </text>
+            </g>
+          );
+        })}
+        <circle cx="360" cy="124" r="34" fill={accent.soft} stroke={accent.fill} strokeWidth="3" />
+        <circle cx="360" cy="124" r="9" fill={accent.fill} />
+      </svg>
+    </div>
+  );
+}
