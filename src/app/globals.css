@@ -71,10 +71,6 @@ a {
   animation: radar-sweep 13s linear infinite;
 }
 
-.constellation-node {
-  transform-origin: center;
-}
-
 .orbit-path {
   stroke-dasharray: 8 7;
   animation: orbit-flow 12s linear infinite;

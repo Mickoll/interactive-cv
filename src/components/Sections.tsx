@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowDownToLine,
   ArrowRight,
@@ -22,10 +21,10 @@ export function ValuePipeline() {
           <div>
             <p className="section-kicker text-emerald-700">How I create value</p>
             <h2 className="mt-3 max-w-xl text-4xl font-black leading-tight text-slate-950">
-              A repeatable way to turn scattered work into decisions.
+              Inputs in. Useful outputs out.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">
-              Most projects start with scattered files, unclear states, and manual handoffs. The work is to capture the inputs, define the rules, structure the data, and make the next action obvious.
+              The pattern is simple: collect the work, clean the data, automate the output, and make the next action obvious.
             </p>
           </div>
 
@@ -62,11 +61,11 @@ export function MissionTimeline() {
           <div className="max-w-3xl">
             <p className="section-kicker text-cyan-700">Career route</p>
             <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950">
-              Operator judgment first, systems execution second.
+              Operations background. Software execution.
             </h2>
           </div>
           <p className="max-w-xl text-base leading-7 text-slate-600">
-            A recruiter should quickly see why this profile fits hybrid roles: operations judgment, SaaS context, and enough technical execution to build the missing workflow.
+            The useful combination: real operations experience, SaaS/product context, and enough technical execution to build working tools.
           </p>
         </div>
 
@@ -109,19 +108,22 @@ export function CaseStudyMap() {
           <div>
             <p className="section-kicker text-amber-700">Product modules</p>
             <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950">
-              Four projects framed as operational systems.
+              Four practical tools.
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-600">
-              Each project is framed around the problem, system designed, output, and hiring signal.
+              Reporting, solar workflow tracking, pricing intelligence, and QA document automation.
             </p>
-            <div className="mt-6 overflow-hidden rounded-lg border border-slate-200">
-              <Image
-                alt="Case study module art direction reference"
-                className="h-full w-full object-cover opacity-90"
-                height={941}
-                src="/images/case-study-grid-reference.png"
-                width={1672}
-              />
+            <div className="mt-6 grid gap-2">
+              {caseStudies.map((caseStudy) => (
+                <Link
+                  key={caseStudy.slug}
+                  className="group flex items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300"
+                  href={`/case-studies/${caseStudy.slug}`}
+                >
+                  {caseStudy.shortTitle}
+                  <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -145,10 +147,7 @@ export function CaseStudyMap() {
                     </Link>
                   </div>
 
-                  <div className="mt-4 grid gap-3">
-                    <MiniProof label="Problem" value={caseStudy.problem} />
-                    <MiniProof label="Output" value={caseStudy.output} />
-                  </div>
+                  <MiniProof label="Output" value={caseStudy.output} />
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     {caseStudy.stack.slice(0, 5).map((tech) => (
@@ -182,12 +181,12 @@ export function SkillMatrix() {
       <div className="mx-auto max-w-[1500px] px-4 py-16 md:px-8 lg:px-10">
         <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
           <div>
-            <p className="section-kicker text-emerald-700">Operating system</p>
+            <p className="section-kicker text-emerald-700">Toolkit</p>
             <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950">
-              Skills organized by what they make possible.
+              Skills by output.
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-600">
-              This keeps the site recruiter-readable while showing how the skills combine: layers, inputs, outputs, and operating modes.
+              No long keyword wall. Just the work each skill group supports.
             </p>
           </div>
 
@@ -232,10 +231,10 @@ export function RecruiterPanel() {
         <div>
           <p className="section-kicker text-emerald-300">Recruiter mode</p>
           <h2 className="mt-3 max-w-2xl text-4xl font-black leading-tight">
-            Fast answer: he understands operations and can build the missing workflow.
+            Fast answer: operations person who can build the tool.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">
-            Best fit: implementation, solutions, product operations, RevOps, BI/data, and technical product roles where business process, data, stakeholders, and hands-on systems meet.
+            Best fit: implementation, solutions, product ops, RevOps, BI/data, and technical product roles.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a className="mission-button bg-white text-slate-950 hover:bg-emerald-100" href={profile.cvUrl}>

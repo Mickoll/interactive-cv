@@ -109,25 +109,25 @@ export const profile = {
 
 export const signalCards = [
   {
-    label: "Business operator",
+    label: "Ops",
     value: "107",
     detail: "people led in Amazon operations",
     icon: BriefcaseBusiness,
   },
   {
-    label: "Revenue lens",
+    label: "SaaS",
     value: "2 yrs",
     detail: "SaaS pricing and revenue workflows",
     icon: LineChart,
   },
   {
-    label: "Builder track",
+    label: "Projects",
     value: "4",
     detail: "featured automation/data projects",
     icon: Workflow,
   },
   {
-    label: "Remote ready",
+    label: "Languages",
     value: "C2",
     detail: "English, plus Spanish and Portuguese",
     icon: Globe2,
@@ -251,23 +251,23 @@ export const valueNodes: ValueNode[] = [
 export const workflowStages = [
   {
     label: "raw inputs",
-    detail: "PDFs, spreadsheets, screenshots, exports, market pages, support questions",
+    detail: "PDFs, sheets, exports, market pages",
   },
   {
     label: "workflow logic",
-    detail: "rules, ownership, validation, states, source-of-truth decisions",
+    detail: "rules, status, ownership, validation",
   },
   {
     label: "structured data",
-    detail: "tables, catalogs, project records, clean entities, confidence signals",
+    detail: "tables, records, catalogs, checks",
   },
   {
     label: "automated outputs",
-    detail: "dashboards, reports, PWA views, generated documents, exports",
+    detail: "dashboards, reports, documents, exports",
   },
   {
     label: "business decisions",
-    detail: "pricing, follow-up, QA review, implementation, operational action",
+    detail: "pricing, QA review, follow-up, action",
   },
 ];
 
