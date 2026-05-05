@@ -123,7 +123,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             <DetailBlock title="System designed" icon={<Layers3 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.built} />
             <DetailBlock title="Business impact" icon={<ArrowRight className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.value} />
-            <DetailBlock title="What this proves" icon={<Sparkles className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.proves} />
+            <DetailBlock title="Hiring signal" icon={<Sparkles className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.proves} />
           </div>
 
           <section className="mt-8 rounded-lg border border-slate-200 bg-[#f8f4ea] p-5 md:p-6">

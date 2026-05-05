@@ -11,7 +11,7 @@ import {
   Network,
   Sparkles,
 } from "lucide-react";
-import { caseStudies, profile, roleFit, skillGroups, timeline, workflowStages } from "@/data/profile";
+import { caseStudies, professionalExperience, profile, roleFit, skillGroups, timeline, workflowStages } from "@/data/profile";
 import { accentFor, CaseStudyVisual } from "@/components/VisualSystem";
 
 export function ValuePipeline() {
@@ -22,10 +22,10 @@ export function ValuePipeline() {
           <div>
             <p className="section-kicker text-emerald-700">How I create value</p>
             <h2 className="mt-3 max-w-xl text-4xl font-black leading-tight text-slate-950">
-              A practical machine for turning operational mess into decisions.
+              A repeatable way to turn scattered work into decisions.
             </h2>
             <p className="mt-5 max-w-xl text-base leading-7 text-slate-600">
-              The creative concept is not decoration. It mirrors the actual work: capture messy inputs, define the workflow, structure the data, automate outputs, and make the next business decision easier.
+              Most projects start with scattered files, unclear states, and manual handoffs. The work is to capture the inputs, define the rules, structure the data, and make the next action obvious.
             </p>
           </div>
 
@@ -62,7 +62,7 @@ export function MissionTimeline() {
           <div className="max-w-3xl">
             <p className="section-kicker text-cyan-700">Career route</p>
             <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950">
-              The transition is the point: operator first, builder second.
+              Operator judgment first, systems execution second.
             </h2>
           </div>
           <p className="max-w-xl text-base leading-7 text-slate-600">
@@ -79,7 +79,7 @@ export function MissionTimeline() {
               </div>
               <div className="relative">
                 <div className="mb-6 grid h-14 w-14 place-items-center rounded border border-slate-200 bg-white text-lg font-black text-slate-950 shadow-sm">
-                  {index === 0 ? "IE" : index === 1 ? "OPS" : index === 2 ? "SaaS" : "AI"}
+                  {index === 0 ? "IE" : index === 1 ? "OPS" : index === 2 ? "SaaS" : "BUILD"}
                 </div>
                 <p className="text-sm font-black text-slate-950">{item.period}</p>
                 <p className="mt-1 text-xs font-black uppercase tracking-[0.16em] text-emerald-700">{item.label}</p>
@@ -109,14 +109,14 @@ export function CaseStudyMap() {
           <div>
             <p className="section-kicker text-amber-700">Product modules</p>
             <h2 className="mt-3 text-4xl font-black leading-tight text-slate-950">
-              Four projects, shown as workflow systems rather than portfolio thumbnails.
+              Four projects framed as operational systems.
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-600">
-              Each project is framed honestly: the problem, the system designed, the output, and what it proves about Mickoll as a hire.
+              Each project is framed around the problem, system designed, output, and hiring signal.
             </p>
             <div className="mt-6 overflow-hidden rounded-lg border border-slate-200">
               <Image
-                alt="AI-generated case study art direction reference"
+                alt="Case study module art direction reference"
                 className="h-full w-full object-cover opacity-90"
                 height={941}
                 src="/images/case-study-grid-reference.png"
@@ -187,7 +187,7 @@ export function SkillMatrix() {
               Skills organized by what they make possible.
             </h2>
             <p className="mt-5 text-base leading-7 text-slate-600">
-              This keeps the site recruiter-readable while still feeling like a cockpit: layers, inputs, outputs, and operating modes.
+              This keeps the site recruiter-readable while showing how the skills combine: layers, inputs, outputs, and operating modes.
             </p>
           </div>
 
@@ -283,6 +283,18 @@ export function RecruiterPanel() {
               <p className="text-sm leading-6 text-slate-200">
                 Open to remote EU, UK, and global teams. Especially strong where the role needs process ownership, product translation, analytics, and practical automation.
               </p>
+            </div>
+          </div>
+          <div className="rounded-lg border border-white/12 bg-white/6 p-5 sm:col-span-2">
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">Experience anchors</div>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {professionalExperience.slice(0, 3).map((item) => (
+                <div key={item.organization} className="rounded border border-white/12 bg-slate-950/40 p-3">
+                  <p className="text-xs font-black uppercase tracking-[0.12em] text-emerald-300">{item.period}</p>
+                  <p className="mt-2 text-sm font-black text-white">{item.organization}</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-300">{item.role}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

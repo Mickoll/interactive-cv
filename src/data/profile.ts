@@ -36,6 +36,14 @@ export type TimelineItem = {
   signals: string[];
 };
 
+export type ProfessionalExperience = {
+  period: string;
+  organization: string;
+  role: string;
+  context: string;
+  bullets: string[];
+};
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -77,7 +85,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/mickollmarin/",
   cvUrl: "/Mickoll_Marin_CV.pdf",
   headline:
-    "Industrial engineer with SaaS product experience and hands-on automation projects across reporting, dashboards, pricing intelligence, QA/QC, and workflow tools.",
+    "Industrial engineer with remote SaaS/product experience and practical automation projects across reporting, dashboards, pricing intelligence, QA/QC, and workflow tools.",
   targetRoles: [
     "Implementation Consultant",
     "Solutions Consultant",
@@ -139,7 +147,7 @@ export const skillGroups: SkillGroup[] = [
     name: "Data",
     level: "Data layer",
     icon: Database,
-    operatingMode: "Structure the mess",
+    operatingMode: "Normalize source data",
     output: "Tables, validations, dashboards, reports",
     items: ["SQL", "Python", "ETL", "dashboards", "validation pipelines"],
   },
@@ -242,7 +250,7 @@ export const valueNodes: ValueNode[] = [
 
 export const workflowStages = [
   {
-    label: "messy inputs",
+    label: "raw inputs",
     detail: "PDFs, spreadsheets, screenshots, exports, market pages, support questions",
   },
   {
@@ -290,11 +298,65 @@ export const timeline: TimelineItem[] = [
   },
   {
     period: "2025-present",
-    label: "Builder mode",
+    label: "Independent automation",
     title: "Independent operations and data automation projects",
     summary:
       "Built practical tools for inspection reporting, solar workflow organization, real-estate pricing intelligence, QA/QC traceability, equipment extraction, dashboards, and document automation.",
     signals: ["Python", "SQL", "React", "FastAPI", "Next.js", "PostgreSQL"],
+  },
+];
+
+export const professionalExperience: ProfessionalExperience[] = [
+  {
+    period: "July 2025 - Present",
+    organization: "Independent Operations & Data Automation Projects",
+    role: "Remote workflow, data, and web-systems builder",
+    context: "Spain-based independent project work for practical business workflows.",
+    bullets: [
+      "Built tools for inspection reporting, solar project organization, real-estate pricing intelligence, QA/QC traceability, equipment-data extraction, dashboards, and document automation.",
+      "Worked across React/TypeScript, Next.js, FastAPI, Python, SQL/PostgreSQL, SQLite, PDF/OCR workflows, DOCX generation, and spreadsheet automation.",
+      "Focused on operational usefulness: cleaner inputs, clearer states, validation, repeatable outputs, and handoff-ready reporting.",
+    ],
+  },
+  {
+    period: "June 2023 - June 2025",
+    organization: "PriceLabs",
+    role: "Remote SaaS pricing, revenue, and product operations",
+    context: "Revenue-management SaaS for short-term rental pricing.",
+    bullets: [
+      "Worked with pricing analysis, market research, product behavior investigation, customer-facing product questions, and revenue-management workflows.",
+      "Translated pricing/product issues into clearer operational follow-up for customers and internal stakeholders.",
+      "Built domain credibility in SaaS, hospitality revenue management, dashboards, pricing logic, and remote cross-functional work.",
+    ],
+  },
+  {
+    period: "2021 - 2023",
+    organization: "PerchPeek",
+    role: "Remote SaaS customer and product operations",
+    context: "Relocation-technology environment with customer-facing operational workflows.",
+    bullets: [
+      "Supported remote SaaS operations by combining customer communication, workflow follow-up, and product troubleshooting.",
+      "Built stronger judgment around implementation gaps, user friction, and the handoff between business process and product behavior.",
+    ],
+  },
+  {
+    period: "2018 - 2021",
+    organization: "Amazon and service operations",
+    role: "Operations, logistics, QA, and team leadership",
+    context: "High-volume operational environments with KPI ownership and process discipline.",
+    bullets: [
+      "Led and coordinated operational work including a 107-person Amazon team, QA follow-up, inventory control, KPI tracking, and action planning.",
+      "Developed the operating rhythm that now informs implementation, product operations, BI, and automation work.",
+    ],
+  },
+  {
+    period: "2017 - 2018",
+    organization: "Industrial engineering and production improvement",
+    role: "Industrial engineer",
+    context: "Food-production process improvement and line-launch support.",
+    bullets: [
+      "Worked on production automation, operator coordination, OEE analysis, cycle-time reduction, line launch support, and capacity improvement.",
+    ],
   },
 ];
 
@@ -308,7 +370,7 @@ export const caseStudies: CaseStudy[] = [
       "A local-first web platform that turns inspection projects, photos, annotations, OCR, catalogs, and templates into structured DOCX reports.",
     problem:
       "Inspection reporting can collapse into manual file handling, repeated Word edits, inconsistent issue catalogs, and weak traceability between photos, findings, and final reports.",
-    role: "Workflow designer and full-stack builder",
+    role: "Workflow designer and full-stack implementer",
     output: "Structured inspection report workflow with generated DOCX output",
     constraints: [
       "Needed to preserve reliability of an existing document-heavy process.",
@@ -328,9 +390,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     proof: ["API surface for projects/assets/catalogs/reports", "Local-first storage model", "Generated report workflow"],
     proves: [
-      "Can model a messy operational process before writing UI.",
-      "Can connect user workflow, file handling, APIs, and document automation.",
-      "Can build tools that feel closer to internal products than one-off scripts.",
+      "Models the operational process before choosing the interface.",
+      "Connects user workflow, file handling, APIs, and document automation.",
+      "Builds internal tools with enough structure to outgrow one-off scripts.",
     ],
     metrics: ["DOCX output", "OCR", "asset workflow"],
     icon: FileCheck2,
@@ -345,7 +407,7 @@ export const caseStudies: CaseStudy[] = [
       "A deployed Next.js PWA for renewable-energy project visits, report status, contacts, dashboards, maps, CSV/Excel import, and operational follow-up.",
     problem:
       "Field and advisory workflows need one reliable place to track visits, pending reports, contacts, expenses, project status, and operational handoffs across advisors.",
-    role: "Product builder and workflow organizer",
+    role: "Product/workflow designer and implementer",
     output: "Deployed PWA for visits, reports, contacts, maps, imports, and operational follow-up",
     constraints: [
       "Needed to serve daily operational use, not just look good in a demo.",
@@ -359,15 +421,15 @@ export const caseStudies: CaseStudy[] = [
     ],
     stack: ["Next.js", "TypeScript", "Tailwind", "Recharts", "Prisma", "Neon", "PWA", "Vercel"],
     value: [
-      "Shows practical product thinking through a usable organizer, not a toy app.",
+      "Shows product thinking through an organizer designed for daily operational use.",
       "Demonstrates dashboard design, workflow modeling, data import, deployment, and operational details.",
       "Gives recruiters a live proof point for implementation and product operations roles.",
     ],
     proof: ["Live Vercel app", "PWA", "CSV/Excel import", "dashboard filters", "QA scripts"],
     proves: [
-      "Can create an organizer around a real business workflow.",
-      "Can translate field operations into product navigation and data states.",
-      "Can ship and verify a deployed Next.js application.",
+      "Creates product structure around a real business workflow.",
+      "Translates field operations into navigation, records, filters, and status states.",
+      "Ships and verifies deployed Next.js applications.",
     ],
     metrics: ["deployed", "PWA", "multi-view"],
     icon: CalendarCheck,
@@ -381,8 +443,8 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A real-estate pricing intelligence MVP for a fragmented market with scraping, ETL, geospatial storage, deduplication, confidence metrics, dashboards, and reports.",
     problem:
-      "Real-estate pricing data is inconsistent, duplicated, geographically messy, and affected by currency volatility. A useful product needs raw observations, normalized metrics, and confidence signals.",
-    role: "Data product designer and pipeline builder",
+      "Real-estate pricing data is inconsistent, duplicated, geographically uneven, and affected by currency volatility. A useful product needs raw observations, normalized metrics, and confidence signals.",
+    role: "Data product and pipeline designer",
     output: "Market intelligence pipeline with geospatial storage, dashboards, and reporting flows",
     constraints: [
       "Sources were fragmented, inconsistent, and not equally trustworthy.",
@@ -396,15 +458,15 @@ export const caseStudies: CaseStudy[] = [
     ],
     stack: ["Python", "Scrapy", "Playwright", "FastAPI", "PostgreSQL", "PostGIS", "Pandas", "Streamlit"],
     value: [
-      "Turned messy public listings into structured pricing intelligence.",
+      "Turned fragmented public listings into structured pricing intelligence.",
       "Separated raw observations from publishable metrics for more trustworthy analysis.",
       "Demonstrated data engineering, analytics, product thinking, and market-domain reasoning.",
     ],
     proof: ["multi-source ingestion", "geospatial model", "freshness metrics", "report generation"],
     proves: [
-      "Can think like a data product owner, not only a scraper builder.",
-      "Can design around data trust, source quality, and operational usefulness.",
-      "Can connect market logic, databases, dashboards, and reports.",
+      "Thinks like a data product owner, not only a scraper implementer.",
+      "Designs around data trust, source quality, and operational usefulness.",
+      "Connects market logic, databases, dashboards, and reports.",
     ],
     metrics: ["ETL", "PostGIS", "market reports"],
     icon: Building2,
@@ -419,7 +481,7 @@ export const caseStudies: CaseStudy[] = [
       "Automated industrial QA/QC and equipment-data workflows by extracting, validating, normalizing, and tracing information from Excel and PDF sources.",
     problem:
       "Industrial documentation often lives across inconsistent spreadsheets, large PDF sets, repeated references, and manual validation, making traceability hard to trust.",
-    role: "Industrial data automation builder",
+    role: "Industrial data automation implementer",
     output: "Traceable QA/QC and equipment-data workflow from documents to validated outputs",
     constraints: [
       "Inputs were document-heavy, inconsistent, and hard to audit manually.",
@@ -439,9 +501,9 @@ export const caseStudies: CaseStudy[] = [
     ],
     proof: ["master index", "validation outputs", "coverage map", "QA approval flow"],
     proves: [
-      "Can bring industrial engineering judgment into data automation work.",
-      "Can build reviewable pipelines for high-friction document workflows.",
-      "Can improve operational trust without inventing fake precision.",
+      "Brings industrial engineering judgment into data automation work.",
+      "Builds reviewable pipelines for high-friction document workflows.",
+      "Improves operational trust without inventing fake precision.",
     ],
     metrics: ["traceability", "validation", "indexed PDFs"],
     icon: ShieldCheck,

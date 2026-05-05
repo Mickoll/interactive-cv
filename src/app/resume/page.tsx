@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowDownToLine, Mail } from "lucide-react";
-import { profile, skillGroups, timeline } from "@/data/profile";
+import { caseStudies, professionalExperience, profile, skillGroups } from "@/data/profile";
 
 export const metadata = {
   title: "Resume | Mickoll Marin",
@@ -54,12 +54,34 @@ export default function ResumePage() {
           </div>
         </ResumeSection>
 
-        <ResumeSection title="Experience narrative">
-          <div className="space-y-5">
-            {timeline.map((item) => (
-              <div key={item.period}>
-                <div className="text-sm font-black text-slate-950">{item.period} | {item.title}</div>
-                <p className="mt-1 text-sm leading-6 text-slate-700">{item.summary}</p>
+        <ResumeSection title="Selected experience">
+          <div className="space-y-6">
+            {professionalExperience.map((item) => (
+              <div key={item.organization}>
+                <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
+                  <div>
+                    <h3 className="text-sm font-black text-slate-950">{item.role}</h3>
+                    <p className="text-sm font-bold text-slate-700">{item.organization}</p>
+                  </div>
+                  <p className="text-sm font-black text-slate-500">{item.period}</p>
+                </div>
+                <p className="mt-1 text-sm leading-6 text-slate-600">{item.context}</p>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700">
+                  {item.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </ResumeSection>
+
+        <ResumeSection title="Featured project proof">
+          <div className="grid gap-4 md:grid-cols-2">
+            {caseStudies.map((caseStudy) => (
+              <div key={caseStudy.slug}>
+                <h3 className="font-black text-slate-950">{caseStudy.title}</h3>
+                <p className="mt-1 text-sm leading-6 text-slate-700">{caseStudy.output}</p>
               </div>
             ))}
           </div>
@@ -85,4 +107,3 @@ function ResumeSection({ title, children }: { title: string; children: React.Rea
     </section>
   );
 }
-

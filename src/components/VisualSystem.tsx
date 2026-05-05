@@ -108,7 +108,7 @@ export function CaseStudyVisual({
 
 export function FlowStrip() {
   const steps = [
-    { label: "messy inputs", icon: FileText },
+    { label: "raw inputs", icon: FileText },
     { label: "structured data", icon: Database },
     { label: "workflow logic", icon: Workflow },
     { label: "automated output", icon: CircleDot },
@@ -139,7 +139,7 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
       <div className="mb-4 flex items-center justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">System designed</p>
-          <h3 className="mt-1 text-lg font-black text-slate-950">Problem to operating system</h3>
+          <h3 className="mt-1 text-lg font-black text-slate-950">Input to decision flow</h3>
         </div>
         <span className={clsx("rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em]", accent.bg, accent.text)}>
           {caseStudy.shortTitle}
@@ -164,7 +164,7 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
                 {block}
               </text>
               <text x={x + 56} y={y + 39} textAnchor="middle" fontSize="10" fontWeight="700" fill="#64748b">
-                {index === 0 ? "messy" : index === 4 ? "usable" : "structured"}
+                {index === 0 ? "raw" : index === 4 ? "usable" : "structured"}
               </text>
             </g>
           );

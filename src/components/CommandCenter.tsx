@@ -86,10 +86,10 @@ export function CommandCenter() {
             Mickoll Marin
           </h1>
           <p className="mt-6 max-w-2xl text-[clamp(1.35rem,3vw,2.45rem)] font-black leading-[1.05] text-slate-900">
-            Business operator + product translator + data/workflow automation builder.
+            Business operator + product translator + data/workflow automation implementer.
           </p>
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-            {profile.headline} I turn messy business workflows into structured outputs people can actually use.
+            {profile.headline} I connect business process, data, and usable software so teams can move from manual follow-up to repeatable decisions.
           </p>
 
           <div className="mt-7 rounded-lg border border-slate-300 bg-white/86 p-2 shadow-sm backdrop-blur">
@@ -167,7 +167,7 @@ export function CommandCenter() {
                   <div className="relative mb-5 flex items-center justify-between gap-3">
                     <div>
                       <p className="font-mono text-xs font-bold uppercase tracking-[0.24em] text-emerald-300">Value constellation</p>
-                      <h2 className="mt-2 text-2xl font-black text-white">Messy work becomes an operating system</h2>
+                      <h2 className="mt-2 text-2xl font-black text-white">From raw inputs to decision-ready outputs</h2>
                     </div>
                     <div className={clsx("hidden rounded border p-3 sm:block", nodeAccent.border, nodeAccent.bg)}>
                       <ActiveNodeIcon className={clsx("h-6 w-6", nodeAccent.text)} />
