@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import {
   ArrowDownToLine,
@@ -34,8 +34,8 @@ export function CommandCenter() {
     locale === "es"
       ? [
           "Lideré un equipo Amazon de 107 personas",
-          "Trabajé remotamente en pricing SaaS y workflows de producto",
-          "Construí herramientas desplegadas y local-first",
+          "Trabajé en SaaS remoto de precios y producto",
+          "Construí herramientas desplegadas y con trabajo local",
           "Español nativo, inglés C2, portugués C1",
         ]
       : [
@@ -47,9 +47,36 @@ export function CommandCenter() {
   const [activeSlug, setActiveSlug] = useState("solartrack-workflow-pwa");
   const [mode, setMode] = useState<Mode>("recruiter");
   const [activeStage, setActiveStage] = useState(0);
+  const stageProjectSlugs = [
+    "inspection-report-automation",
+    "solartrack-workflow-pwa",
+    "real-estate-pricing-intelligence",
+    "inspection-report-automation",
+    "industrial-qaqc-data-automation",
+  ];
 
   const activeCase = caseStudies.find((caseStudy) => caseStudy.slug === activeSlug) ?? caseStudies[0];
   const accent = accentFor(activeCase.accent);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      if (new URLSearchParams(window.location.search).get("mode") === "explorer") {
+        setMode("explorer");
+      }
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const updateMode = (nextMode: Mode) => {
+    setMode(nextMode);
+    const url = new URL(window.location.href);
+    if (nextMode === "explorer") {
+      url.searchParams.set("mode", "explorer");
+    } else {
+      url.searchParams.delete("mode");
+    }
+    window.history.replaceState({}, "", url.toString());
+  };
 
   return (
     <section className="relative overflow-hidden border-b border-slate-900 bg-[#07131f] text-white">
@@ -124,12 +151,12 @@ export function CommandCenter() {
                       "rounded-lg px-3 py-2 text-sm font-black capitalize transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
                       mode === nextMode ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/8 hover:text-white"
                     )}
-                    onClick={() => setMode(nextMode)}
+                    onClick={() => updateMode(nextMode)}
                     type="button"
                   >
-                  {nextMode === "recruiter" ? ui.recruiter : ui.explorer}
-                </button>
-              ))}
+                    {nextMode === "recruiter" ? ui.recruiter : ui.explorer}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -152,6 +179,15 @@ export function CommandCenter() {
                           <span>{item}</span>
                         </div>
                       ))}
+                    </div>
+                  </section>
+
+                  <section className="rounded-[18px] border border-white/12 bg-slate-950/38 p-4">
+                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.strongestProof}</p>
+                    <h3 className="mt-3 text-xl font-black text-white">{activeCase.shortTitle}</h3>
+                    <div className="mt-3 grid gap-2 text-sm leading-5">
+                      <p className="rounded-lg border border-white/10 bg-white/7 px-3 py-2 text-slate-300"><span className="font-black text-cyan-300">{ui.inputLabel}:</span> {activeCase.input}</p>
+                      <p className="rounded-lg border border-white/10 bg-white/7 px-3 py-2 text-slate-300"><span className="font-black text-amber-300">{ui.outputLabel}:</span> {activeCase.output}</p>
                     </div>
                   </section>
 
@@ -247,7 +283,10 @@ export function CommandCenter() {
                         "h-10 rounded-lg border text-xs font-black transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
                         index === activeStage ? "border-cyan-300 bg-cyan-300 text-slate-950" : "border-white/12 bg-white/7 text-slate-300 hover:bg-white/12"
                       )}
-                      onClick={() => setActiveStage(index)}
+                      onClick={() => {
+                        setActiveStage(index);
+                        setActiveSlug(stageProjectSlugs[index] ?? activeSlug);
+                      }}
                       type="button"
                     >
                       {index + 1}

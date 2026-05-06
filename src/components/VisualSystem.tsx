@@ -150,7 +150,7 @@ export function WorkflowRun({ caseStudy, dark = false }: { caseStudy: CaseStudy;
               </span>
               {index < caseStudy.workflow.length - 1 ? <ArrowRight className={clsx("h-4 w-4", dark ? "text-slate-500" : "text-slate-300")} /> : <CheckCircle2 className="h-4 w-4 text-emerald-500" />}
             </div>
-            <p className="text-sm font-black capitalize leading-tight">{step}</p>
+            <p className="text-sm font-black leading-tight">{step}</p>
           </div>
         ))}
       </div>
@@ -185,7 +185,6 @@ export function FlowStrip() {
 export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
   const { ui } = useLanguage();
   const accent = accentFor(caseStudy.accent);
-  const blocks = ["Inputs", "Rules", "Data", "Interface", "Output"];
 
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-[0_22px_70px_-55px_rgba(4,12,24,0.75)]">
@@ -199,36 +198,45 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
         </span>
       </div>
 
-      <svg className="h-60 w-full" viewBox="0 0 760 270" role="img" aria-label={`${caseStudy.title} workflow architecture`}>
-        <defs>
-          <marker id={`arrow-${caseStudy.slug}`} viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill={accent.fill} />
-          </marker>
-          <pattern id={`grid-${caseStudy.slug}`} width="26" height="26" patternUnits="userSpaceOnUse">
-            <path d="M 26 0 L 0 0 0 26" fill="none" stroke="#e5e7eb" strokeWidth="1" />
-          </pattern>
-        </defs>
-        <rect width="760" height="270" rx="22" fill="#f8f5ed" />
-        <rect width="760" height="270" rx="22" fill={`url(#grid-${caseStudy.slug})`} opacity="0.75" />
-        <path d="M74 135 H686" stroke={accent.fill} strokeWidth="4" strokeDasharray="13 12" markerEnd={`url(#arrow-${caseStudy.slug})`} />
-        {blocks.map((block, index) => {
-          const x = 36 + index * 144;
-          const y = index % 2 === 0 ? 70 : 150;
-          return (
-            <g key={block}>
-              <rect x={x} y={y} width="122" height="60" rx="14" fill={index === 2 ? "#06131f" : "#ffffff"} stroke={index === 2 ? accent.fill : "#cbd5e1"} strokeWidth={index === 2 ? "3" : "1.5"} />
-              <text x={x + 61} y={y + 27} textAnchor="middle" fontSize="14" fontWeight="900" fill={index === 2 ? "#ffffff" : "#06131f"}>
-                {block}
-              </text>
-              <text x={x + 61} y={y + 45} textAnchor="middle" fontSize="10" fontWeight="800" fill={index === 2 ? "#a7f3d0" : "#64748b"}>
-                {index === 0 ? ui.raw : index === 4 ? ui.usable : ui.structured}
-              </text>
-            </g>
-          );
-        })}
-        <circle cx="380" cy="135" r="36" fill={accent.soft} stroke={accent.fill} strokeWidth="4" />
-        <circle cx="380" cy="135" r="10" fill={accent.fill} />
-      </svg>
+      <div className="rounded-[18px] border border-slate-200 bg-[#f8f5ed] p-4">
+        <div className="grid gap-3 md:grid-cols-3">
+          {[
+            { label: ui.inputLabel, value: caseStudy.input, icon: FileText },
+            { label: ui.systemLabel, value: caseStudy.system, icon: Workflow },
+            { label: ui.outputLabel, value: caseStudy.output, icon: Database },
+          ].map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.label}
+                className={clsx(
+                  "relative rounded-2xl border p-4",
+                  index === 1 ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-white text-slate-700"
+                )}
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", index === 1 ? accent.textDark : "text-slate-500")}>
+                    {item.label}
+                  </p>
+                  <Icon className={clsx("h-5 w-5", index === 1 ? accent.textDark : accent.text)} />
+                </div>
+                <p className={clsx("mt-4 text-sm font-bold leading-6", index === 1 ? "text-slate-200" : "text-slate-700")}>{item.value}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 grid gap-2 md:grid-cols-4">
+          {caseStudy.workflow.map((step, index) => (
+            <div key={step} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-black text-slate-700">
+              <span className="grid h-7 w-7 place-items-center rounded-lg text-xs font-black text-white" style={{ backgroundColor: index === caseStudy.workflow.length - 1 ? "#19b27f" : accent.fill }}>
+                {index + 1}
+              </span>
+              <span>{step}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -50,6 +50,8 @@ export type CaseStudy = {
   shortTitle: string;
   eyebrow: string;
   summary: string;
+  input: string;
+  system: string;
   problem: string;
   role: string;
   output: string;
@@ -58,6 +60,7 @@ export type CaseStudy = {
   stack: string[];
   value: string[];
   proof: string[];
+  evidence: string[];
   proves: string[];
   metrics: string[];
   sampleImage: string;
@@ -70,8 +73,11 @@ export type CaseStudy = {
 export type CapabilityGroup = {
   name: string;
   verb: string;
+  input: string;
+  system: string;
   items: string[];
   output: string;
+  usedIn: string[];
 };
 
 export type ValueNode = {
@@ -148,32 +154,47 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     name: "Operate",
     verb: "Understand the work",
+    input: "field work, service queues, QA gaps",
+    system: "status rhythm, ownership, handoffs",
     items: ["field workflows", "KPI follow-up", "QA/QC", "handoffs"],
     output: "A clear picture of what needs to happen next.",
+    usedIn: ["SolarTrack", "Amazon", "report automation"],
   },
   {
     name: "Analyze",
     verb: "Find the signal",
+    input: "pricing data, exports, market pages",
+    system: "SQL/Python checks and dashboards",
     items: ["SQL", "pricing analysis", "market research", "dashboards"],
     output: "Cleaner context for decisions and prioritization.",
+    usedIn: ["PriceLabs", "pricing MVP", "QA/QC"],
   },
   {
     name: "Automate",
     verb: "Remove repeat work",
+    input: "PDFs, spreadsheets, images, templates",
+    system: "ETL, OCR, validation, generation",
     items: ["Python", "ETL", "PDF/OCR", "DOCX/Excel generation"],
     output: "Repeatable outputs from documents, sheets, and operational records.",
+    usedIn: ["report builder", "QA/QC", "equipment data"],
   },
   {
     name: "Ship",
     verb: "Make it usable",
+    input: "workflow requirements and user friction",
+    system: "React/Next/FastAPI interfaces",
     items: ["React", "Next.js", "TypeScript", "FastAPI"],
     output: "Small web tools that people can actually operate.",
+    usedIn: ["SolarTrack", "report builder", "portfolio"],
   },
   {
     name: "Communicate",
     verb: "Bridge teams",
+    input: "users, product behavior, business context",
+    system: "clear follow-up and technical translation",
     items: ["English C2", "Spanish native", "Portuguese C1", "stakeholder follow-up"],
     output: "Better translation between users, business needs, and technical work.",
+    usedIn: ["SaaS roles", "implementation", "remote teams"],
   },
 ];
 
@@ -383,6 +404,16 @@ export const professionalExperience: ProfessionalExperience[] = [
     ],
   },
   {
+    period: "May 2021 - January 2023",
+    organization: "Padme Yoga",
+    role: "Manager and co-founder",
+    context: "Local wellness business with operations, scheduling, commercial follow-up, and team coordination.",
+    bullets: [
+      "Managed day-to-day operations, scheduling, stakeholder communication, revenue initiatives, and team coordination.",
+      "Implemented operational and commercial improvements that contributed to a 30% increase in monthly revenue.",
+    ],
+  },
+  {
     period: "2018 - 2021",
     organization: "Amazon and service operations",
     role: "Operations, logistics, QA, and team leadership",
@@ -390,6 +421,16 @@ export const professionalExperience: ProfessionalExperience[] = [
     bullets: [
       "Led and coordinated operational work including a 107-person Amazon team, QA follow-up, inventory control, KPI tracking, and action planning.",
       "Developed the operating rhythm that now informs implementation, product operations, BI, and automation work.",
+    ],
+  },
+  {
+    period: "January 2018 - June 2019",
+    organization: "Badajoz Speed Queen",
+    role: "Manager",
+    context: "Service-business operations with planning, accounts, marketing, and daily execution.",
+    bullets: [
+      "Managed accounts, planning, marketing, daily operations, data analysis, and stakeholder communication.",
+      "Helped increase revenue by 55% year over year through operational and commercial improvements.",
     ],
   },
   {
@@ -411,6 +452,8 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Inspection workflows",
     summary:
       "A local-first web platform that turns inspection projects, photos, annotations, OCR, catalogs, and templates into structured DOCX reports.",
+    input: "inspection photos, PDFs, certificates, issue catalogs, project metadata",
+    system: "local-first React/FastAPI workbench with project storage, review states, OCR, and DOCX generation",
     problem:
       "Inspection reporting can collapse into manual file handling, repeated Word edits, inconsistent issue catalogs, and weak traceability between photos, findings, and final reports.",
     role: "Workflow designer and full-stack implementer",
@@ -431,15 +474,16 @@ export const caseStudies: CaseStudy[] = [
       "Improved consistency between inspection evidence and report output.",
       "Created a path from desktop/manual workflows toward a browser-based operations tool.",
     ],
-    proof: ["API surface for projects/assets/catalogs/reports", "Local-first storage model", "Generated report workflow"],
+    proof: ["real local app capture", "API surface for projects/assets/catalogs/reports", "Generated report workflow"],
+    evidence: ["Captured from local Vite/FastAPI app after creating a sanitized demo project.", "Other visible project names were masked and replaced with demo labels."],
     proves: [
       "Models the operational process before choosing the interface.",
       "Connects user workflow, file handling, APIs, and document automation.",
       "Builds internal tools with enough structure to outgrow one-off scripts.",
     ],
     metrics: ["DOCX output", "OCR", "asset workflow"],
-    sampleImage: "/work-samples/report-builder.svg",
-    sampleAlt: "Sanitized report builder interface preview based on the local inspection report app.",
+    sampleImage: "/work-samples/report-builder-capture.png",
+    sampleAlt: "Sanitized capture of the local inspection report builder app using a demo project.",
     workflow: ["project setup", "photo upload", "issue catalog", "DOCX export"],
     icon: FileCheck2,
     accent: "amber",
@@ -451,6 +495,8 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Deployed organizer",
     summary:
       "A deployed Next.js PWA for renewable-energy project visits, report status, contacts, dashboards, maps, CSV/Excel import, and operational follow-up.",
+    input: "visit schedules, advisor assignments, report status, contacts, imports, expenses",
+    system: "Next.js PWA with dashboards, calendar, maps, records, filters, imports, auth, and persistence QA scripts",
     problem:
       "Field and advisory workflows need one reliable place to track visits, pending reports, contacts, expenses, project status, and operational handoffs across advisors.",
     role: "Product/workflow designer and implementer",
@@ -471,7 +517,8 @@ export const caseStudies: CaseStudy[] = [
       "Demonstrates dashboard design, workflow modeling, data import, deployment, and operational details.",
       "Gives recruiters a live proof point for implementation and product operations roles.",
     ],
-    proof: ["Live Vercel app", "PWA", "CSV/Excel import", "dashboard filters", "QA scripts"],
+    proof: ["component-derived product preview", "PWA", "CSV/Excel import", "dashboard filters", "QA scripts"],
+    evidence: ["Preview built from the actual SolarTrack dashboard/sidebar/report components.", "Raw app screenshots were not used because the local store contains private operational records."],
     proves: [
       "Creates product structure around a real business workflow.",
       "Translates field operations into navigation, records, filters, and status states.",
@@ -491,6 +538,8 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Market data product",
     summary:
       "A real-estate pricing intelligence MVP for a fragmented market with scraping, ETL, geospatial storage, deduplication, confidence metrics, dashboards, and reports.",
+    input: "public listings, source snapshots, zone names, prices, geography, freshness signals",
+    system: "multi-source ingestion, PostgreSQL/PostGIS model, deduplication, confidence scoring, reports",
     problem:
       "Real-estate pricing data is inconsistent, duplicated, geographically uneven, and affected by currency volatility. A useful product needs raw observations, normalized metrics, and confidence signals.",
     role: "Data product and pipeline designer",
@@ -511,7 +560,8 @@ export const caseStudies: CaseStudy[] = [
       "Separated raw observations from publishable metrics for more trustworthy analysis.",
       "Demonstrated data engineering, analytics, product thinking, and market-domain reasoning.",
     ],
-    proof: ["multi-source ingestion", "geospatial model", "freshness metrics", "report generation"],
+    proof: ["daily report outputs", "multi-source ingestion", "geospatial model", "freshness metrics", "report generation"],
+    evidence: ["Preview uses sanitized metrics from generated daily market report files.", "Exact zones and source-specific names are generalized in the public asset."],
     proves: [
       "Thinks like a data product owner, not only a scraper implementer.",
       "Designs around data trust, source quality, and operational usefulness.",
@@ -531,6 +581,8 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Industrial data",
     summary:
       "Automated industrial QA/QC and equipment-data workflows by extracting, validating, normalizing, and tracing information from Excel and PDF sources.",
+    input: "Excel registers, PDF document sets, system lists, weak references, anomalies",
+    system: "master index, closed catalogs, coverage maps, validation summaries, reviewable exports",
     problem:
       "Industrial documentation often lives across inconsistent spreadsheets, large PDF sets, repeated references, and manual validation, making traceability hard to trust.",
     role: "Industrial data automation implementer",
@@ -551,7 +603,8 @@ export const caseStudies: CaseStudy[] = [
       "Improved traceability from source documents to QA/QC deliverables.",
       "Demonstrated fit for implementation, operations analysis, industrial data, and technical product roles.",
     ],
-    proof: ["master index", "validation outputs", "coverage map", "QA approval flow"],
+    proof: ["validation summary outputs", "master index", "coverage map", "QA approval flow"],
+    evidence: ["Preview uses sanitized values from generated QA/QC summary and validation output files.", "Private source filenames were removed from the public asset."],
     proves: [
       "Brings industrial engineering judgment into data automation work.",
       "Builds reviewable pipelines for high-friction document workflows.",

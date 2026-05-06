@@ -188,17 +188,28 @@ export function CaseStudyMap() {
                     <p className="mt-4 text-sm leading-6 text-slate-600">{activeCase.summary}</p>
                   </div>
 
-                  <div className="mt-6">
-                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-500">{ui.problemToOutput}</p>
-                    <div className="mt-3 grid gap-2">
-                      {activeCase.workflow.map((step, index) => (
-                        <div key={step} className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700">
-                          <span className="grid h-7 w-7 place-items-center rounded-lg bg-slate-950 text-xs font-black text-white">{index + 1}</span>
-                          <span className="capitalize">{step}</span>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="mt-6 grid gap-2">
+                    {[
+                      { label: ui.inputLabel, value: activeCase.input },
+                      { label: ui.systemLabel, value: activeCase.system },
+                      { label: ui.outputLabel, value: activeCase.output },
+                    ].map((item, index) => (
+                      <div
+                        key={item.label}
+                        className={clsx(
+                          "rounded-xl border px-3 py-2",
+                          index === 1 ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-slate-50 text-slate-700"
+                        )}
+                      >
+                        <p className={clsx("text-[0.62rem] font-black uppercase tracking-[0.16em]", index === 1 ? activeAccent.textDark : "text-slate-500")}>{item.label}</p>
+                        <p className={clsx("mt-1 text-sm font-bold leading-5", index === 1 ? "text-slate-200" : "text-slate-700")}>{item.value}</p>
+                      </div>
+                    ))}
                   </div>
+
+                  <p className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-black leading-6 text-emerald-900">
+                    {activeCase.proves[0]}
+                  </p>
 
                   <Link
                     className="mt-6 inline-flex w-fit items-center gap-2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-black text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-cyan-500"
@@ -212,8 +223,9 @@ export function CaseStudyMap() {
             </article>
 
             <div className="grid gap-4 md:grid-cols-3">
-              {activeCase.proof.slice(0, 3).map((proof) => (
+              {activeCase.proof.slice(0, 3).map((proof, index) => (
                 <div key={proof} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold leading-6 text-slate-700 shadow-sm">
+                  <span className="mb-3 grid h-8 w-8 place-items-center rounded-lg bg-slate-950 text-xs font-black text-white">{index + 1}</span>
                   {proof}
                 </div>
               ))}
@@ -249,13 +261,20 @@ export function SkillMatrix() {
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-slate-950 text-sm font-black text-white">{group.name.slice(0, 2).toUpperCase()}</div>
                 <h3 className="mt-5 text-xl font-black text-slate-950">{group.name}</h3>
                 <p className="mt-2 text-sm font-black text-cyan-700">{group.verb}</p>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{group.output}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <span key={item} className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-700">
-                      {item}
-                    </span>
-                  ))}
+                <div className="mt-4 grid gap-2">
+                  <SkillLine label={ui.inputLabel} value={group.input} />
+                  <SkillLine label={ui.systemLabel} value={group.system} dark />
+                  <SkillLine label={ui.outputLabel} value={group.output} />
+                </div>
+                <div className="mt-4">
+                  <p className="text-[0.62rem] font-black uppercase tracking-[0.16em] text-slate-500">{ui.usedIn}</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {group.usedIn.map((item) => (
+                      <span key={item} className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-700">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </article>
             ))}
@@ -263,6 +282,15 @@ export function SkillMatrix() {
         </div>
       </div>
     </section>
+  );
+}
+
+function SkillLine({ label, value, dark = false }: { label: string; value: string; dark?: boolean }) {
+  return (
+    <div className={clsx("rounded-xl border px-3 py-2", dark ? "border-slate-950 bg-slate-950 text-white" : "border-slate-200 bg-slate-50 text-slate-700")}>
+      <p className={clsx("text-[0.58rem] font-black uppercase tracking-[0.14em]", dark ? "text-cyan-300" : "text-slate-500")}>{label}</p>
+      <p className={clsx("mt-1 text-xs font-bold leading-5", dark ? "text-slate-200" : "text-slate-700")}>{value}</p>
+    </div>
   );
 }
 

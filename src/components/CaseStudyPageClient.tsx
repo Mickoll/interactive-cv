@@ -138,6 +138,16 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
                 ))}
               </div>
             </div>
+            <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+              <p className="section-kicker text-slate-500">{ui.evidenceLabel}</p>
+              <div className="mt-3 grid gap-2 md:grid-cols-2">
+                {caseStudy.evidence.map((item) => (
+                  <p key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold leading-6 text-slate-700">
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </div>
           </section>
         </div>
       </section>
