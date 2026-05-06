@@ -7,8 +7,8 @@ export default function HomePage() {
       <CommandCenter />
       <ValuePipeline />
       <MissionTimeline />
-      <SkillMatrix />
       <CaseStudyMap />
+      <SkillMatrix />
       <RecruiterPanel />
     </main>
   );

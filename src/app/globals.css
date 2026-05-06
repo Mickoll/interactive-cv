@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8f4ea;
-  --foreground: #0f172a;
-  --muted: #475569;
-  --grid-line: rgba(15, 23, 42, 0.07);
+  --background: #f4efe4;
+  --foreground: #06131f;
+  --muted: #526179;
+  --panel: #07131f;
+  --panel-soft: #102336;
+  --paper: #fffaf0;
+  --cyan: #00a9c7;
+  --amber: #f5a400;
+  --emerald: #19b27f;
+  --grid-line: rgba(6, 19, 31, 0.08);
 }
 
 * {
@@ -19,6 +25,7 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
 a {
@@ -34,11 +41,29 @@ a {
   background-image:
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-size: 34px 34px;
 }
 
-.mission-hero {
-  isolation: isolate;
+.cockpit-grid {
+  background:
+    linear-gradient(rgba(255, 250, 240, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 250, 240, 0.04) 1px, transparent 1px),
+    #07131f;
+  background-size: 30px 30px;
+}
+
+.cockpit-panel {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)),
+    #07131f;
+  box-shadow: 0 30px 80px -54px rgba(4, 12, 24, 0.95);
+}
+
+.paper-panel {
+  border: 1px solid rgba(6, 19, 31, 0.12);
+  background: rgba(255, 250, 240, 0.88);
+  box-shadow: 0 24px 70px -54px rgba(4, 12, 24, 0.72);
 }
 
 .mission-button {
@@ -94,17 +119,40 @@ a {
 }
 
 .section-kicker {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .module-card {
-  border: 1px solid rgba(203, 213, 225, 0.9);
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 20px 50px -42px rgba(15, 23, 42, 0.72);
-  backdrop-filter: blur(12px);
+  border: 1px solid rgba(6, 19, 31, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 22px 70px -52px rgba(4, 12, 24, 0.75);
+}
+
+.work-sample {
+  isolation: isolate;
+}
+
+.work-sample::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(0, 169, 199, 0.12), transparent 28%),
+    linear-gradient(270deg, rgba(245, 164, 0, 0.13), transparent 32%);
+}
+
+.ticker-chip {
+  border: 1px solid rgba(6, 19, 31, 0.13);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.mode-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .scan-line {
@@ -170,5 +218,11 @@ a {
 
   body {
     background: #fff;
+  }
+
+  .module-card,
+  .paper-panel,
+  .cockpit-panel {
+    box-shadow: none !important;
   }
 }

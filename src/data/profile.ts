@@ -60,8 +60,18 @@ export type CaseStudy = {
   proof: string[];
   proves: string[];
   metrics: string[];
+  sampleImage: string;
+  sampleAlt: string;
+  workflow: string[];
   icon: LucideIcon;
   accent: "amber" | "emerald" | "cyan" | "blue";
+};
+
+export type CapabilityGroup = {
+  name: string;
+  verb: string;
+  items: string[];
+  output: string;
 };
 
 export type ValueNode = {
@@ -85,7 +95,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/mickollmarin/",
   cvUrl: "/Mickoll_Marin_CV.pdf",
   headline:
-    "Industrial engineer with remote SaaS/product experience and practical automation projects across reporting, dashboards, pricing intelligence, QA/QC, and workflow tools.",
+    "Industrial engineer who has led operations, worked in remote SaaS, and built practical tools for reporting, dashboards, pricing intelligence, QA/QC, and workflow automation.",
   targetRoles: [
     "Implementation Consultant",
     "Solutions Consultant",
@@ -98,7 +108,7 @@ export const profile = {
     { label: "Role fit", value: "Implementation, RevOps, Product Ops, BI" },
     { label: "Availability", value: "Open to remote EU, UK, and global roles" },
     { label: "Languages", value: "Spanish native, English C2, Portuguese C1" },
-    { label: "Work style", value: "Remote, analytical, stakeholder-facing" },
+    { label: "Work setup", value: "Spain-based, async-friendly, stakeholder-facing" },
   ],
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/mickollmarin/" },
@@ -109,28 +119,61 @@ export const profile = {
 
 export const signalCards = [
   {
-    label: "Ops",
+    label: "Amazon Ops",
     value: "107",
     detail: "people led in Amazon operations",
     icon: BriefcaseBusiness,
   },
   {
-    label: "SaaS",
+    label: "SaaS/Product",
     value: "2 yrs",
     detail: "SaaS pricing and revenue workflows",
     icon: LineChart,
   },
   {
-    label: "Projects",
+    label: "Automation",
     value: "4",
     detail: "featured automation/data projects",
     icon: Workflow,
   },
   {
-    label: "Languages",
+    label: "Remote",
     value: "C2",
     detail: "English, plus Spanish and Portuguese",
     icon: Globe2,
+  },
+];
+
+export const capabilityGroups: CapabilityGroup[] = [
+  {
+    name: "Operate",
+    verb: "Understand the work",
+    items: ["field workflows", "KPI follow-up", "QA/QC", "handoffs"],
+    output: "A clear picture of what needs to happen next.",
+  },
+  {
+    name: "Analyze",
+    verb: "Find the signal",
+    items: ["SQL", "pricing analysis", "market research", "dashboards"],
+    output: "Cleaner context for decisions and prioritization.",
+  },
+  {
+    name: "Automate",
+    verb: "Remove repeat work",
+    items: ["Python", "ETL", "PDF/OCR", "DOCX/Excel generation"],
+    output: "Repeatable outputs from documents, sheets, and operational records.",
+  },
+  {
+    name: "Ship",
+    verb: "Make it usable",
+    items: ["React", "Next.js", "TypeScript", "FastAPI"],
+    output: "Small web tools that people can actually operate.",
+  },
+  {
+    name: "Communicate",
+    verb: "Bridge teams",
+    items: ["English C2", "Spanish native", "Portuguese C1", "stakeholder follow-up"],
+    output: "Better translation between users, business needs, and technical work.",
   },
 ];
 
@@ -395,6 +438,9 @@ export const caseStudies: CaseStudy[] = [
       "Builds internal tools with enough structure to outgrow one-off scripts.",
     ],
     metrics: ["DOCX output", "OCR", "asset workflow"],
+    sampleImage: "/work-samples/report-builder.svg",
+    sampleAlt: "Sanitized report builder interface preview based on the local inspection report app.",
+    workflow: ["project setup", "photo upload", "issue catalog", "DOCX export"],
     icon: FileCheck2,
     accent: "amber",
   },
@@ -432,6 +478,9 @@ export const caseStudies: CaseStudy[] = [
       "Ships and verifies deployed Next.js applications.",
     ],
     metrics: ["deployed", "PWA", "multi-view"],
+    sampleImage: "/work-samples/solartrack-dashboard.svg",
+    sampleAlt: "Sanitized SolarTrack dashboard preview based on the local project organizer app.",
+    workflow: ["visit records", "status filters", "report queue", "follow-up"],
     icon: CalendarCheck,
     accent: "emerald",
   },
@@ -469,6 +518,9 @@ export const caseStudies: CaseStudy[] = [
       "Connects market logic, databases, dashboards, and reports.",
     ],
     metrics: ["ETL", "PostGIS", "market reports"],
+    sampleImage: "/work-samples/pricing-intelligence.svg",
+    sampleAlt: "Sanitized pricing intelligence dashboard preview based on the local real-estate MVP.",
+    workflow: ["raw listings", "dedupe", "geo confidence", "market report"],
     icon: Building2,
     accent: "cyan",
   },
@@ -505,7 +557,10 @@ export const caseStudies: CaseStudy[] = [
       "Builds reviewable pipelines for high-friction document workflows.",
       "Improves operational trust without inventing fake precision.",
     ],
-    metrics: ["traceability", "validation", "indexed PDFs"],
+    metrics: ["1,594 records", "98 systems", "13,351 checks"],
+    sampleImage: "/work-samples/qaqc-index.svg",
+    sampleAlt: "Sanitized QA/QC master index preview based on generated validation outputs.",
+    workflow: ["document intake", "master index", "coverage checks", "QA summary"],
     icon: ShieldCheck,
     accent: "blue",
   },

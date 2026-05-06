@@ -1,33 +1,42 @@
+import Image from "next/image";
 import clsx from "clsx";
-import { ArrowRight, CalendarDays, CheckCircle2, CircleDot, Database, FileText, Home, ImageIcon, MapPin, Table2, Workflow } from "lucide-react";
+import { ArrowRight, CheckCircle2, CircleDot, Database, FileText, MonitorCog, Workflow } from "lucide-react";
 import type { CaseStudy } from "@/data/profile";
 
 const accentClasses = {
   amber: {
-    border: "border-amber-300/70",
-    bg: "bg-amber-100/70",
+    border: "border-amber-400/70",
+    bg: "bg-amber-100",
     text: "text-amber-700",
-    fill: "#f59e0b",
-    soft: "#fef3c7",
+    textDark: "text-amber-300",
+    ring: "ring-amber-300/45",
+    fill: "#f5a400",
+    soft: "#fff3cb",
   },
   emerald: {
-    border: "border-emerald-300/70",
-    bg: "bg-emerald-100/70",
+    border: "border-emerald-400/70",
+    bg: "bg-emerald-100",
     text: "text-emerald-700",
-    fill: "#10b981",
-    soft: "#d1fae5",
+    textDark: "text-emerald-300",
+    ring: "ring-emerald-300/45",
+    fill: "#19b27f",
+    soft: "#d9f9ea",
   },
   cyan: {
-    border: "border-cyan-300/70",
-    bg: "bg-cyan-100/70",
+    border: "border-cyan-400/70",
+    bg: "bg-cyan-100",
     text: "text-cyan-700",
-    fill: "#06b6d4",
-    soft: "#cffafe",
+    textDark: "text-cyan-300",
+    ring: "ring-cyan-300/45",
+    fill: "#00a9c7",
+    soft: "#cff7ff",
   },
   blue: {
-    border: "border-blue-300/70",
-    bg: "bg-blue-100/70",
+    border: "border-blue-400/70",
+    bg: "bg-blue-100",
     text: "text-blue-700",
+    textDark: "text-blue-300",
+    ring: "ring-blue-300/45",
     fill: "#2563eb",
     soft: "#dbeafe",
   },
@@ -40,171 +49,103 @@ export function accentFor(accent: CaseStudy["accent"]) {
 export function CaseStudyVisual({
   caseStudy,
   compact = false,
+  dark = false,
 }: {
   caseStudy: CaseStudy;
   compact?: boolean;
+  dark?: boolean;
 }) {
   const accent = accentFor(caseStudy.accent);
   const Icon = caseStudy.icon;
 
   return (
-    <div
+    <figure
       className={clsx(
-        "case-module relative overflow-hidden rounded-lg border bg-white shadow-sm",
-        accent.border,
-        compact ? "min-h-52" : "min-h-[24rem]"
+        "work-sample group relative self-start overflow-hidden rounded-[18px] border p-2 shadow-[0_22px_70px_-52px_rgba(4,12,24,0.95)] transition",
+        dark ? "border-white/14 bg-white/8" : "border-slate-900/12 bg-white",
+        compact ? "h-full" : ""
       )}
-      aria-label={`${caseStudy.title} representative product preview`}
     >
-      <div className="absolute inset-x-0 top-0 h-1.5" style={{ background: accent.fill }} />
-      <div className={clsx("flex h-full flex-col gap-4 p-4 pt-5", compact ? "min-h-52" : "min-h-[24rem]")}>
-        <div className="flex items-center justify-between gap-3">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-500">Product preview</p>
-            <h3 className="mt-1 text-base font-black text-slate-950">{caseStudy.shortTitle}</h3>
-          </div>
-          <div className="rounded border border-slate-200 bg-white p-2 shadow-sm">
-            <Icon className={clsx("h-5 w-5", accent.text)} />
-          </div>
+      <div className="flex items-center justify-between gap-3 px-2 pb-2">
+        <div className="min-w-0">
+          <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", dark ? "text-slate-400" : "text-slate-500")}>
+            Sanitized work sample
+          </p>
+          <figcaption className={clsx("mt-1 truncate text-sm font-black", dark ? "text-white" : "text-slate-950")}>
+            {caseStudy.shortTitle}
+          </figcaption>
         </div>
-
-        <PreviewMock caseStudy={caseStudy} />
-
-        <div className="grid grid-cols-3 gap-2">
-          {caseStudy.metrics.map((metric) => (
-            <div key={metric} className="rounded border border-slate-200 bg-slate-50 px-2 py-2 text-center text-xs font-bold text-slate-700">
-              {metric}
-            </div>
-          ))}
+        <div className={clsx("grid h-10 w-10 flex-none place-items-center rounded-lg border", dark ? "border-white/12 bg-white/8" : "border-slate-200 bg-white")}>
+          <Icon className={clsx("h-5 w-5", dark ? accent.textDark : accent.text)} />
         </div>
       </div>
-    </div>
+
+      <div className={clsx("relative overflow-hidden rounded-[14px] border", dark ? "border-white/10 bg-slate-950" : "border-slate-200 bg-slate-100")}>
+        <Image
+          src={caseStudy.sampleImage}
+          alt={caseStudy.sampleAlt}
+          width={1200}
+          height={760}
+          className={clsx(
+            "h-auto w-full object-cover transition duration-500 group-hover:scale-[1.015]",
+            compact ? "aspect-[16/10]" : "aspect-[16/10]"
+          )}
+          priority={!compact && caseStudy.slug === "solartrack-workflow-pwa"}
+        />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/34 to-transparent" />
+      </div>
+
+      <div className="mt-3 grid grid-cols-3 gap-2">
+        {caseStudy.metrics.map((metric) => (
+          <div
+            key={metric}
+            className={clsx(
+              "rounded-lg border px-2 py-2 text-center text-[0.72rem] font-black uppercase tracking-[0.04em]",
+              dark ? "border-white/12 bg-white/7 text-slate-200" : "border-slate-200 bg-slate-50 text-slate-700"
+            )}
+          >
+            {metric}
+          </div>
+        ))}
+      </div>
+    </figure>
   );
 }
 
-function PreviewMock({ caseStudy }: { caseStudy: CaseStudy }) {
+export function WorkflowRun({ caseStudy, dark = false }: { caseStudy: CaseStudy; dark?: boolean }) {
   const accent = accentFor(caseStudy.accent);
 
-  if (caseStudy.slug === "solartrack-workflow-pwa") {
-    return (
-      <div className="grid flex-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
-        <div className="grid grid-cols-3 gap-2">
-          {["Visits", "Reports", "Open"].map((label, index) => (
-            <div key={label} className="rounded border border-slate-200 bg-white p-2">
-              <p className="text-[0.65rem] font-black uppercase tracking-[0.1em] text-slate-500">{label}</p>
-              <p className="mt-1 text-xl font-black text-slate-950">{[24, 18, 6][index]}</p>
-            </div>
-          ))}
-        </div>
-        <div className="grid min-h-36 gap-3 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="rounded border border-slate-200 bg-white p-3">
-            <div className="mb-2 flex items-center gap-2 text-xs font-black text-slate-600">
-              <CalendarDays className={clsx("h-4 w-4", accent.text)} />
-              Visit calendar
-            </div>
-            <div className="grid grid-cols-5 gap-1">
-              {Array.from({ length: 20 }).map((_, index) => (
-                <span key={index} className={clsx("h-6 rounded", index % 6 === 0 ? "bg-emerald-200" : index % 4 === 0 ? "bg-amber-200" : "bg-slate-100")} />
-              ))}
-            </div>
-          </div>
-          <div className="rounded border border-slate-200 bg-white p-3">
-            {["Pending report", "Advisor follow-up", "Client visit"].map((item, index) => (
-              <div key={item} className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0">
-                <span className="text-xs font-bold text-slate-700">{item}</span>
-                <span className={clsx("rounded px-2 py-1 text-[0.65rem] font-black", index === 0 ? "bg-amber-100 text-amber-700" : "bg-emerald-100 text-emerald-700")}>
-                  {index === 0 ? "open" : "ok"}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (caseStudy.slug === "real-estate-pricing-intelligence") {
-    return (
-      <div className="grid flex-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[0.85fr_1.15fr]">
-        <div className="rounded border border-slate-200 bg-white p-3">
-          <div className="mb-3 flex items-center gap-2 text-xs font-black text-slate-600">
-            <MapPin className={clsx("h-4 w-4", accent.text)} />
-            Price zones
-          </div>
-          <div className="grid h-40 grid-cols-4 gap-1">
-            {Array.from({ length: 28 }).map((_, index) => (
-              <span key={index} className={clsx("rounded", index % 7 === 0 ? "bg-cyan-300" : index % 5 === 0 ? "bg-amber-200" : "bg-slate-100")} />
-            ))}
-          </div>
-        </div>
-        <div className="rounded border border-slate-200 bg-white p-3">
-          <div className="mb-3 flex items-center gap-2 text-xs font-black text-slate-600">
-            <Home className={clsx("h-4 w-4", accent.text)} />
-            Comparable listings
-          </div>
-          {["Freshness", "Confidence", "Duplicates", "Median price"].map((item, index) => (
-            <div key={item} className="grid grid-cols-[1fr_auto] items-center gap-3 border-b border-slate-100 py-2 last:border-0">
-              <span className="text-xs font-bold text-slate-700">{item}</span>
-              <span className="text-xs font-black text-slate-950">{["92%", "High", "12", "Indexed"][index]}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (caseStudy.slug === "industrial-qaqc-data-automation") {
-    return (
-      <div className="grid flex-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[1fr_1fr]">
-        <div className="rounded border border-slate-200 bg-white p-3">
-          <div className="mb-3 flex items-center gap-2 text-xs font-black text-slate-600">
-            <Table2 className={clsx("h-4 w-4", accent.text)} />
-            Master index
-          </div>
-          {["Document ID", "Equipment tag", "Status", "Reviewer"].map((item) => (
-            <div key={item} className="grid grid-cols-[1fr_52px] gap-2 border-b border-slate-100 py-2 last:border-0">
-              <span className="text-xs font-bold text-slate-700">{item}</span>
-              <span className="h-3 rounded bg-slate-200" />
-            </div>
-          ))}
-        </div>
-        <div className="rounded border border-slate-200 bg-white p-3">
-          <div className="mb-3 text-xs font-black uppercase tracking-[0.12em] text-slate-500">Validation</div>
-          {["Coverage checked", "Anomalies flagged", "QA approved"].map((item) => (
-            <div key={item} className="flex items-center gap-2 py-2">
-              <CheckCircle2 className={clsx("h-4 w-4", accent.text)} />
-              <span className="text-xs font-bold text-slate-700">{item}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="grid flex-1 gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[0.9fr_1.1fr]">
-      <div className="rounded border border-slate-200 bg-white p-3">
-        <div className="mb-3 flex items-center gap-2 text-xs font-black text-slate-600">
-          <ImageIcon className={clsx("h-4 w-4", accent.text)} />
-          Inspection assets
+    <div className={clsx("rounded-[18px] border p-4", dark ? "border-white/12 bg-white/7" : "border-slate-200 bg-white")}>
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <div>
+          <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", dark ? "text-slate-400" : "text-slate-500")}>
+            Workflow run
+          </p>
+          <h3 className={clsx("mt-1 text-lg font-black", dark ? "text-white" : "text-slate-950")}>From messy input to usable output</h3>
         </div>
-        <div className="grid grid-cols-2 gap-2">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="aspect-[4/3] rounded border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-200 p-2">
-              <span className={clsx("block h-2 w-10 rounded", accent.bg)} />
-            </div>
-          ))}
-        </div>
+        <MonitorCog className={clsx("h-5 w-5 flex-none", dark ? accent.textDark : accent.text)} />
       </div>
-      <div className="rounded border border-slate-200 bg-white p-3">
-        <div className="mb-3 flex items-center gap-2 text-xs font-black text-slate-600">
-          <FileText className={clsx("h-4 w-4", accent.text)} />
-          Report builder
-        </div>
-        {["Issue catalog", "Photo annotations", "DOCX export"].map((item) => (
-          <div key={item} className="flex items-center justify-between border-b border-slate-100 py-2 last:border-0">
-            <span className="text-xs font-bold text-slate-700">{item}</span>
-            <CheckCircle2 className={clsx("h-4 w-4", accent.text)} />
+
+      <div className="grid gap-3 md:grid-cols-4">
+        {caseStudy.workflow.map((step, index) => (
+          <div
+            key={step}
+            className={clsx(
+              "relative rounded-xl border p-3",
+              dark ? "border-white/12 bg-slate-950/44 text-slate-200" : "border-slate-200 bg-slate-50 text-slate-700"
+            )}
+          >
+            <div className="mb-6 flex items-center justify-between">
+              <span
+                className="grid h-8 w-8 place-items-center rounded-lg text-xs font-black text-white"
+                style={{ backgroundColor: index === caseStudy.workflow.length - 1 ? "#19b27f" : accent.fill }}
+              >
+                {index + 1}
+              </span>
+              {index < caseStudy.workflow.length - 1 ? <ArrowRight className={clsx("h-4 w-4", dark ? "text-slate-500" : "text-slate-300")} /> : <CheckCircle2 className="h-4 w-4 text-emerald-500" />}
+            </div>
+            <p className="text-sm font-black capitalize leading-tight">{step}</p>
           </div>
         ))}
       </div>
@@ -214,10 +155,10 @@ function PreviewMock({ caseStudy }: { caseStudy: CaseStudy }) {
 
 export function FlowStrip() {
   const steps = [
-    { label: "raw inputs", icon: FileText },
-    { label: "structured data", icon: Database },
+    { label: "raw files", icon: FileText },
+    { label: "clean data", icon: Database },
     { label: "workflow logic", icon: Workflow },
-    { label: "automated output", icon: CircleDot },
+    { label: "usable output", icon: CircleDot },
   ];
 
   return (
@@ -225,9 +166,9 @@ export function FlowStrip() {
       {steps.map((step, index) => {
         const Icon = step.icon;
         return (
-          <div key={step.label} className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md">
-            <Icon className="h-5 w-5 text-emerald-600" />
-            <span className="text-sm font-semibold text-slate-800">{step.label}</span>
+          <div key={step.label} className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md">
+            <Icon className="h-5 w-5 text-cyan-700" />
+            <span className="text-sm font-black text-slate-800">{step.label}</span>
             {index < steps.length - 1 ? <ArrowRight className="ml-auto hidden h-4 w-4 text-slate-300 md:block" /> : null}
           </div>
         );
@@ -238,45 +179,49 @@ export function FlowStrip() {
 
 export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
   const accent = accentFor(caseStudy.accent);
-  const blocks = ["Inputs", "Rules", "Data model", "Interface", "Output"];
+  const blocks = ["Inputs", "Rules", "Data", "Interface", "Output"];
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-[0_22px_70px_-55px_rgba(4,12,24,0.75)]">
       <div className="mb-4 flex items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">System designed</p>
-          <h3 className="mt-1 text-lg font-black text-slate-950">Input to decision flow</h3>
+          <p className="text-[0.7rem] font-black uppercase tracking-[0.18em] text-slate-500">System designed</p>
+          <h3 className="mt-1 text-xl font-black text-slate-950">Operating flow</h3>
         </div>
         <span className={clsx("rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em]", accent.bg, accent.text)}>
           {caseStudy.shortTitle}
         </span>
       </div>
 
-      <svg className="h-56 w-full" viewBox="0 0 720 250" role="img" aria-label={`${caseStudy.title} architecture visualization`}>
+      <svg className="h-60 w-full" viewBox="0 0 760 270" role="img" aria-label={`${caseStudy.title} workflow architecture`}>
         <defs>
           <marker id={`arrow-${caseStudy.slug}`} viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
             <path d="M 0 0 L 10 5 L 0 10 z" fill={accent.fill} />
           </marker>
+          <pattern id={`grid-${caseStudy.slug}`} width="26" height="26" patternUnits="userSpaceOnUse">
+            <path d="M 26 0 L 0 0 0 26" fill="none" stroke="#e5e7eb" strokeWidth="1" />
+          </pattern>
         </defs>
-        <rect width="720" height="250" rx="18" fill="#f8fafc" />
-        <path d="M60 124 H660" stroke={accent.fill} strokeWidth="3" strokeDasharray="10 12" markerEnd={`url(#arrow-${caseStudy.slug})`} />
+        <rect width="760" height="270" rx="22" fill="#f8f5ed" />
+        <rect width="760" height="270" rx="22" fill={`url(#grid-${caseStudy.slug})`} opacity="0.75" />
+        <path d="M74 135 H686" stroke={accent.fill} strokeWidth="4" strokeDasharray="13 12" markerEnd={`url(#arrow-${caseStudy.slug})`} />
         {blocks.map((block, index) => {
-          const x = 42 + index * 132;
-          const y = index % 2 === 0 ? 62 : 142;
+          const x = 36 + index * 144;
+          const y = index % 2 === 0 ? 70 : 150;
           return (
             <g key={block}>
-              <rect x={x} y={y} width="112" height="54" rx="12" fill="white" stroke={index === 2 ? accent.fill : "#cbd5e1"} strokeWidth={index === 2 ? "3" : "1.5"} />
-              <text x={x + 56} y={y + 23} textAnchor="middle" fontSize="13" fontWeight="800" fill="#0f172a">
+              <rect x={x} y={y} width="122" height="60" rx="14" fill={index === 2 ? "#06131f" : "#ffffff"} stroke={index === 2 ? accent.fill : "#cbd5e1"} strokeWidth={index === 2 ? "3" : "1.5"} />
+              <text x={x + 61} y={y + 27} textAnchor="middle" fontSize="14" fontWeight="900" fill={index === 2 ? "#ffffff" : "#06131f"}>
                 {block}
               </text>
-              <text x={x + 56} y={y + 39} textAnchor="middle" fontSize="10" fontWeight="700" fill="#64748b">
-                {index === 0 ? "raw" : index === 4 ? "usable" : "structured"}
+              <text x={x + 61} y={y + 45} textAnchor="middle" fontSize="10" fontWeight="800" fill={index === 2 ? "#a7f3d0" : "#64748b"}>
+                {index === 0 ? "messy" : index === 4 ? "usable" : "structured"}
               </text>
             </g>
           );
         })}
-        <circle cx="360" cy="124" r="34" fill={accent.soft} stroke={accent.fill} strokeWidth="3" />
-        <circle cx="360" cy="124" r="9" fill={accent.fill} />
+        <circle cx="380" cy="135" r="36" fill={accent.soft} stroke={accent.fill} strokeWidth="4" />
+        <circle cx="380" cy="135" r="10" fill={accent.fill} />
       </svg>
     </div>
   );

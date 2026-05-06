@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sanitized pricing intelligence preview</title>
+  <desc id="desc">Representative market intelligence dashboard based on the real-estate MVP structure with sanitized labels.</desc>
+  <rect width="1200" height="760" rx="28" fill="#06131f"/>
+  <rect x="24" y="24" width="1152" height="712" rx="22" fill="#f4f8fb"/>
+  <g transform="translate(56 54)">
+    <text x="0" y="20" fill="#007c91" font-family="Inter, Arial" font-size="13" font-weight="900" letter-spacing="4">PRICING INTELLIGENCE</text>
+    <text x="0" y="58" fill="#06131f" font-family="Inter, Arial" font-size="34" font-weight="900">Market signal board</text>
+    <text x="0" y="88" fill="#526179" font-family="Inter, Arial" font-size="17">Sanitized sample from listings, zones, confidence, and reporting flows.</text>
+  </g>
+  <g transform="translate(56 170)">
+    <rect width="324" height="486" rx="18" fill="#06131f"/>
+    <text x="24" y="38" fill="#7dd3fc" font-family="Inter, Arial" font-size="13" font-weight="900" letter-spacing="3">SOURCE HEALTH</text>
+    <g transform="translate(24 72)" font-family="Inter, Arial">
+      <rect width="276" height="72" rx="13" fill="#0e2436"/><text x="18" y="28" fill="#8ca3b8" font-size="12" font-weight="900" letter-spacing="2">RAW LISTINGS</text><text x="18" y="58" fill="#fff" font-size="28" font-weight="900">1,500</text>
+      <rect y="90" width="276" height="72" rx="13" fill="#0e2436"/><text x="18" y="118" fill="#8ca3b8" font-size="12" font-weight="900" letter-spacing="2">PUBLISHABLE</text><text x="18" y="148" fill="#fff" font-size="28" font-weight="900">74%</text>
+      <rect y="180" width="276" height="72" rx="13" fill="#0e2436"/><text x="18" y="208" fill="#8ca3b8" font-size="12" font-weight="900" letter-spacing="2">CONFIDENCE</text><text x="18" y="238" fill="#fff" font-size="28" font-weight="900">High</text>
+      <rect y="292" width="276" height="114" rx="13" fill="#fff7e7"/>
+      <text x="18" y="326" fill="#06131f" font-size="16" font-weight="900">Daily report</text>
+      <text x="18" y="358" fill="#526179" font-size="14">Zone metrics, source coverage,</text>
+      <text x="18" y="382" fill="#526179" font-size="14">unresolved geography, trends.</text>
+    </g>
+  </g>
+  <g transform="translate(410 170)">
+    <rect width="734" height="486" rx="18" fill="#fff" stroke="#d6e0eb"/>
+    <g transform="translate(28 24)">
+      <text x="0" y="18" fill="#526179" font-family="Inter, Arial" font-size="13" font-weight="900" letter-spacing="3">ZONE METRICS</text>
+      <rect x="0" y="42" width="310" height="330" rx="16" fill="#f4f8fb" stroke="#d6e0eb"/>
+      <g transform="translate(20 64)">
+        <rect width="268" height="250" rx="12" fill="#fff"/>
+        <g>
+          <rect x="18" y="18" width="48" height="38" rx="8" fill="#7dd3fc"/><rect x="76" y="18" width="48" height="38" rx="8" fill="#d9edf6"/><rect x="134" y="18" width="48" height="38" rx="8" fill="#ffdc70"/><rect x="192" y="18" width="48" height="38" rx="8" fill="#d9edf6"/>
+          <rect x="18" y="66" width="48" height="38" rx="8" fill="#d9edf6"/><rect x="76" y="66" width="48" height="38" rx="8" fill="#7dd3fc"/><rect x="134" y="66" width="48" height="38" rx="8" fill="#d9edf6"/><rect x="192" y="66" width="48" height="38" rx="8" fill="#13b981"/>
+          <rect x="18" y="114" width="48" height="38" rx="8" fill="#ffdc70"/><rect x="76" y="114" width="48" height="38" rx="8" fill="#d9edf6"/><rect x="134" y="114" width="48" height="38" rx="8" fill="#7dd3fc"/><rect x="192" y="114" width="48" height="38" rx="8" fill="#d9edf6"/>
+          <rect x="18" y="162" width="48" height="38" rx="8" fill="#d9edf6"/><rect x="76" y="162" width="48" height="38" rx="8" fill="#ffdc70"/><rect x="134" y="162" width="48" height="38" rx="8" fill="#d9edf6"/><rect x="192" y="162" width="48" height="38" rx="8" fill="#7dd3fc"/>
+        </g>
+      </g>
+      <rect x="342" y="42" width="336" height="330" rx="16" fill="#f4f8fb" stroke="#d6e0eb"/>
+      <text x="366" y="82" fill="#06131f" font-family="Inter, Arial" font-size="18" font-weight="900">Listings review</text>
+      <g transform="translate(366 106)" font-family="Inter, Arial" font-size="13" font-weight="800">
+        <rect width="288" height="50" rx="10" fill="#fff"/><text x="16" y="31" fill="#06131f">Zone A confidence</text><text x="230" y="31" fill="#00894d">0.92</text>
+        <rect y="64" width="288" height="50" rx="10" fill="#fff"/><text x="16" y="95" fill="#06131f">Zone B freshness</text><text x="230" y="95" fill="#007c91">fresh</text>
+        <rect y="128" width="288" height="50" rx="10" fill="#fff"/><text x="16" y="159" fill="#06131f">Duplicate group</text><text x="230" y="159" fill="#8a5b00">12</text>
+        <rect y="192" width="288" height="50" rx="10" fill="#fff"/><text x="16" y="223" fill="#06131f">Market index</text><text x="230" y="223" fill="#06131f">ready</text>
+      </g>
+    </g>
+  </g>
+</svg>

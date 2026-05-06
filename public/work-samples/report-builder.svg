@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Sanitized report builder preview</title>
+  <desc id="desc">Representative preview based on the local inspection report builder flow with demo project labels.</desc>
+  <rect width="1200" height="760" rx="28" fill="#081522"/>
+  <rect x="24" y="24" width="1152" height="712" rx="22" fill="#f8f5ed"/>
+  <g transform="translate(54 54)">
+    <rect width="250" height="652" rx="20" fill="#07131f"/>
+    <text x="26" y="42" fill="#7dd3fc" font-family="Inter, Arial" font-size="13" font-weight="900" letter-spacing="4">REPORT BUILDER</text>
+    <text x="26" y="76" fill="#fff" font-family="Inter, Arial" font-size="25" font-weight="900">Example Report</text>
+    <g font-family="Inter, Arial" font-size="14" font-weight="800">
+      <rect x="22" y="120" width="206" height="46" rx="10" fill="#ffb020"/><text x="44" y="150" fill="#07131f">1 Project</text>
+      <rect x="22" y="178" width="206" height="46" rx="10" fill="#12263a"/><text x="44" y="208" fill="#d8e4ef">2 Uploads</text>
+      <rect x="22" y="236" width="206" height="46" rx="10" fill="#12263a"/><text x="44" y="266" fill="#d8e4ef">3 Documents</text>
+      <rect x="22" y="294" width="206" height="46" rx="10" fill="#12263a"/><text x="44" y="324" fill="#d8e4ef">4 Classify</text>
+      <rect x="22" y="352" width="206" height="46" rx="10" fill="#12263a"/><text x="44" y="382" fill="#d8e4ef">5 Review</text>
+      <rect x="22" y="410" width="206" height="46" rx="10" fill="#12263a"/><text x="44" y="440" fill="#d8e4ef">6 Generate</text>
+    </g>
+    <rect x="22" y="548" width="206" height="72" rx="14" fill="#0e2436" stroke="#1e405a"/>
+    <text x="44" y="582" fill="#7dd3fc" font-family="Inter, Arial" font-size="13" font-weight="900">LOCAL-FIRST</text>
+    <text x="44" y="606" fill="#fff" font-family="Inter, Arial" font-size="18" font-weight="900">DOCX export</text>
+  </g>
+  <g transform="translate(340 54)">
+    <rect width="806" height="652" rx="20" fill="#fff" stroke="#d7dee8"/>
+    <text x="28" y="42" fill="#63718a" font-family="Inter, Arial" font-size="13" font-weight="900" letter-spacing="4">PROJECT WORKBENCH</text>
+    <text x="28" y="78" fill="#07131f" font-family="Inter, Arial" font-size="32" font-weight="900">Inspection Area 01</text>
+    <g transform="translate(28 116)">
+      <rect width="360" height="436" rx="18" fill="#f4f7fb" stroke="#d8e1ee"/>
+      <text x="22" y="38" fill="#07131f" font-family="Inter, Arial" font-size="18" font-weight="900">Photo assets</text>
+      <g transform="translate(22 64)">
+        <rect width="142" height="102" rx="12" fill="#dbe5ef"/><rect x="18" y="18" width="84" height="12" rx="6" fill="#ffdc70"/><circle cx="106" cy="66" r="18" fill="#ffb020"/>
+        <rect x="166" width="142" height="102" rx="12" fill="#dbe5ef"/><rect x="184" y="18" width="84" height="12" rx="6" fill="#c9f7dd"/><circle cx="272" cy="66" r="18" fill="#13b981"/>
+        <rect y="124" width="142" height="102" rx="12" fill="#dbe5ef"/><rect x="18" y="142" width="84" height="12" rx="6" fill="#cfeeff"/><circle cx="106" cy="190" r="18" fill="#00a9c7"/>
+        <rect x="166" y="124" width="142" height="102" rx="12" fill="#dbe5ef"/><rect x="184" y="142" width="84" height="12" rx="6" fill="#ffdc70"/><circle cx="272" cy="190" r="18" fill="#ffb020"/>
+      </g>
+      <rect x="22" y="324" width="316" height="78" rx="13" fill="#fff"/>
+      <text x="44" y="356" fill="#63718a" font-family="Inter, Arial" font-size="12" font-weight="900" letter-spacing="2">PHONE UPLOAD</text>
+      <text x="44" y="384" fill="#07131f" font-family="Inter, Arial" font-size="20" font-weight="900">QR intake ready</text>
+    </g>
+    <g transform="translate(420 116)">
+      <rect width="358" height="436" rx="18" fill="#f4f7fb" stroke="#d8e1ee"/>
+      <text x="22" y="38" fill="#07131f" font-family="Inter, Arial" font-size="18" font-weight="900">Report fields</text>
+      <g transform="translate(22 70)" font-family="Inter, Arial" font-size="14" font-weight="800">
+        <rect width="314" height="50" rx="10" fill="#fff"/><text x="18" y="31" fill="#07131f">Project code</text><text x="220" y="31" fill="#63718a">DEMO-001</text>
+        <rect y="64" width="314" height="50" rx="10" fill="#fff"/><text x="18" y="95" fill="#07131f">Client</text><text x="226" y="95" fill="#63718a">Client Demo</text>
+        <rect y="128" width="314" height="50" rx="10" fill="#fff"/><text x="18" y="159" fill="#07131f">Visit date</text><text x="226" y="159" fill="#63718a">Sample</text>
+        <rect y="192" width="314" height="50" rx="10" fill="#fff"/><text x="18" y="223" fill="#07131f">Issue catalog</text><circle cx="286" cy="216" r="12" fill="#13b981"/>
+      </g>
+      <rect x="22" y="338" width="314" height="64" rx="12" fill="#07131f"/>
+      <text x="48" y="378" fill="#fff" font-family="Inter, Arial" font-size="18" font-weight="900">Generate DOCX</text>
+    </g>
+  </g>
+</svg>

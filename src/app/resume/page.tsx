@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowDownToLine, Mail } from "lucide-react";
-import { caseStudies, professionalExperience, profile, skillGroups } from "@/data/profile";
+import { capabilityGroups, caseStudies, professionalExperience, profile } from "@/data/profile";
 
 export const metadata = {
   title: "Resume | Mickoll Marin",
@@ -9,19 +9,19 @@ export const metadata = {
 
 export default function ResumePage() {
   return (
-    <main className="min-h-screen bg-white text-slate-950">
-      <div className="no-print border-b border-slate-200 bg-[#f8f4ea]">
+    <main className="min-h-screen bg-[#f4efe4] text-slate-950 print:bg-white">
+      <div className="no-print border-b border-white/10 bg-slate-950 text-white">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-5 py-4 md:px-8">
-          <Link className="inline-flex items-center gap-2 text-sm font-bold text-slate-700 hover:text-slate-950" href="/">
+          <Link className="inline-flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-white" href="/">
             <ArrowLeft className="h-4 w-4" />
             Back
           </Link>
           <div className="flex gap-3">
-            <a className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-3 py-2 text-sm font-bold text-white" href={profile.cvUrl}>
+            <a className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-3 py-2 text-sm font-bold text-slate-950" href={profile.cvUrl}>
               <ArrowDownToLine className="h-4 w-4" />
               PDF
             </a>
-            <a className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-bold text-slate-900" href={`mailto:${profile.email}`}>
+            <a className="inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-sm font-bold text-white" href={`mailto:${profile.email}`}>
               <Mail className="h-4 w-4" />
               Email
             </a>
@@ -29,25 +29,32 @@ export default function ResumePage() {
         </div>
       </div>
 
-      <article className="mx-auto max-w-5xl px-5 py-12 md:px-8 print:px-0">
-        <header>
-          <h1 className="text-4xl font-black">{profile.name}</h1>
-          <p className="mt-2 text-xl font-bold text-slate-800">{profile.role}</p>
-          <p className="mt-3 text-sm text-slate-600">
-            {profile.location} | {profile.email} | {profile.phone} | linkedin.com/in/mickollmarin
-          </p>
-          <p className="mt-6 max-w-4xl text-base leading-7 text-slate-700">{profile.headline}</p>
+      <article className="mx-auto my-8 max-w-5xl rounded-[26px] border border-slate-900/12 bg-white px-5 py-10 shadow-[0_28px_80px_-62px_rgba(4,12,24,0.85)] md:px-8 print:my-0 print:rounded-none print:border-0 print:px-0 print:py-0 print:shadow-none">
+        <header className="border-b border-slate-200 pb-7">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-start">
+            <div>
+              <h1 className="text-4xl font-black tracking-tight">{profile.name}</h1>
+              <p className="mt-2 text-xl font-bold text-slate-800">{profile.role}</p>
+              <p className="mt-5 max-w-4xl text-base leading-7 text-slate-700">{profile.headline}</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-[#f4efe4] p-4 text-sm leading-6 text-slate-700 print:bg-white">
+              <p>{profile.location}</p>
+              <p>{profile.email}</p>
+              <p>{profile.phone}</p>
+              <p>linkedin.com/in/mickollmarin</p>
+            </div>
+          </div>
         </header>
 
         <ResumeSection title="Target roles">
           <p className="text-sm leading-6 text-slate-700">{profile.targetRoles.join(" | ")}</p>
         </ResumeSection>
 
-        <ResumeSection title="Core skills">
+        <ResumeSection title="Core operating system">
           <div className="grid gap-4 md:grid-cols-2">
-            {skillGroups.map((group) => (
-              <div key={group.name}>
-                <h3 className="font-black text-slate-950">{group.name}</h3>
+            {capabilityGroups.map((group) => (
+              <div key={group.name} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">
+                <h3 className="font-black text-slate-950">{group.name}: {group.verb}</h3>
                 <p className="mt-1 text-sm leading-6 text-slate-700">{group.items.join(", ")}</p>
               </div>
             ))}
@@ -79,7 +86,7 @@ export default function ResumePage() {
         <ResumeSection title="Featured project proof">
           <div className="grid gap-4 md:grid-cols-2">
             {caseStudies.map((caseStudy) => (
-              <div key={caseStudy.slug}>
+              <div key={caseStudy.slug} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">
                 <h3 className="font-black text-slate-950">{caseStudy.title}</h3>
                 <p className="mt-1 text-sm leading-6 text-slate-700">{caseStudy.output}</p>
               </div>
@@ -101,7 +108,7 @@ export default function ResumePage() {
 
 function ResumeSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-8 border-t border-slate-200 pt-5">
+    <section className="mt-8 break-inside-avoid border-t border-slate-200 pt-5">
       <h2 className="mb-4 text-sm font-black uppercase tracking-[0.16em] text-slate-500">{title}</h2>
       {children}
     </section>
