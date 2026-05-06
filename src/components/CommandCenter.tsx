@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import {
   ArrowDownToLine,
@@ -13,27 +13,42 @@ import {
   PanelTop,
   RadioTower,
 } from "lucide-react";
-import { caseStudies, profile, signalCards, workflowStages } from "@/data/profile";
+import {
+  getLocalizedCaseStudies,
+  getLocalizedProfile,
+  getLocalizedSignalCards,
+  getLocalizedWorkflowStages,
+} from "@/data/localized";
+import { useLanguage } from "@/components/LanguageProvider";
 import { accentFor, CaseStudyVisual, WorkflowRun } from "@/components/VisualSystem";
 
 type Mode = "recruiter" | "explorer";
 
-const cockpitProof = [
-  "Led a 107-person Amazon operations team",
-  "Worked remotely in SaaS pricing and product workflows",
-  "Built deployed and local-first workflow tools",
-  "Spanish native, English C2, Portuguese C1",
-];
-
 export function CommandCenter() {
+  const { locale, ui, localizedHref } = useLanguage();
+  const profile = getLocalizedProfile(locale);
+  const caseStudies = getLocalizedCaseStudies(locale);
+  const signalCards = getLocalizedSignalCards(locale);
+  const workflowStages = getLocalizedWorkflowStages(locale);
+  const cockpitProof =
+    locale === "es"
+      ? [
+          "Lideré un equipo Amazon de 107 personas",
+          "Trabajé remotamente en pricing SaaS y workflows de producto",
+          "Construí herramientas desplegadas y local-first",
+          "Español nativo, inglés C2, portugués C1",
+        ]
+      : [
+          "Led a 107-person Amazon operations team",
+          "Worked remotely in SaaS pricing and product workflows",
+          "Built deployed and local-first workflow tools",
+          "Spanish native, English C2, Portuguese C1",
+        ];
   const [activeSlug, setActiveSlug] = useState("solartrack-workflow-pwa");
   const [mode, setMode] = useState<Mode>("recruiter");
   const [activeStage, setActiveStage] = useState(0);
 
-  const activeCase = useMemo(
-    () => caseStudies.find((caseStudy) => caseStudy.slug === activeSlug) ?? caseStudies[0],
-    [activeSlug]
-  );
+  const activeCase = caseStudies.find((caseStudy) => caseStudy.slug === activeSlug) ?? caseStudies[0];
   const accent = accentFor(activeCase.accent);
 
   return (
@@ -45,31 +60,33 @@ export function CommandCenter() {
         <div className="flex flex-col justify-center py-10">
           <div className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/14 bg-white/8 px-3 py-2 text-xs font-black uppercase tracking-[0.16em] text-cyan-100">
             <RadioTower className="h-4 w-4 text-emerald-300" />
-            Remote from Spain
+            {ui.remoteFromSpain}
           </div>
 
           <h1 className="mt-7 max-w-3xl text-5xl font-black leading-[0.92] tracking-tight text-white md:text-7xl">
-            I build tools that make operations easier to run.
+            {locale === "es" ? "Construyo herramientas que hacen las operaciones más fáciles." : "I build tools that make operations easier to run."}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            I am Mickoll Marin: an industrial engineer with Amazon operations experience, remote SaaS/product context, and a portfolio of practical automation tools.
+            {locale === "es"
+              ? "Soy Mickoll Marin: ingeniero industrial con experiencia en operaciones Amazon, contexto SaaS/producto remoto y un portfolio de herramientas prácticas de automatización."
+              : "I am Mickoll Marin: an industrial engineer with Amazon operations experience, remote SaaS/product context, and a portfolio of practical automation tools."}
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a className="mission-button bg-amber-400 text-slate-950 hover:bg-amber-300" href={profile.cvUrl}>
               <ArrowDownToLine className="h-4 w-4" />
-              Download CV
+              {ui.downloadCv}
             </a>
             <a
               className="mission-button border border-white/16 bg-white/8 text-white hover:border-cyan-300 hover:text-cyan-100"
               href={mode === "recruiter" ? "#recruiter-scan" : "#case-studies"}
             >
               {mode === "recruiter" ? <BriefcaseBusiness className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              {mode === "recruiter" ? "Recruiter scan" : "View proof"}
+              {mode === "recruiter" ? ui.recruiterScan : ui.viewProof}
             </a>
             <a className="mission-button border border-white/16 bg-white/8 text-white hover:border-emerald-300 hover:text-emerald-100" href={`mailto:${profile.email}`}>
               <Mail className="h-4 w-4" />
-              Contact
+              {ui.contact}
             </a>
           </div>
 
@@ -94,9 +111,9 @@ export function CommandCenter() {
           <div className="cockpit-panel w-full rounded-[24px] p-3 md:p-4">
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-1 pb-4">
               <div>
-                <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-slate-400">Operations cockpit</p>
+                <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-slate-400">{ui.operationsCockpit}</p>
                 <h2 className="mt-1 text-2xl font-black text-white">
-                  {mode === "recruiter" ? "Fast proof first" : "Explore the systems"}
+                  {mode === "recruiter" ? ui.fastProofFirst : ui.exploreSystems}
                 </h2>
               </div>
               <div className="mode-toggle rounded-xl p-1">
@@ -110,9 +127,9 @@ export function CommandCenter() {
                     onClick={() => setMode(nextMode)}
                     type="button"
                   >
-                    {nextMode}
-                  </button>
-                ))}
+                  {nextMode === "recruiter" ? ui.recruiter : ui.explorer}
+                </button>
+              ))}
               </div>
             </div>
 
@@ -121,13 +138,13 @@ export function CommandCenter() {
                 <div className="grid gap-3 self-start">
                   <CaseStudyVisual caseStudy={activeCase} dark />
                   <div className="rounded-[18px] border border-white/12 bg-white/7 p-4 text-sm leading-6 text-slate-300">
-                    Sanitized from local project routes and generated outputs. Private names, locations, contacts, coordinates, and file identifiers are replaced with demo values.
+                    {ui.sanitizedNote}
                   </div>
                 </div>
 
                 <div className="grid gap-4">
                   <section className="rounded-[18px] border border-white/12 bg-white/7 p-4">
-                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-300">Why this profile works</p>
+                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-300">{ui.whyProfileWorks}</p>
                     <div className="mt-4 grid gap-2">
                       {cockpitProof.map((item) => (
                         <div key={item} className="flex gap-2 rounded-lg border border-white/10 bg-slate-950/38 px-3 py-2 text-sm font-bold leading-5 text-slate-200">
@@ -139,7 +156,7 @@ export function CommandCenter() {
                   </section>
 
                   <section className="rounded-[18px] border border-white/12 bg-white/7 p-4">
-                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">Top role fit</p>
+                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.topRoleFit}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {profile.targetRoles.slice(0, 5).map((role) => (
                         <span key={role} className="rounded-lg border border-white/12 bg-white/8 px-2.5 py-1.5 text-xs font-black text-slate-100">
@@ -200,9 +217,9 @@ export function CommandCenter() {
 
                   <a
                     className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-black text-slate-950 transition hover:bg-cyan-100 focus:outline-none focus:ring-2 focus:ring-cyan-300"
-                    href={`/case-studies/${activeCase.slug}`}
+                    href={localizedHref(`/case-studies/${activeCase.slug}`)}
                   >
-                    Open case study
+                    {ui.openCaseStudy}
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </section>
@@ -217,7 +234,7 @@ export function CommandCenter() {
             <section className="mt-4 rounded-[18px] border border-white/12 bg-slate-950/42 p-4">
               <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
                 <div>
-                  <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">Value pipeline</p>
+                  <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.valuePipeline}</p>
                   <h3 className="mt-1 text-lg font-black text-white">{workflowStages[activeStage].label}</h3>
                   <p className="mt-1 text-sm leading-6 text-slate-300">{workflowStages[activeStage].detail}</p>
                 </div>
@@ -225,7 +242,7 @@ export function CommandCenter() {
                   {workflowStages.map((stage, index) => (
                     <button
                       key={stage.label}
-                      aria-label={`Show ${stage.label}`}
+                      aria-label={`${ui.showStage} ${stage.label}`}
                       className={clsx(
                         "h-10 rounded-lg border text-xs font-black transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
                         index === activeStage ? "border-cyan-300 bg-cyan-300 text-slate-950" : "border-white/12 bg-white/7 text-slate-300 hover:bg-white/12"

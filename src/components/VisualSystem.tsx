@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import clsx from "clsx";
 import { ArrowRight, CheckCircle2, CircleDot, Database, FileText, MonitorCog, Workflow } from "lucide-react";
 import type { CaseStudy } from "@/data/profile";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const accentClasses = {
   amber: {
@@ -55,6 +58,7 @@ export function CaseStudyVisual({
   compact?: boolean;
   dark?: boolean;
 }) {
+  const { ui } = useLanguage();
   const accent = accentFor(caseStudy.accent);
   const Icon = caseStudy.icon;
 
@@ -69,7 +73,7 @@ export function CaseStudyVisual({
       <div className="flex items-center justify-between gap-3 px-2 pb-2">
         <div className="min-w-0">
           <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", dark ? "text-slate-400" : "text-slate-500")}>
-            Sanitized work sample
+            {ui.sanitizedWorkSample}
           </p>
           <figcaption className={clsx("mt-1 truncate text-sm font-black", dark ? "text-white" : "text-slate-950")}>
             {caseStudy.shortTitle}
@@ -113,6 +117,7 @@ export function CaseStudyVisual({
 }
 
 export function WorkflowRun({ caseStudy, dark = false }: { caseStudy: CaseStudy; dark?: boolean }) {
+  const { ui } = useLanguage();
   const accent = accentFor(caseStudy.accent);
 
   return (
@@ -120,9 +125,9 @@ export function WorkflowRun({ caseStudy, dark = false }: { caseStudy: CaseStudy;
       <div className="mb-4 flex items-center justify-between gap-4">
         <div>
           <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", dark ? "text-slate-400" : "text-slate-500")}>
-            Workflow run
+            {ui.workflowRun}
           </p>
-          <h3 className={clsx("mt-1 text-lg font-black", dark ? "text-white" : "text-slate-950")}>From messy input to usable output</h3>
+          <h3 className={clsx("mt-1 text-lg font-black", dark ? "text-white" : "text-slate-950")}>{ui.workflowRunHeading}</h3>
         </div>
         <MonitorCog className={clsx("h-5 w-5 flex-none", dark ? accent.textDark : accent.text)} />
       </div>
@@ -178,6 +183,7 @@ export function FlowStrip() {
 }
 
 export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
+  const { ui } = useLanguage();
   const accent = accentFor(caseStudy.accent);
   const blocks = ["Inputs", "Rules", "Data", "Interface", "Output"];
 
@@ -185,8 +191,8 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
     <div className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-[0_22px_70px_-55px_rgba(4,12,24,0.75)]">
       <div className="mb-4 flex items-center justify-between gap-4">
         <div>
-          <p className="text-[0.7rem] font-black uppercase tracking-[0.18em] text-slate-500">System designed</p>
-          <h3 className="mt-1 text-xl font-black text-slate-950">Operating flow</h3>
+          <p className="text-[0.7rem] font-black uppercase tracking-[0.18em] text-slate-500">{ui.systemDesigned}</p>
+          <h3 className="mt-1 text-xl font-black text-slate-950">{ui.operatingFlow}</h3>
         </div>
         <span className={clsx("rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em]", accent.bg, accent.text)}>
           {caseStudy.shortTitle}
@@ -215,7 +221,7 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
                 {block}
               </text>
               <text x={x + 61} y={y + 45} textAnchor="middle" fontSize="10" fontWeight="800" fill={index === 2 ? "#a7f3d0" : "#64748b"}>
-                {index === 0 ? "messy" : index === 4 ? "usable" : "structured"}
+                {index === 0 ? ui.raw : index === 4 ? ui.usable : ui.structured}
               </text>
             </g>
           );
