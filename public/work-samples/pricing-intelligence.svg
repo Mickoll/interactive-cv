@@ -5,7 +5,7 @@
   <rect x="24" y="24" width="1152" height="712" rx="22" fill="#f4f8fb"/>
   <g transform="translate(56 54)">
     <text x="0" y="20" fill="#007c91" font-family="Inter, Arial" font-size="13" font-weight="900" letter-spacing="4">PRICING INTELLIGENCE</text>
-    <text x="0" y="58" fill="#06131f" font-family="Inter, Arial" font-size="34" font-weight="900">Market signal board</text>
+    <text x="0" y="58" fill="#06131f" font-family="Inter, Arial" font-size="34" font-weight="900">Market pricing board</text>
     <text x="0" y="88" fill="#526179" font-family="Inter, Arial" font-size="17">Sanitized sample from listings, zones, confidence, and reporting flows.</text>
   </g>
   <g transform="translate(56 170)">

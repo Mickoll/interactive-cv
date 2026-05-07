@@ -148,28 +148,6 @@ a {
     linear-gradient(270deg, rgba(245, 164, 0, 0.13), transparent 32%);
 }
 
-#value-pipeline .value-step-idle {
-  background-color: #fffaf0 !important;
-  border-color: #e2e8f0 !important;
-  color: #314158 !important;
-}
-
-#value-pipeline .value-step-active {
-  background-color: #020618 !important;
-  border-color: #020618 !important;
-  color: #ffffff !important;
-}
-
-#value-pipeline .value-step-idle .value-step-number {
-  background-color: #ffffff !important;
-  color: #020618 !important;
-}
-
-#value-pipeline .value-step-active .value-step-number {
-  background-color: #53eafd !important;
-  color: #020618 !important;
-}
-
 @keyframes radar-sweep {
   from {
     transform: rotate(0deg) scale(1.28);

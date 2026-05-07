@@ -79,7 +79,7 @@ export function ResumeClient() {
           </div>
         </ResumeSection>
 
-        <ResumeSection title={ui.coreOperatingSystem}>
+        <ResumeSection title={ui.coreSkills}>
           <div className="grid gap-4 md:grid-cols-2 print:grid-cols-5 print:gap-1">
             {capabilityGroups.map((group) => (
               <div key={group.name} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">
@@ -95,7 +95,7 @@ export function ResumeClient() {
         <ResumeSection title={ui.selectedExperience}>
           <div className="space-y-6 print:space-y-2">
             {professionalExperience.map((item) => (
-              <div key={item.organization}>
+              <div key={item.organization} className="break-inside-avoid">
                 <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
                   <div>
                     <h3 className="text-sm font-black text-slate-950 print:text-[10px] print:leading-4">{item.role}</h3>
@@ -115,7 +115,7 @@ export function ResumeClient() {
         </ResumeSection>
 
         <ResumeSection title={ui.projectExamples}>
-          <div className="grid gap-4 md:grid-cols-2 print:grid-cols-4 print:gap-1">
+          <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-1">
             {caseStudies.map((caseStudy) => (
               <div key={caseStudy.slug} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">
                 <h3 className="font-black text-slate-950 print:text-[9px] print:leading-3">{caseStudy.title}</h3>

@@ -5,8 +5,8 @@ import {
   FileCheck2,
   Globe2,
   LineChart,
+  MonitorCog,
   ShieldCheck,
-  Workflow,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -52,7 +52,6 @@ export type CaseStudy = {
   metrics: string[];
   sampleImage: string;
   sampleAlt: string;
-  workflow: string[];
   icon: LucideIcon;
   accent: "amber" | "emerald" | "cyan" | "blue";
 };
@@ -60,8 +59,6 @@ export type CaseStudy = {
 export type CapabilityGroup = {
   name: string;
   verb: string;
-  input: string;
-  system: string;
   items: string[];
   output: string;
   usedIn: string[];
@@ -116,7 +113,7 @@ export const signalCards = [
     label: "Automation",
     value: "4",
     detail: "featured data and automation projects",
-    icon: Workflow,
+    icon: MonitorCog,
   },
   {
     label: "Remote",
@@ -130,8 +127,6 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     name: "Operate",
     verb: "Run the work first",
-    input: "field visits, service queues, QA gaps",
-    system: "owners, status, next actions",
     items: ["field operations", "KPI follow-up", "QA/QC", "handoffs"],
     output: "Clear priorities and fewer loose ends.",
     usedIn: ["SolarTrack", "Amazon", "report automation"],
@@ -139,8 +134,6 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     name: "Analyze",
     verb: "Make the numbers useful",
-    input: "pricing data, exports, market pages",
-    system: "SQL/Python checks and dashboards",
     items: ["SQL", "pricing analysis", "market research", "dashboards"],
     output: "Cleaner context for pricing, QA, and planning.",
     usedIn: ["PriceLabs", "pricing MVP", "QA/QC"],
@@ -148,8 +141,6 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     name: "Automate",
     verb: "Remove repeat work",
-    input: "PDFs, spreadsheets, images, templates",
-    system: "ETL, OCR, validation, generation",
     items: ["Python", "ETL", "PDF/OCR", "DOCX/Excel generation"],
     output: "Repeatable outputs from documents, sheets, and operational records.",
     usedIn: ["report builder", "QA/QC", "equipment data"],
@@ -157,8 +148,6 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     name: "Ship",
     verb: "Build the screen people need",
-    input: "user friction and process requirements",
-    system: "React/Next/FastAPI interfaces",
     items: ["React", "Next.js", "TypeScript", "FastAPI"],
     output: "Small web tools that people can actually operate.",
     usedIn: ["SolarTrack", "report builder", "portfolio"],
@@ -166,39 +155,9 @@ export const capabilityGroups: CapabilityGroup[] = [
   {
     name: "Communicate",
     verb: "Explain clearly",
-    input: "users, product behavior, business context",
-    system: "clear follow-up and plain technical translation",
     items: ["English C2", "Spanish native", "Portuguese C1", "customer follow-up"],
     output: "Less confusion between users, business needs, and technical work.",
     usedIn: ["SaaS roles", "implementation", "remote teams"],
-  },
-];
-
-export const workflowStages = [
-  {
-    badge: "Files",
-    label: "Source material",
-    detail: "PDFs, sheets, exports, market pages",
-  },
-  {
-    badge: "Rules",
-    label: "Business rules",
-    detail: "rules, status, ownership, validation",
-  },
-  {
-    badge: "Data",
-    label: "Clean records",
-    detail: "tables, records, catalogs, checks",
-  },
-  {
-    badge: "Reports",
-    label: "Finished work",
-    detail: "dashboards, reports, documents, exports",
-  },
-  {
-    badge: "Action",
-    label: "Business decisions",
-    detail: "pricing, QA review, follow-up, action",
   },
 ];
 
@@ -222,7 +181,7 @@ export const timeline: TimelineItem[] = [
   {
     period: "2021-2025",
     label: "Remote SaaS and product",
-    title: "Customer operations, product support, and revenue workflows",
+    title: "Customer operations, product support, and revenue work",
     summary:
       "Worked remotely in SaaS roles at PerchPeek and PriceLabs, close to customers, pricing, revenue management, market research, product behavior, and support follow-up.",
     signals: ["remote SaaS", "pricing", "market research", "product operations"],
@@ -267,7 +226,7 @@ export const professionalExperience: ProfessionalExperience[] = [
     context: "Relocation-technology environment with customer-facing operations.",
     bullets: [
       "Supported remote SaaS operations through customer communication, follow-up, and product troubleshooting.",
-      "Built stronger judgment around implementation gaps, user friction, and the handoff between business process and product behavior.",
+      "Built stronger judgment around implementation gaps, user friction, and the handoff between business needs and product behavior.",
     ],
   },
   {
@@ -287,7 +246,7 @@ export const professionalExperience: ProfessionalExperience[] = [
     context: "High-volume operational environments with KPI ownership and process discipline.",
     bullets: [
       "Led and coordinated operational work including a 107-person Amazon team, QA follow-up, inventory control, KPI tracking, and action planning.",
-      "Developed the operating rhythm that now informs implementation, product operations, BI, and automation work.",
+      "Developed the discipline that now informs implementation, product operations, BI, and automation work.",
     ],
   },
   {
@@ -351,13 +310,12 @@ export const caseStudies: CaseStudy[] = [
     metrics: ["DOCX export", "OCR", "asset review"],
     sampleImage: "/work-samples/report-builder-capture.png",
     sampleAlt: "Anonymized capture of the local inspection report builder app using a demo project.",
-    workflow: ["create project", "add photos", "classify issues", "export DOCX"],
     icon: FileCheck2,
     accent: "amber",
   },
   {
     slug: "solartrack-workflow-pwa",
-    title: "SolarTrack Workflow PWA",
+    title: "SolarTrack Operations PWA",
     shortTitle: "SolarTrack PWA",
     eyebrow: "Deployed organizer",
     summary:
@@ -394,7 +352,6 @@ export const caseStudies: CaseStudy[] = [
     metrics: ["deployed", "PWA", "multi-view"],
     sampleImage: "/work-samples/solartrack-dashboard.svg",
     sampleAlt: "Anonymized SolarTrack dashboard preview based on the local project organizer app.",
-    workflow: ["visit records", "status filters", "report queue", "follow-up"],
     icon: CalendarCheck,
     accent: "emerald",
   },
@@ -437,7 +394,6 @@ export const caseStudies: CaseStudy[] = [
     metrics: ["ETL", "PostGIS", "market reports"],
     sampleImage: "/work-samples/pricing-intelligence.svg",
     sampleAlt: "Anonymized pricing intelligence dashboard preview based on the local real-estate MVP.",
-    workflow: ["raw listings", "dedupe", "geo confidence", "market report"],
     icon: Building2,
     accent: "cyan",
   },
@@ -480,7 +436,6 @@ export const caseStudies: CaseStudy[] = [
     metrics: ["1,594 records", "98 systems", "13,351 checks"],
     sampleImage: "/work-samples/qaqc-index.svg",
     sampleAlt: "Anonymized QA/QC master index preview based on generated validation outputs.",
-    workflow: ["document intake", "master index", "coverage checks", "QA summary"],
     icon: ShieldCheck,
     accent: "blue",
   },

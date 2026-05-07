@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import {
   ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   CheckCircle2,
   FileText,
@@ -14,7 +13,7 @@ import {
 } from "lucide-react";
 import { getLocalizedCaseStudy, getLocalizedProfile } from "@/data/localized";
 import { useLanguage } from "@/components/LanguageProvider";
-import { accentFor, ArchitectureDiagram, CaseStudyVisual, WorkflowRun } from "@/components/VisualSystem";
+import { accentFor, CaseStudyVisual } from "@/components/VisualSystem";
 
 export function CaseStudyPageClient({ slug }: { slug: string }) {
   const { locale, ui, localizedHref } = useLanguage();
@@ -34,7 +33,7 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
         <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-4 px-5 py-5 md:px-8 lg:px-10">
           <Link className="inline-flex items-center gap-2 text-sm font-bold text-slate-300 transition hover:text-white" href={localizedHref("/")}>
             <ArrowLeft className="h-4 w-4" />
-            {ui.backToCockpit}
+            {ui.backToSite}
           </Link>
           <Link className="hidden items-center gap-2 text-sm font-bold text-slate-300 transition hover:text-white sm:inline-flex" href={localizedHref("/resume")}>
             {ui.resume}
@@ -57,8 +56,8 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{caseStudy.summary}</p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              <HeroFact label={locale === "es" ? "Rol" : "Role"} value={caseStudy.role} />
-              <HeroFact label={locale === "es" ? "Salida" : "Output"} value={caseStudy.output} />
+              <HeroFact label={ui.roleLabel} value={caseStudy.role} />
+              <HeroFact label={ui.resultLabel} value={caseStudy.output} />
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">
@@ -70,10 +69,7 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
             </div>
           </div>
 
-          <div className="grid gap-4">
-            <CaseStudyVisual caseStudy={caseStudy} dark />
-            <WorkflowRun caseStudy={caseStudy} dark />
-          </div>
+          <CaseStudyVisual caseStudy={caseStudy} dark />
         </div>
       </section>
 
@@ -101,45 +97,49 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
               </div>
             </section>
 
-            <ArchitectureDiagram caseStudy={caseStudy} />
+            <section className="module-card rounded-[22px] p-6">
+              <p className="section-kicker text-slate-500">{ui.toolHandles}</p>
+              <h2 className="mt-2 text-2xl font-black text-slate-950">{caseStudy.input}</h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <MiniPanel label={ui.toolShape} value={caseStudy.system} />
+                <MiniPanel label={ui.resultLabel} value={caseStudy.output} />
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {caseStudy.facts.map((fact) => (
+                  <span key={fact} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700">
+                    {fact}
+                  </span>
+                ))}
+              </div>
+            </section>
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             <DetailBlock title={ui.systemBuilt} icon={<Layers3 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.built} />
-            <DetailBlock title={ui.outputImpact} icon={<ArrowRight className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.value} />
-            <DetailBlock title={ui.whatThisProves} icon={<Sparkles className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.proves} />
+            <DetailBlock title={ui.outputImpact} icon={<CheckCircle2 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.value} />
+            <DetailBlock title={ui.whatThisShows} icon={<Sparkles className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.proves} />
           </div>
 
           <section className="mt-8 rounded-[24px] border border-slate-200 bg-[#f4efe4] p-5 md:p-6">
             <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
               <div>
                 <p className="section-kicker text-slate-500">{ui.stackEvidence}</p>
-                <h2 className="mt-2 text-2xl font-black text-slate-950">{ui.builtAroundWorkflow}</h2>
+                <h2 className="mt-2 text-2xl font-black text-slate-950">{ui.toolsUsed}</h2>
               </div>
               <Link className="inline-flex w-fit items-center gap-2 rounded-xl bg-slate-950 px-4 py-3 text-sm font-black text-white transition hover:bg-slate-800" href={localizedHref("/resume")}>
                 {ui.printableResume}
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_0.9fr]">
-              <div className="flex flex-wrap gap-2">
-                {caseStudy.stack.map((tech) => (
-                  <span key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="grid gap-2">
-                {caseStudy.facts.map((fact) => (
-                  <div key={fact} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700">
-                    <CheckCircle2 className={`h-4 w-4 flex-none ${accent.text}`} />
-                    {fact}
-                  </div>
-                ))}
-              </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {caseStudy.stack.map((tech) => (
+                <span key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm">
+                  {tech}
+                </span>
+              ))}
             </div>
             <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
-              <p className="section-kicker text-slate-500">{ui.evidenceLabel}</p>
+              <p className="section-kicker text-slate-500">{ui.publicSampleNote}</p>
               <div className="mt-3 grid gap-2 md:grid-cols-2">
                 {caseStudy.evidence.map((item) => (
                   <p key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold leading-6 text-slate-700">
@@ -160,7 +160,7 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-950" href={localizedHref("/")}>
-              {ui.cockpit}
+              {ui.home}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <a className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-3 text-sm font-bold text-white transition hover:border-emerald-300 hover:text-emerald-200" href={profile.cvUrl}>
@@ -179,6 +179,15 @@ function HeroFact({ label, value }: { label: string; value: string }) {
     <div className="rounded-2xl border border-white/12 bg-white/7 p-4">
       <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{label}</p>
       <p className="mt-2 text-sm font-bold leading-6 text-slate-200">{value}</p>
+    </div>
+  );
+}
+
+function MiniPanel({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <p className="section-kicker text-slate-500">{label}</p>
+      <p className="mt-3 text-sm font-bold leading-6 text-slate-700">{value}</p>
     </div>
   );
 }

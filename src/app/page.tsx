@@ -1,15 +1,14 @@
 import { CommandCenter } from "@/components/CommandCenter";
-import { CaseStudyMap, MissionTimeline, RecruiterPanel, SkillMatrix, ValuePipeline } from "@/components/Sections";
+import { CaseStudyMap, MissionTimeline, RecruiterPanel, SkillMatrix } from "@/components/Sections";
 
 export default function HomePage() {
   return (
     <main>
       <CommandCenter />
-      <ValuePipeline />
-      <MissionTimeline />
-      <CaseStudyMap />
-      <SkillMatrix />
       <RecruiterPanel />
+      <CaseStudyMap />
+      <MissionTimeline />
+      <SkillMatrix />
     </main>
   );
 }
