@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Mickoll Marin | Remote Operations & Data Automation",
     description:
-      "Interactive command-center CV with case studies in workflow automation, dashboards, pricing intelligence, and QA/QC data systems.",
+      "Interactive CV with case studies in report automation, dashboards, pricing intelligence, and QA/QC data systems.",
     type: "website",
   },
   icons: {

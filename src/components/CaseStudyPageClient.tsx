@@ -130,10 +130,10 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
                 ))}
               </div>
               <div className="grid gap-2">
-                {caseStudy.proof.map((proof) => (
-                  <div key={proof} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700">
+                {caseStudy.facts.map((fact) => (
+                  <div key={fact} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700">
                     <CheckCircle2 className={`h-4 w-4 flex-none ${accent.text}`} />
-                    {proof}
+                    {fact}
                   </div>
                 ))}
               </div>

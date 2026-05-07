@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import {
   ArrowDownToLine,
@@ -21,53 +21,29 @@ import {
 import { useLanguage } from "@/components/LanguageProvider";
 import { accentFor, CaseStudyVisual, WorkflowRun } from "@/components/VisualSystem";
 
-type Mode = "recruiter" | "explorer";
-
 export function CommandCenter() {
   const { locale, ui, localizedHref } = useLanguage();
   const profile = getLocalizedProfile(locale);
   const caseStudies = getLocalizedCaseStudies(locale);
   const signalCards = getLocalizedSignalCards(locale);
-  const cockpitProof =
+  const cvHighlights =
     locale === "es"
       ? [
           "Lideré un equipo Amazon de 107 personas",
           "Trabajé en SaaS remoto de precios y producto",
-          "Construí herramientas desplegadas y con trabajo local",
+          "Construí herramientas desplegadas y locales",
           "Español nativo, inglés C2, portugués C1",
         ]
       : [
           "Led a 107-person Amazon operations team",
-          "Worked remotely in SaaS pricing and product workflows",
-          "Built deployed and local-first workflow tools",
+          "Worked remotely in SaaS pricing and product support",
+          "Built deployed and local tools from real work problems",
           "Spanish native, English C2, Portuguese C1",
         ];
   const [activeSlug, setActiveSlug] = useState("solartrack-workflow-pwa");
-  const [mode, setMode] = useState<Mode>("recruiter");
 
   const activeCase = caseStudies.find((caseStudy) => caseStudy.slug === activeSlug) ?? caseStudies[0];
   const accent = accentFor(activeCase.accent);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const requestedMode = new URLSearchParams(window.location.search).get("mode");
-      if (requestedMode === "explorer" || requestedMode === "deep-dive") {
-        setMode("explorer");
-      }
-    }, 0);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  const updateMode = (nextMode: Mode) => {
-    setMode(nextMode);
-    const url = new URL(window.location.href);
-    if (nextMode === "explorer") {
-      url.searchParams.set("mode", "deep-dive");
-    } else {
-      url.searchParams.delete("mode");
-    }
-    window.history.replaceState({}, "", url.toString());
-  };
 
   return (
     <section className="relative overflow-hidden border-b border-slate-900 bg-[#07131f] text-white">
@@ -86,21 +62,22 @@ export function CommandCenter() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
             {locale === "es"
-              ? "Soy Mickoll Marin: ingeniero industrial con experiencia en operaciones Amazon, contexto SaaS/producto remoto y un portfolio de herramientas prácticas de automatización."
-              : "I am Mickoll Marin: an industrial engineer with Amazon operations experience, remote SaaS/product context, and a portfolio of practical automation tools."}
+              ? "Soy Mickoll Marin: ingeniero industrial con experiencia en operaciones Amazon, SaaS remoto y proyectos propios de automatización."
+              : "I am Mickoll Marin: an industrial engineer with Amazon operations experience, remote SaaS work, and my own automation projects."}
           </p>
 
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a className="mission-button bg-amber-400 text-slate-950 hover:bg-amber-300" href={profile.cvUrl}>
               <ArrowDownToLine className="h-4 w-4" />
               {ui.downloadCv}
             </a>
-            <a
-              className="mission-button border border-white/16 bg-white/8 text-white hover:border-cyan-300 hover:text-cyan-100"
-              href={mode === "recruiter" ? "#recruiter-scan" : "#case-studies"}
-            >
-              {mode === "recruiter" ? <BriefcaseBusiness className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              {mode === "recruiter" ? ui.recruiterScan : ui.viewProof}
+            <a className="mission-button border border-white/16 bg-white/8 text-white hover:border-cyan-300 hover:text-cyan-100" href="#recruiter-scan">
+              <BriefcaseBusiness className="h-4 w-4" />
+              {ui.scanMyCv}
+            </a>
+            <a className="mission-button border border-white/16 bg-white/8 text-white hover:border-amber-300 hover:text-amber-100" href="#case-studies">
+              <Eye className="h-4 w-4" />
+              {ui.exploreProjects}
             </a>
             <a className="mission-button border border-white/16 bg-white/8 text-white hover:border-emerald-300 hover:text-emerald-100" href={`mailto:${profile.email}`}>
               <Mail className="h-4 w-4" />
@@ -129,117 +106,62 @@ export function CommandCenter() {
           <div className="cockpit-panel w-full rounded-[24px] p-3 md:p-4">
             <div className="border-b border-white/10 px-1 pb-4">
               <div>
-                <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-slate-400">{ui.operationsCockpit}</p>
-                <h2 className="mt-1 text-2xl font-black text-white">
-                  {mode === "recruiter" ? ui.fastProofFirst : ui.exploreSystems}
-                </h2>
+                <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-slate-400">{ui.startHere}</p>
+                <h2 className="mt-1 text-2xl font-black text-white">{ui.entryHeading}</h2>
               </div>
               <div className="mt-4 rounded-2xl border border-white/12 bg-slate-950/32 p-3">
-                <p className="text-sm leading-6 text-slate-300">{ui.modeIntro}</p>
-                <div className="mt-3 grid gap-2 sm:grid-cols-2" role="tablist" aria-label={ui.operationsCockpit}>
-                  {(["recruiter", "explorer"] as const).map((nextMode) => {
-                    const isActive = mode === nextMode;
-                    return (
-                      <button
-                        key={nextMode}
-                        aria-label={nextMode === "recruiter" ? ui.quickModeStatus : ui.deepModeStatus}
-                        aria-selected={isActive}
-                        className={clsx(
-                          "min-h-16 rounded-xl border px-4 py-3 text-left transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
-                          isActive
-                            ? "border-white bg-white text-slate-950 shadow-[0_18px_44px_-32px_rgba(255,255,255,0.9)]"
-                            : "border-white/12 bg-white/7 text-slate-200 hover:border-cyan-300 hover:bg-white/10"
-                        )}
-                        onClick={() => updateMode(nextMode)}
-                        role="tab"
-                        type="button"
-                      >
-                        <span className="block text-sm font-black">{nextMode === "recruiter" ? ui.recruiter : ui.explorer}</span>
-                        <span className={clsx("mt-1 block text-xs font-bold leading-5", isActive ? "text-slate-700" : "text-slate-400")}>
-                          {nextMode === "recruiter" ? ui.quickModeDescription : ui.deepModeDescription}
-                        </span>
-                      </button>
-                    );
-                  })}
+                <p className="text-sm leading-6 text-slate-300">{ui.entryIntro}</p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  <a
+                    className="min-h-16 rounded-xl border border-white bg-white px-4 py-3 text-left text-slate-950 shadow-[0_18px_44px_-32px_rgba(255,255,255,0.9)] transition hover:bg-cyan-50 focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                    href="#recruiter-scan"
+                  >
+                    <span className="block text-sm font-black">{ui.scanMyCv}</span>
+                    <span className="mt-1 block text-xs font-bold leading-5 text-slate-700">{ui.scanMyCvHelp}</span>
+                  </a>
+                  <a
+                    className="min-h-16 rounded-xl border border-white/12 bg-white/7 px-4 py-3 text-left text-slate-200 transition hover:border-amber-300 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-cyan-300"
+                    href="#case-studies"
+                  >
+                    <span className="block text-sm font-black">{ui.exploreProjects}</span>
+                    <span className="mt-1 block text-xs font-bold leading-5 text-slate-400">{ui.exploreProjectsHelp}</span>
+                  </a>
                 </div>
-                <p className="mt-3 rounded-xl border border-white/10 bg-white/7 px-3 py-2 text-sm font-bold leading-6 text-cyan-100">
-                  {mode === "recruiter" ? ui.quickModeStatus : ui.deepModeStatus}
-                </p>
               </div>
             </div>
 
-            {mode === "recruiter" ? (
-              <div className="grid gap-4 pt-4 xl:grid-cols-[1fr_0.76fr]">
-                <div className="grid gap-3 self-start">
-                  <CaseStudyVisual caseStudy={activeCase} dark />
-                  <div className="rounded-[18px] border border-white/12 bg-white/7 p-4 text-sm leading-6 text-slate-300">
-                    {ui.sanitizedNote}
-                  </div>
-                </div>
-
-                <div className="grid gap-4">
-                  <section className="rounded-[18px] border border-white/12 bg-white/7 p-4">
-                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-300">{ui.whyProfileWorks}</p>
-                    <div className="mt-4 grid gap-2">
-                      {cockpitProof.map((item) => (
-                        <div key={item} className="flex gap-2 rounded-lg border border-white/10 bg-slate-950/38 px-3 py-2 text-sm font-bold leading-5 text-slate-200">
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-emerald-300" />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-
-                  <section className="rounded-[18px] border border-white/12 bg-slate-950/38 p-4">
-                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.strongestProof}</p>
-                    <h3 className="mt-3 text-xl font-black text-white">{activeCase.shortTitle}</h3>
-                    <div className="mt-3 grid gap-2 text-sm leading-5">
-                      <p className="rounded-lg border border-white/10 bg-white/7 px-3 py-2 text-slate-300"><span className="font-black text-cyan-300">{ui.inputLabel}:</span> {activeCase.input}</p>
-                      <p className="rounded-lg border border-white/10 bg-white/7 px-3 py-2 text-slate-300"><span className="font-black text-amber-300">{ui.outputLabel}:</span> {activeCase.output}</p>
-                    </div>
-                  </section>
-
-                  <section className="rounded-[18px] border border-white/12 bg-white/7 p-4">
-                    <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.topRoleFit}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {profile.targetRoles.slice(0, 5).map((role) => (
-                        <span key={role} className="rounded-lg border border-white/12 bg-white/8 px-2.5 py-1.5 text-xs font-black text-slate-100">
-                          {role}
-                        </span>
-                      ))}
-                    </div>
-                  </section>
-
-                  <div className="grid grid-cols-3 gap-2">
-                    {caseStudies.slice(0, 3).map((caseStudy) => (
-                      <button
-                        key={caseStudy.slug}
-                        className={clsx(
-                          "min-h-20 rounded-xl border p-2 text-left text-[0.72rem] font-black leading-tight transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
-                          activeSlug === caseStudy.slug ? "border-white bg-white text-slate-950" : "border-white/12 bg-white/7 text-slate-300 hover:bg-white/12"
-                        )}
-                        onClick={() => setActiveSlug(caseStudy.slug)}
-                        type="button"
-                      >
-                        {caseStudy.shortTitle}
-                      </button>
-                    ))}
-                  </div>
+            <div className="grid gap-4 pt-4 xl:grid-cols-[1fr_0.82fr]">
+              <div className="grid gap-3 self-start">
+                <CaseStudyVisual caseStudy={activeCase} dark />
+                <div className="rounded-[18px] border border-white/12 bg-white/7 p-4 text-sm leading-6 text-slate-300">
+                  {ui.sanitizedNote}
                 </div>
               </div>
-            ) : (
-              <div className="grid gap-4 pt-4 xl:grid-cols-[0.84fr_1.16fr]">
+
+              <div className="grid gap-4">
+                <section className="rounded-[18px] border border-white/12 bg-white/7 p-4">
+                  <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-300">{ui.whyProfileWorks}</p>
+                  <div className="mt-4 grid gap-2">
+                    {cvHighlights.map((item) => (
+                      <div key={item} className="flex gap-2 rounded-lg border border-white/10 bg-slate-950/38 px-3 py-2 text-sm font-bold leading-5 text-slate-200">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-emerald-300" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
                 <section className="rounded-[18px] border border-white/12 bg-white/7 p-4">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", accent.textDark)}>{activeCase.eyebrow}</p>
-                      <h3 className="mt-2 text-2xl font-black leading-tight text-white">{activeCase.title}</h3>
+                      <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", accent.textDark)}>{ui.exampleProject}</p>
+                      <h3 className="mt-2 text-xl font-black leading-tight text-white">{activeCase.title}</h3>
                     </div>
                     <PanelTop className={clsx("h-6 w-6 flex-none", accent.textDark)} />
                   </div>
                   <p className="mt-4 text-sm leading-6 text-slate-300">{activeCase.output}</p>
 
-                  <div className="mt-5 grid gap-2">
+                  <div className="mt-5 grid gap-2 sm:grid-cols-2">
                     {caseStudies.map((caseStudy) => {
                       const isActive = caseStudy.slug === activeSlug;
                       return (
@@ -268,12 +190,9 @@ export function CommandCenter() {
                   </a>
                 </section>
 
-                <div className="grid gap-4">
-                  <CaseStudyVisual caseStudy={activeCase} dark />
-                  <WorkflowRun caseStudy={activeCase} dark />
-                </div>
+                <WorkflowRun caseStudy={activeCase} dark />
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

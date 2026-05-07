@@ -57,7 +57,7 @@ export function ResumeClient() {
           </div>
         </header>
 
-        <ResumeSection title={ui.strongestProof}>
+        <ResumeSection title={ui.experienceHighlights}>
           <div className="grid gap-3 md:grid-cols-4 print:grid-cols-4 print:gap-1">
             {signalCards.map((card) => (
               <div key={card.label} className="rounded-2xl border border-slate-200 bg-[#f4efe4] p-4 print:bg-white print:p-1">
@@ -70,14 +70,13 @@ export function ResumeClient() {
         </ResumeSection>
 
         <ResumeSection title={ui.targetRoles}>
-          <div className="flex flex-wrap gap-2 print:hidden">
+          <div className="flex flex-wrap gap-2 print:gap-1">
             {profile.targetRoles.map((role) => (
-              <span key={role} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700">
+              <span key={role} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700 print:px-1.5 print:py-0.5 print:text-[8px]">
                 {role}
               </span>
             ))}
           </div>
-          <p className="hidden text-sm leading-6 text-slate-700 print:block print:text-[10px] print:leading-4">{profile.targetRoles.join(" | ")}</p>
         </ResumeSection>
 
         <ResumeSection title={ui.coreOperatingSystem}>
@@ -115,7 +114,7 @@ export function ResumeClient() {
           </div>
         </ResumeSection>
 
-        <ResumeSection title={ui.featuredProjectProof}>
+        <ResumeSection title={ui.projectExamples}>
           <div className="grid gap-4 md:grid-cols-2 print:grid-cols-4 print:gap-1">
             {caseStudies.map((caseStudy) => (
               <div key={caseStudy.slug} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">

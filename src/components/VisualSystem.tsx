@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import clsx from "clsx";
-import { ArrowRight, CheckCircle2, CircleDot, Database, FileText, MonitorCog, Workflow } from "lucide-react";
+import { CheckCircle2, Database, FileText, MonitorCog, Workflow } from "lucide-react";
 import type { CaseStudy } from "@/data/profile";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -154,30 +154,6 @@ export function WorkflowRun({ caseStudy, dark = false }: { caseStudy: CaseStudy;
           </div>
         ))}
       </div>
-    </div>
-  );
-}
-
-export function FlowStrip() {
-  const steps = [
-    { label: "raw files", icon: FileText },
-    { label: "clean data", icon: Database },
-    { label: "workflow logic", icon: Workflow },
-    { label: "usable output", icon: CircleDot },
-  ];
-
-  return (
-    <div className="grid gap-3 md:grid-cols-4">
-      {steps.map((step, index) => {
-        const Icon = step.icon;
-        return (
-          <div key={step.label} className="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-3 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-300 hover:shadow-md">
-            <Icon className="h-5 w-5 text-cyan-700" />
-            <span className="text-sm font-black text-slate-800">{step.label}</span>
-            {index < steps.length - 1 ? <ArrowRight className="ml-auto hidden h-4 w-4 text-slate-300 md:block" /> : null}
-          </div>
-        );
-      })}
     </div>
   );
 }

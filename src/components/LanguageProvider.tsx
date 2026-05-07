@@ -92,7 +92,7 @@ export function LanguageToggle() {
   const { locale, setLocale, ui } = useLanguage();
 
   return (
-    <div className="no-print fixed bottom-4 right-4 z-50">
+    <div className="no-print fixed bottom-4 right-4 z-50 md:bottom-auto md:top-4">
       <div className="flex items-center gap-1 rounded-2xl border border-white/14 bg-slate-950/92 p-1 text-white shadow-[0_18px_50px_-34px_rgba(4,12,24,0.95)] backdrop-blur">
         <span className="sr-only">{ui.language}</span>
         <Languages className="ml-2 h-4 w-4 text-cyan-300" aria-hidden="true" />

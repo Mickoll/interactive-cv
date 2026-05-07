@@ -49,7 +49,7 @@ export function ValuePipeline() {
               <button
                 key={item.label}
                 aria-controls="value-pipeline-detail"
-                aria-label={`${String(index + 1).padStart(2, "0")} ${item.label}`}
+                aria-label={item.label}
                 aria-selected={active === index}
                 className={clsx(
                   "value-step flex min-h-44 flex-col rounded-2xl border p-4 text-left transition-shadow focus:outline-none focus:ring-2 focus:ring-cyan-500",
@@ -61,11 +61,11 @@ export function ValuePipeline() {
                 role="tab"
                 type="button"
               >
-                <div className="flex items-start gap-3">
-                  <span className="value-step-number grid h-11 w-11 flex-none place-items-center rounded-xl text-sm font-black">
-                    {String(index + 1).padStart(2, "0")}
+                <div className="grid gap-3">
+                  <span className="value-step-number grid min-h-11 w-fit min-w-16 place-items-center rounded-xl px-2 text-xs font-black uppercase tracking-[0.08em]">
+                    {item.badge}
                   </span>
-                  <h3 className="pt-1 text-base font-black leading-tight">{item.label}</h3>
+                  <h3 className="text-base font-black leading-tight">{item.label}</h3>
                 </div>
                 <p className={clsx("mt-auto pt-5 text-sm leading-6", active === index ? "text-slate-300" : "text-slate-600")}>{item.detail}</p>
               </button>
@@ -220,10 +220,10 @@ export function CaseStudyMap() {
             </article>
 
             <div className="grid gap-4 md:grid-cols-3">
-              {activeCase.proof.slice(0, 3).map((proof, index) => (
-                <div key={proof} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold leading-6 text-slate-700 shadow-sm">
-                  <span className="mb-3 grid h-8 w-8 place-items-center rounded-lg bg-slate-950 text-xs font-black text-white">{index + 1}</span>
-                  {proof}
+              {activeCase.facts.slice(0, 3).map((fact) => (
+                <div key={fact} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-bold leading-6 text-slate-700 shadow-sm">
+                  <span className="mb-3 block h-2 w-10 rounded-full bg-slate-950" />
+                  {fact}
                 </div>
               ))}
             </div>
