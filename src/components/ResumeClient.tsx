@@ -48,7 +48,7 @@ export function ResumeClient() {
               <p className="mt-2 text-xl font-bold text-slate-800 print:mt-1 print:text-sm">{profile.role}</p>
               <p className="mt-5 max-w-4xl text-base leading-7 text-slate-700 print:mt-2 print:text-[10px] print:leading-4">{profile.headline}</p>
             </div>
-            <div className="rounded-2xl border border-slate-200 bg-[#f4efe4] p-4 text-sm leading-6 text-slate-700 print:bg-white print:p-2 print:text-[9px] print:leading-4">
+            <div className="w-full rounded-2xl border border-slate-200 bg-[#f4efe4] p-4 text-sm leading-6 text-slate-700 md:w-auto md:min-w-60 print:bg-white print:p-2 print:text-[9px] print:leading-4">
               <p>{profile.location}</p>
               <p>{profile.email}</p>
               <p>{profile.phone}</p>
@@ -70,7 +70,14 @@ export function ResumeClient() {
         </ResumeSection>
 
         <ResumeSection title={ui.targetRoles}>
-          <p className="text-sm leading-6 text-slate-700 print:text-[10px] print:leading-4">{profile.targetRoles.join(" | ")}</p>
+          <div className="flex flex-wrap gap-2 print:hidden">
+            {profile.targetRoles.map((role) => (
+              <span key={role} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700">
+                {role}
+              </span>
+            ))}
+          </div>
+          <p className="hidden text-sm leading-6 text-slate-700 print:block print:text-[10px] print:leading-4">{profile.targetRoles.join(" | ")}</p>
         </ResumeSection>
 
         <ResumeSection title={ui.coreOperatingSystem}>

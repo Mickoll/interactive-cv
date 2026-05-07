@@ -17,7 +17,6 @@ import {
   getLocalizedCaseStudies,
   getLocalizedProfile,
   getLocalizedSignalCards,
-  getLocalizedWorkflowStages,
 } from "@/data/localized";
 import { useLanguage } from "@/components/LanguageProvider";
 import { accentFor, CaseStudyVisual, WorkflowRun } from "@/components/VisualSystem";
@@ -29,7 +28,6 @@ export function CommandCenter() {
   const profile = getLocalizedProfile(locale);
   const caseStudies = getLocalizedCaseStudies(locale);
   const signalCards = getLocalizedSignalCards(locale);
-  const workflowStages = getLocalizedWorkflowStages(locale);
   const cockpitProof =
     locale === "es"
       ? [
@@ -46,21 +44,14 @@ export function CommandCenter() {
         ];
   const [activeSlug, setActiveSlug] = useState("solartrack-workflow-pwa");
   const [mode, setMode] = useState<Mode>("recruiter");
-  const [activeStage, setActiveStage] = useState(0);
-  const stageProjectSlugs = [
-    "inspection-report-automation",
-    "solartrack-workflow-pwa",
-    "real-estate-pricing-intelligence",
-    "inspection-report-automation",
-    "industrial-qaqc-data-automation",
-  ];
 
   const activeCase = caseStudies.find((caseStudy) => caseStudy.slug === activeSlug) ?? caseStudies[0];
   const accent = accentFor(activeCase.accent);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      if (new URLSearchParams(window.location.search).get("mode") === "explorer") {
+      const requestedMode = new URLSearchParams(window.location.search).get("mode");
+      if (requestedMode === "explorer" || requestedMode === "deep-dive") {
         setMode("explorer");
       }
     }, 0);
@@ -71,7 +62,7 @@ export function CommandCenter() {
     setMode(nextMode);
     const url = new URL(window.location.href);
     if (nextMode === "explorer") {
-      url.searchParams.set("mode", "explorer");
+      url.searchParams.set("mode", "deep-dive");
     } else {
       url.searchParams.delete("mode");
     }
@@ -136,27 +127,44 @@ export function CommandCenter() {
 
         <div className="flex items-center py-4" id="value-map">
           <div className="cockpit-panel w-full rounded-[24px] p-3 md:p-4">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-1 pb-4">
+            <div className="border-b border-white/10 px-1 pb-4">
               <div>
                 <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-slate-400">{ui.operationsCockpit}</p>
                 <h2 className="mt-1 text-2xl font-black text-white">
                   {mode === "recruiter" ? ui.fastProofFirst : ui.exploreSystems}
                 </h2>
               </div>
-              <div className="mode-toggle rounded-xl p-1">
-                {(["recruiter", "explorer"] as const).map((nextMode) => (
-                  <button
-                    key={nextMode}
-                    className={clsx(
-                      "rounded-lg px-3 py-2 text-sm font-black capitalize transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
-                      mode === nextMode ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/8 hover:text-white"
-                    )}
-                    onClick={() => updateMode(nextMode)}
-                    type="button"
-                  >
-                    {nextMode === "recruiter" ? ui.recruiter : ui.explorer}
-                  </button>
-                ))}
+              <div className="mt-4 rounded-2xl border border-white/12 bg-slate-950/32 p-3">
+                <p className="text-sm leading-6 text-slate-300">{ui.modeIntro}</p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2" role="tablist" aria-label={ui.operationsCockpit}>
+                  {(["recruiter", "explorer"] as const).map((nextMode) => {
+                    const isActive = mode === nextMode;
+                    return (
+                      <button
+                        key={nextMode}
+                        aria-label={nextMode === "recruiter" ? ui.quickModeStatus : ui.deepModeStatus}
+                        aria-selected={isActive}
+                        className={clsx(
+                          "min-h-16 rounded-xl border px-4 py-3 text-left transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
+                          isActive
+                            ? "border-white bg-white text-slate-950 shadow-[0_18px_44px_-32px_rgba(255,255,255,0.9)]"
+                            : "border-white/12 bg-white/7 text-slate-200 hover:border-cyan-300 hover:bg-white/10"
+                        )}
+                        onClick={() => updateMode(nextMode)}
+                        role="tab"
+                        type="button"
+                      >
+                        <span className="block text-sm font-black">{nextMode === "recruiter" ? ui.recruiter : ui.explorer}</span>
+                        <span className={clsx("mt-1 block text-xs font-bold leading-5", isActive ? "text-slate-700" : "text-slate-400")}>
+                          {nextMode === "recruiter" ? ui.quickModeDescription : ui.deepModeDescription}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="mt-3 rounded-xl border border-white/10 bg-white/7 px-3 py-2 text-sm font-bold leading-6 text-cyan-100">
+                  {mode === "recruiter" ? ui.quickModeStatus : ui.deepModeStatus}
+                </p>
               </div>
             </div>
 
@@ -266,35 +274,6 @@ export function CommandCenter() {
                 </div>
               </div>
             )}
-
-            <section className="mt-4 rounded-[18px] border border-white/12 bg-slate-950/42 p-4">
-              <div className="flex flex-col justify-between gap-3 md:flex-row md:items-center">
-                <div>
-                  <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.valuePipeline}</p>
-                  <h3 className="mt-1 text-lg font-black text-white">{workflowStages[activeStage].label}</h3>
-                  <p className="mt-1 text-sm leading-6 text-slate-300">{workflowStages[activeStage].detail}</p>
-                </div>
-                <div className="grid grid-cols-5 gap-1.5">
-                  {workflowStages.map((stage, index) => (
-                    <button
-                      key={stage.label}
-                      aria-label={`${ui.showStage} ${stage.label}`}
-                      className={clsx(
-                        "h-10 rounded-lg border text-xs font-black transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
-                        index === activeStage ? "border-cyan-300 bg-cyan-300 text-slate-950" : "border-white/12 bg-white/7 text-slate-300 hover:bg-white/12"
-                      )}
-                      onClick={() => {
-                        setActiveStage(index);
-                        setActiveSlug(stageProjectSlugs[index] ?? activeSlug);
-                      }}
-                      type="button"
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </section>
           </div>
         </div>
       </div>

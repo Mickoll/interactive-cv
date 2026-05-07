@@ -148,41 +148,26 @@ a {
     linear-gradient(270deg, rgba(245, 164, 0, 0.13), transparent 32%);
 }
 
-.ticker-chip {
-  border: 1px solid rgba(6, 19, 31, 0.13);
-  background: rgba(255, 255, 255, 0.8);
+#value-pipeline .value-step-idle {
+  background-color: #fffaf0 !important;
+  border-color: #e2e8f0 !important;
+  color: #314158 !important;
 }
 
-.mode-toggle {
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.08);
+#value-pipeline .value-step-active {
+  background-color: #020618 !important;
+  border-color: #020618 !important;
+  color: #ffffff !important;
 }
 
-.scan-line {
-  position: relative;
-  overflow: hidden;
+#value-pipeline .value-step-idle .value-step-number {
+  background-color: #ffffff !important;
+  color: #020618 !important;
 }
 
-.scan-line::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-120%);
-  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.16), transparent);
-  animation: scan 7s ease-in-out infinite;
-}
-
-@keyframes scan {
-  0%,
-  38% {
-    transform: translateX(-120%);
-  }
-  70% {
-    transform: translateX(120%);
-  }
-  100% {
-    transform: translateX(120%);
-  }
+#value-pipeline .value-step-active .value-step-number {
+  background-color: #53eafd !important;
+  color: #020618 !important;
 }
 
 @keyframes radar-sweep {

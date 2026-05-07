@@ -105,7 +105,7 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            <DetailBlock title={ui.systemDesigned} icon={<Layers3 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.built} />
+            <DetailBlock title={ui.systemBuilt} icon={<Layers3 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.built} />
             <DetailBlock title={ui.outputImpact} icon={<ArrowRight className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.value} />
             <DetailBlock title={ui.whatThisProves} icon={<Sparkles className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.proves} />
           </div>

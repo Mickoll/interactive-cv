@@ -11,7 +11,6 @@ import {
   Globe2,
   Mail,
   Network,
-  Sparkles,
 } from "lucide-react";
 import {
   getLocalizedCapabilityGroups,
@@ -45,37 +44,35 @@ export function ValuePipeline() {
         </div>
 
         <div className="rounded-[24px] border border-slate-900/12 bg-white p-4 shadow-[0_24px_70px_-56px_rgba(4,12,24,0.72)]">
-          <div className="grid gap-3 md:grid-cols-5">
+          <div className="grid auto-rows-fr gap-3 md:grid-cols-5" role="tablist" aria-label={ui.valuePipeline}>
             {workflowStages.map((item, index) => (
               <button
                 key={item.label}
+                aria-controls="value-pipeline-detail"
+                aria-label={`${String(index + 1).padStart(2, "0")} ${item.label}`}
+                aria-selected={active === index}
                 className={clsx(
-                  "min-h-40 rounded-2xl border p-4 text-left transition focus:outline-none focus:ring-2 focus:ring-cyan-500",
+                  "value-step flex min-h-44 flex-col rounded-2xl border p-4 text-left transition-shadow focus:outline-none focus:ring-2 focus:ring-cyan-500",
                   active === index
-                    ? "border-slate-950 bg-slate-950 text-white shadow-[0_20px_44px_-34px_rgba(4,12,24,0.95)]"
-                    : "border-slate-200 bg-[#fffaf0] text-slate-700 hover:-translate-y-1 hover:border-cyan-300"
+                    ? "value-step-active shadow-[0_20px_44px_-34px_rgba(4,12,24,0.95)]"
+                    : "value-step-idle hover:shadow-md"
                 )}
                 onClick={() => setActive(index)}
+                role="tab"
                 type="button"
               >
-                <div className="mb-8 flex items-center justify-between gap-2">
-                  <span
-                    className={clsx(
-                      "grid h-10 w-10 place-items-center rounded-xl text-sm font-black",
-                      active === index ? "bg-cyan-300 text-slate-950" : "bg-white text-slate-950"
-                    )}
-                  >
+                <div className="flex items-start gap-3">
+                  <span className="value-step-number grid h-11 w-11 flex-none place-items-center rounded-xl text-sm font-black">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  {index < workflowStages.length - 1 ? <ArrowRight className="hidden h-4 w-4 opacity-50 md:block" /> : <Sparkles className="h-4 w-4 text-amber-400" />}
+                  <h3 className="pt-1 text-base font-black leading-tight">{item.label}</h3>
                 </div>
-                <h3 className="text-base font-black capitalize leading-tight">{item.label}</h3>
-                <p className={clsx("mt-3 text-sm leading-6", active === index ? "text-slate-300" : "text-slate-600")}>{item.detail}</p>
+                <p className={clsx("mt-auto pt-5 text-sm leading-6", active === index ? "text-slate-300" : "text-slate-600")}>{item.detail}</p>
               </button>
             ))}
           </div>
 
-          <div className="mt-4 rounded-2xl border border-slate-200 bg-[#f7faf8] p-4 md:flex md:items-center md:justify-between md:gap-6">
+          <div id="value-pipeline-detail" className="mt-4 rounded-2xl border border-cyan-200 bg-[#f7faf8] p-4 md:flex md:items-center md:justify-between md:gap-6">
             <div>
               <p className="section-kicker text-emerald-700">{ui.activeStage}</p>
               <h3 className="mt-2 text-2xl font-black text-slate-950">{stage.label}</h3>

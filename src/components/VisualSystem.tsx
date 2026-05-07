@@ -132,25 +132,25 @@ export function WorkflowRun({ caseStudy, dark = false }: { caseStudy: CaseStudy;
         <MonitorCog className={clsx("h-5 w-5 flex-none", dark ? accent.textDark : accent.text)} />
       </div>
 
-      <div className="grid gap-3 md:grid-cols-4">
+      <div className="grid auto-rows-fr gap-3 md:grid-cols-4">
         {caseStudy.workflow.map((step, index) => (
           <div
             key={step}
             className={clsx(
-              "relative rounded-xl border p-3",
+              "flex min-h-36 flex-col justify-between rounded-xl border p-3",
               dark ? "border-white/12 bg-slate-950/44 text-slate-200" : "border-slate-200 bg-slate-50 text-slate-700"
             )}
           >
-            <div className="mb-6 flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               <span
                 className="grid h-8 w-8 place-items-center rounded-lg text-xs font-black text-white"
                 style={{ backgroundColor: index === caseStudy.workflow.length - 1 ? "#19b27f" : accent.fill }}
               >
                 {index + 1}
               </span>
-              {index < caseStudy.workflow.length - 1 ? <ArrowRight className={clsx("h-4 w-4", dark ? "text-slate-500" : "text-slate-300")} /> : <CheckCircle2 className="h-4 w-4 text-emerald-500" />}
+              {index === caseStudy.workflow.length - 1 ? <CheckCircle2 className="h-4 w-4 text-emerald-500" /> : null}
             </div>
-            <p className="text-sm font-black leading-tight">{step}</p>
+            <p className="pt-6 text-sm font-black leading-tight">{step}</p>
           </div>
         ))}
       </div>
@@ -190,8 +190,8 @@ export function ArchitectureDiagram({ caseStudy }: { caseStudy: CaseStudy }) {
     <div className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-[0_22px_70px_-55px_rgba(4,12,24,0.75)]">
       <div className="mb-4 flex items-center justify-between gap-4">
         <div>
-          <p className="text-[0.7rem] font-black uppercase tracking-[0.18em] text-slate-500">{ui.systemDesigned}</p>
-          <h3 className="mt-1 text-xl font-black text-slate-950">{ui.operatingFlow}</h3>
+          <p className="text-[0.7rem] font-black uppercase tracking-[0.18em] text-slate-500">{ui.workflowLabel}</p>
+          <h3 className="mt-1 text-xl font-black text-slate-950">{ui.problemToOutput}</h3>
         </div>
         <span className={clsx("rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em]", accent.bg, accent.text)}>
           {caseStudy.shortTitle}

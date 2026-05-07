@@ -314,23 +314,23 @@ export const valueNodes: ValueNode[] = [
 
 export const workflowStages = [
   {
-    label: "raw inputs",
+    label: "Messy inputs",
     detail: "PDFs, sheets, exports, market pages",
   },
   {
-    label: "workflow logic",
+    label: "Process logic",
     detail: "rules, status, ownership, validation",
   },
   {
-    label: "structured data",
+    label: "Structured data",
     detail: "tables, records, catalogs, checks",
   },
   {
-    label: "automated outputs",
+    label: "Automated outputs",
     detail: "dashboards, reports, documents, exports",
   },
   {
-    label: "business decisions",
+    label: "Business decisions",
     detail: "pricing, QA review, follow-up, action",
   },
 ];
