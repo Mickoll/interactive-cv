@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useSyncExternalStore } from "react";
 import clsx from "clsx";
 import { Languages } from "lucide-react";
 import { getUi, localeLabels } from "@/data/localized";
@@ -15,7 +15,7 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-function normalizeLocale(value: string | null | undefined): Locale {
+function normalizeLocale(value: string | null): Locale {
   return value === "es" ? "es" : "en";
 }
 
@@ -38,23 +38,49 @@ function addLocaleToHref(href: string, locale: Locale) {
   return `${path}${queryString ? `?${queryString}` : ""}${hash ? `#${hash}` : ""}`;
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+let localeSnapshot: Locale = "en";
+let hasBrowserSnapshot = false;
+const localeListeners = new Set<() => void>();
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlLocale = normalizeLocale(params.get("lang"));
-    const storedLocale = normalizeLocale(window.localStorage.getItem("mickoll-cv-language"));
-    const nextLocale = params.has("lang") ? urlLocale : storedLocale;
-    window.setTimeout(() => setLocaleState(nextLocale), 0);
-  }, []);
+function readBrowserLocale() {
+  const params = new URLSearchParams(window.location.search);
+  const urlLocale = normalizeLocale(params.get("lang"));
+  const storedLocale = normalizeLocale(window.localStorage.getItem("mickoll-cv-language"));
+  return params.has("lang") ? urlLocale : storedLocale;
+}
+
+function getLocaleSnapshot() {
+  if (typeof window === "object" && !hasBrowserSnapshot) {
+    localeSnapshot = readBrowserLocale();
+    hasBrowserSnapshot = true;
+  }
+  return localeSnapshot;
+}
+
+function getServerLocaleSnapshot() {
+  return "en" as Locale;
+}
+
+function subscribeToLocale(listener: () => void) {
+  localeListeners.add(listener);
+  return () => localeListeners.delete(listener);
+}
+
+function publishLocale(nextLocale: Locale) {
+  localeSnapshot = nextLocale;
+  hasBrowserSnapshot = true;
+  localeListeners.forEach((listener) => listener());
+}
+
+export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  const locale = useSyncExternalStore(subscribeToLocale, getLocaleSnapshot, getServerLocaleSnapshot);
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
 
   const setLocale = (nextLocale: Locale) => {
-    setLocaleState(nextLocale);
+    publishLocale(nextLocale);
     document.documentElement.lang = nextLocale;
     window.localStorage.setItem("mickoll-cv-language", nextLocale);
 
@@ -101,10 +127,11 @@ export function LanguageToggle() {
             key={nextLocale}
             aria-pressed={locale === nextLocale}
             className={clsx(
-              "rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.12em] transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
+              "min-h-[44px] min-w-[44px] rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.12em] transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
               locale === nextLocale ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white"
             )}
             onClick={() => setLocale(nextLocale)}
+            style={{ minHeight: 44, minWidth: 44 }}
             type="button"
           >
             {localeLabels[nextLocale]}

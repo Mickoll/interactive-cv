@@ -82,42 +82,52 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
                   <FileText className={`h-5 w-5 ${accent.text}`} />
                 </div>
                 <div>
-                  <p className="section-kicker text-slate-500">{ui.problemConstraints}</p>
+                  <p className="section-kicker text-slate-500">{ui.situation}</p>
                   <h2 className="mt-1 text-2xl font-black text-slate-950">{ui.whySystem}</h2>
                 </div>
               </div>
               <p className="mt-5 text-base leading-7 text-slate-600">{caseStudy.problem}</p>
-              <div className="mt-6 space-y-3">
+              <ul className="mt-6 space-y-3">
                 {caseStudy.constraints.map((constraint) => (
-                  <div key={constraint} className="flex gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm leading-6 text-slate-600">
+                  <li key={constraint} className="flex gap-3 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm leading-6 text-slate-600">
                     <ShieldCheck className={`mt-0.5 h-4 w-4 flex-none ${accent.text}`} />
                     <span>{constraint}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <div className="grid gap-6">
+              <DetailBlock title={ui.systemBuilt} icon={<Layers3 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.built} />
+
+              <section className="module-card rounded-[22px] p-6">
+                <p className="section-kicker text-slate-500">{ui.inPractice}</p>
+                <div className="mt-5 grid gap-4 md:grid-cols-3">
+                  <MiniPanel label={ui.inputsLabel} value={caseStudy.input} />
+                  <MiniPanel label={ui.processingLabel} value={caseStudy.system} />
+                  <MiniPanel label={ui.outputsLabel} value={caseStudy.output} />
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {caseStudy.facts.map((fact) => (
+                    <span key={fact} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700">
+                      {fact}
+                    </span>
+                  ))}
+                </div>
+              </section>
+
+              <DetailBlock title={ui.madeEasier} icon={<CheckCircle2 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.value} />
+
+              <section className={`rounded-[22px] border ${accent.border} ${accent.bg} p-6`}>
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-xl border border-white/70 bg-white">
+                    <Sparkles className={`h-5 w-5 ${accent.text}`} />
                   </div>
-                ))}
-              </div>
-            </section>
-
-            <section className="module-card rounded-[22px] p-6">
-              <p className="section-kicker text-slate-500">{ui.toolHandles}</p>
-              <h2 className="mt-2 text-2xl font-black text-slate-950">{caseStudy.input}</h2>
-              <div className="mt-6 grid gap-4 md:grid-cols-2">
-                <MiniPanel label={ui.toolShape} value={caseStudy.system} />
-                <MiniPanel label={ui.resultLabel} value={caseStudy.output} />
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {caseStudy.facts.map((fact) => (
-                  <span key={fact} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700">
-                    {fact}
-                  </span>
-                ))}
-              </div>
-            </section>
-          </div>
-
-          <div className="mt-8 grid gap-6 lg:grid-cols-3">
-            <DetailBlock title={ui.systemBuilt} icon={<Layers3 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.built} />
-            <DetailBlock title={ui.outputImpact} icon={<CheckCircle2 className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.value} />
-            <DetailBlock title={ui.whatThisShows} icon={<Sparkles className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.proves} />
+                  <h2 className="text-xl font-black text-slate-950">{ui.hiringTakeaway}</h2>
+                </div>
+                <p className="mt-4 text-base font-black leading-7 text-slate-800">{caseStudy.hiringTakeaway}</p>
+              </section>
+            </div>
           </div>
 
           <section className="mt-8 rounded-[24px] border border-slate-200 bg-[#f4efe4] p-5 md:p-6">
@@ -140,7 +150,8 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
             </div>
             <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
               <p className="section-kicker text-slate-500">{ui.publicSampleNote}</p>
-              <div className="mt-3 grid gap-2 md:grid-cols-2">
+              <p className="mt-3 text-sm leading-6 text-slate-600">{ui.publicSampleIntro}</p>
+              <div className="mt-4 grid gap-2 md:grid-cols-2">
                 {caseStudy.evidence.map((item) => (
                   <p key={item} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold leading-6 text-slate-700">
                     {item}

@@ -80,7 +80,7 @@ export function ResumeClient() {
         </ResumeSection>
 
         <ResumeSection title={ui.coreSkills}>
-          <div className="grid gap-4 md:grid-cols-2 print:grid-cols-5 print:gap-1">
+          <div className="grid gap-4 md:grid-cols-3 print:grid-cols-3 print:gap-1">
             {capabilityGroups.map((group) => (
               <div key={group.name} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">
                 <h3 className="font-black text-slate-950 print:text-[9px] print:leading-3">

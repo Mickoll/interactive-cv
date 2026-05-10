@@ -49,6 +49,7 @@ export type CaseStudy = {
   facts: string[];
   evidence: string[];
   proves: string[];
+  hiringTakeaway: string;
   metrics: string[];
   sampleImage: string;
   sampleAlt: string;
@@ -76,18 +77,16 @@ export const profile = {
   headline:
     "Industrial engineer with Amazon operations leadership, remote SaaS experience, and hands-on projects in reports, dashboards, pricing data, QA/QC, and automation.",
   targetRoles: [
-    "Implementation Consultant",
-    "Solutions Consultant",
-    "RevOps Analyst",
-    "Product Ops Analyst",
-    "BI/Data Analyst",
-    "Technical Product Specialist",
+    "Implementation / Solutions Consultant",
+    "Product Operations / Technical Product Specialist",
+    "RevOps / Data Operations Analyst",
+    "Operations-heavy BI/Data Analyst",
   ],
   recruiterSnapshot: [
-    { label: "Role fit", value: "Implementation, RevOps, Product Ops, BI" },
-    { label: "Availability", value: "Open to remote EU, UK, and global roles" },
+    { label: "Role fit", value: "Implementation, product operations, RevOps, and BI/data roles" },
+    { label: "Availability", value: "Remote from Spain for EU, UK, and global teams" },
     { label: "Languages", value: "Spanish native, English C2, Portuguese C1" },
-    { label: "Work setup", value: "Spain-based, remote, comfortable with customers and internal teams" },
+    { label: "Work setup", value: "Comfortable with customers, internal teams, async documentation, and handoffs" },
   ],
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/mickollmarin/" },
@@ -125,39 +124,25 @@ export const signalCards = [
 
 export const capabilityGroups: CapabilityGroup[] = [
   {
-    name: "Operate",
-    verb: "Run the work first",
-    items: ["field operations", "KPI follow-up", "QA/QC", "handoffs"],
-    output: "Clear priorities and fewer loose ends.",
-    usedIn: ["SolarTrack", "Amazon", "report automation"],
+    name: "Implementation & operations",
+    verb: "Turn real work into clear processes",
+    items: ["onboarding", "handoffs", "issue triage", "follow-up"],
+    output: "I map how the work actually happens, then shape the process or tool around it.",
+    usedIn: ["Amazon operations leadership", "PerchPeek / PriceLabs remote SaaS work", "SolarTrack Operations PWA"],
   },
   {
-    name: "Analyze",
-    verb: "Make the numbers useful",
-    items: ["SQL", "pricing analysis", "market research", "dashboards"],
-    output: "Cleaner context for pricing, QA, and planning.",
-    usedIn: ["PriceLabs", "pricing MVP", "QA/QC"],
+    name: "Data, reporting & analysis",
+    verb: "Clean the inputs and show what matters",
+    items: ["SQL", "pricing views", "dashboards", "QA checks"],
+    output: "I structure operational data so teams can see gaps, compare options, and act with more confidence.",
+    usedIn: ["Real-estate pricing intelligence MVP", "Industrial QA/QC automation", "Inspection reporting"],
   },
   {
-    name: "Automate",
-    verb: "Remove repeat work",
-    items: ["Python", "ETL", "PDF/OCR", "DOCX/Excel generation"],
-    output: "Repeatable outputs from documents, sheets, and operational records.",
-    usedIn: ["report builder", "QA/QC", "equipment data"],
-  },
-  {
-    name: "Ship",
-    verb: "Build the screen people need",
-    items: ["React", "Next.js", "TypeScript", "FastAPI"],
-    output: "Small web tools that people can actually operate.",
-    usedIn: ["SolarTrack", "report builder", "portfolio"],
-  },
-  {
-    name: "Communicate",
-    verb: "Explain clearly",
-    items: ["English C2", "Spanish native", "Portuguese C1", "customer follow-up"],
-    output: "Less confusion between users, business needs, and technical work.",
-    usedIn: ["SaaS roles", "implementation", "remote teams"],
+    name: "Internal tools & automation",
+    verb: "Build the tool that removes repeat work",
+    items: ["React", "Next.js", "Python", "FastAPI", "PDF/OCR", "DOCX/Excel"],
+    output: "I build lightweight tools for document-heavy, spreadsheet-heavy, and follow-up-heavy work.",
+    usedIn: ["Inspection Report Automation Platform", "SolarTrack Operations PWA", "QA/QC validation exports"],
   },
 ];
 
@@ -307,6 +292,8 @@ export const caseStudies: CaseStudy[] = [
       "Connects file handling, APIs, review states, and document automation.",
       "Builds internal tools with enough structure to outgrow one-off scripts.",
     ],
+    hiringTakeaway:
+      "Shows I can turn document-heavy field work into structured reporting tools without losing traceability.",
     metrics: ["DOCX export", "OCR", "asset review"],
     sampleImage: "/work-samples/report-builder-capture.png",
     sampleAlt: "Anonymized capture of the local inspection report builder app using a demo project.",
@@ -349,6 +336,8 @@ export const caseStudies: CaseStudy[] = [
       "Translates field operations into navigation, records, filters, and status states.",
       "Ships and verifies deployed Next.js applications.",
     ],
+    hiringTakeaway:
+      "Shows I can design practical operations software around visits, assignments, follow-up, and accountability.",
     metrics: ["deployed", "PWA", "multi-view"],
     sampleImage: "/work-samples/solartrack-dashboard.svg",
     sampleAlt: "Anonymized SolarTrack dashboard preview based on the local project organizer app.",
@@ -391,6 +380,8 @@ export const caseStudies: CaseStudy[] = [
       "Designs around data trust, source quality, and real market questions.",
       "Connects market logic, databases, dashboards, and reports.",
     ],
+    hiringTakeaway:
+      "Shows I can turn fragmented market data into pricing context that helps teams make better decisions.",
     metrics: ["ETL", "PostGIS", "market reports"],
     sampleImage: "/work-samples/pricing-intelligence.svg",
     sampleAlt: "Anonymized pricing intelligence dashboard preview based on the local real-estate MVP.",
@@ -433,6 +424,8 @@ export const caseStudies: CaseStudy[] = [
       "Builds reviewable pipelines for high-friction document work.",
       "Improves operational trust without inventing fake precision.",
     ],
+    hiringTakeaway:
+      "Shows I can convert document-heavy QA/QC records into traceable checks, registers, and exports.",
     metrics: ["1,594 records", "98 systems", "13,351 checks"],
     sampleImage: "/work-samples/qaqc-index.svg",
     sampleAlt: "Anonymized QA/QC master index preview based on generated validation outputs.",
@@ -442,12 +435,10 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 export const roleFit = [
-  "Implementation Consultant",
-  "Solutions Consultant",
-  "Revenue Operations Analyst",
-  "Product Operations Analyst",
-  "BI/Data Analyst",
-  "Technical Product Specialist",
+  "Implementation / Solutions Consultant",
+  "Product Operations / Technical Product Specialist",
+  "RevOps / Data Operations Analyst",
+  "Operations-heavy BI/Data Analyst",
 ];
 
 export function getCaseStudy(slug: string) {

@@ -5,15 +5,14 @@ import {
   ArrowDownToLine,
   ArrowRight,
   BriefcaseBusiness,
+  CheckCircle2,
   FileText,
   Globe2,
   Mail,
-  Network,
 } from "lucide-react";
 import {
   getLocalizedCapabilityGroups,
   getLocalizedCaseStudies,
-  getLocalizedExperience,
   getLocalizedProfile,
   getLocalizedRoleFit,
   getLocalizedTimeline,
@@ -25,10 +24,12 @@ export function RecruiterPanel() {
   const { locale, ui, localizedHref } = useLanguage();
   const profile = getLocalizedProfile(locale);
   const roleFit = getLocalizedRoleFit(locale);
-  const professionalExperience = getLocalizedExperience(locale);
+  const availability = profile.recruiterSnapshot[1];
+  const languages = profile.recruiterSnapshot[2];
+  const workSetup = profile.recruiterSnapshot[3];
 
   return (
-    <section className="border-b border-slate-900 bg-slate-950 text-white" id="recruiter-scan">
+    <section className="border-b border-slate-900 bg-slate-950 text-white" id="hiring-snapshot">
       <div className="mx-auto grid max-w-[1500px] gap-8 px-4 py-14 md:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:px-10">
         <div>
           <p className="section-kicker text-emerald-300">{ui.recruiterScan}</p>
@@ -59,12 +60,6 @@ export function RecruiterPanel() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          {profile.recruiterSnapshot.map((item) => (
-            <div key={item.label} className="rounded-[20px] border border-white/12 bg-white/7 p-5">
-              <div className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{item.label}</div>
-              <div className="mt-2 text-lg font-black text-white">{item.value}</div>
-            </div>
-          ))}
           <div className="rounded-[20px] border border-white/12 bg-white/7 p-5 sm:col-span-2">
             <div className="flex items-center gap-2 text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">
               <BriefcaseBusiness className="h-4 w-4 text-emerald-300" />
@@ -78,25 +73,24 @@ export function RecruiterPanel() {
               ))}
             </div>
           </div>
+
+          {[availability, languages, workSetup].map((item) => (
+            <div key={item.label} className="rounded-[20px] border border-white/12 bg-white/7 p-5">
+              <div className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{item.label}</div>
+              <div className="mt-2 text-base font-black leading-6 text-white">{item.value}</div>
+            </div>
+          ))}
+
           <div className="rounded-[20px] border border-emerald-300/20 bg-emerald-300/8 p-5 sm:col-span-2">
-            <div className="flex gap-3">
-              <Network className="mt-1 h-5 w-5 flex-none text-emerald-300" />
-              <p className="text-sm leading-6 text-slate-200">
-                {ui.remoteNote}
-              </p>
-            </div>
-          </div>
-          <div className="rounded-[20px] border border-white/12 bg-white/7 p-5 sm:col-span-2">
-            <div className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-slate-400">{ui.experienceAnchors}</div>
-            <div className="mt-4 grid gap-3 md:grid-cols-3">
-              {professionalExperience.slice(0, 3).map((item) => (
-                <div key={item.organization} className="rounded-xl border border-white/12 bg-slate-950/44 p-3">
-                  <p className="text-xs font-black uppercase tracking-[0.12em] text-cyan-300">{item.period}</p>
-                  <p className="mt-2 text-sm font-black text-white">{item.organization}</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-300">{item.role}</p>
-                </div>
+            <div className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-emerald-300">{ui.experienceAnchors}</div>
+            <ul className="mt-4 grid gap-3 md:grid-cols-3">
+              {ui.experienceAnchorItems.map((item) => (
+                <li key={item} className="flex gap-2 rounded-xl border border-white/12 bg-slate-950/44 p-3 text-sm font-bold leading-6 text-slate-200">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-emerald-300" />
+                  <span>{item}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>
@@ -129,6 +123,7 @@ export function CaseStudyMap() {
             return (
               <Link
                 key={caseStudy.slug}
+                aria-label={`${ui.openCaseStudy}: ${caseStudy.title}`}
                 className="group rounded-[26px] border border-slate-900/12 bg-[#f4efe4] p-4 shadow-[0_28px_80px_-60px_rgba(4,12,24,0.72)] transition hover:-translate-y-1 hover:border-slate-900/30 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 href={localizedHref(`/case-studies/${caseStudy.slug}`)}
               >
@@ -148,7 +143,7 @@ export function CaseStudyMap() {
                     </div>
 
                     <p className="mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-bold leading-6 text-emerald-900">
-                      {caseStudy.proves[0]}
+                      {caseStudy.hiringTakeaway}
                     </p>
 
                     <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-black text-slate-950">
@@ -227,7 +222,8 @@ export function SkillMatrix() {
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <div className="grid gap-4 lg:grid-cols-3">
             {capabilityGroups.map((group) => (
               <article key={group.name} className="module-card rounded-[22px] p-5">
                 <div className="flex items-start gap-4">
@@ -250,6 +246,11 @@ export function SkillMatrix() {
                 </p>
               </article>
             ))}
+            </div>
+            <div className="mt-4 rounded-[22px] border border-slate-900/12 bg-white p-5 shadow-[0_20px_60px_-54px_rgba(4,12,24,0.8)]">
+              <p className="section-kicker text-emerald-700">{ui.communicationLanguages}</p>
+              <p className="mt-2 text-sm font-bold leading-6 text-slate-700">{ui.communicationLanguagesText}</p>
+            </div>
           </div>
         </div>
       </div>

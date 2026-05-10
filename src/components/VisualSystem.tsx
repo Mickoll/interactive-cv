@@ -3,7 +3,6 @@
 import Image from "next/image";
 import clsx from "clsx";
 import type { CaseStudy } from "@/data/profile";
-import { useLanguage } from "@/components/LanguageProvider";
 
 const accentClasses = {
   amber: {
@@ -57,7 +56,6 @@ export function CaseStudyVisual({
   compact?: boolean;
   dark?: boolean;
 }) {
-  const { ui } = useLanguage();
   const accent = accentFor(caseStudy.accent);
   const Icon = caseStudy.icon;
 
@@ -71,12 +69,12 @@ export function CaseStudyVisual({
     >
       <div className="flex items-center justify-between gap-3 px-2 pb-2">
         <div className="min-w-0">
-          <p className={clsx("text-[0.68rem] font-black uppercase tracking-[0.18em]", dark ? "text-slate-400" : "text-slate-500")}>
-            {ui.sanitizedWorkSample}
-          </p>
-          <figcaption className={clsx("mt-1 truncate text-sm font-black", dark ? "text-white" : "text-slate-950")}>
+          <figcaption className={clsx("truncate text-sm font-black", dark ? "text-white" : "text-slate-950")}>
             {caseStudy.shortTitle}
           </figcaption>
+          <p className={clsx("mt-1 truncate text-xs font-bold", dark ? "text-slate-400" : "text-slate-500")}>
+            {caseStudy.role}
+          </p>
         </div>
         <div className={clsx("grid h-10 w-10 flex-none place-items-center rounded-lg border", dark ? "border-white/12 bg-white/8" : "border-slate-200 bg-white")}>
           <Icon className={clsx("h-5 w-5", dark ? accent.textDark : accent.text)} />
@@ -98,7 +96,7 @@ export function CaseStudyVisual({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/34 to-transparent" />
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <div className={clsx("mt-3 grid-cols-3 gap-2", compact ? "hidden sm:grid" : "grid")}>
         {caseStudy.metrics.map((metric) => (
           <div
             key={metric}
