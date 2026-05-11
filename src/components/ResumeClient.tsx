@@ -21,13 +21,13 @@ export function ResumeClient() {
   const educationItems =
     locale === "es"
       ? [
-          "EF SET English C2 Certificate.",
+          "EF SET English Certificate, 79/100, C2 Proficient.",
           "MBA, Universidad Isabel I, Barcelona, España, 2020.",
           "Máster en Big Data and Business Intelligence, ISEB, Barcelona, España, 2019. Cum Laude.",
           "Ingeniería Industrial, Universidad Yacambú, Barquisimeto, Venezuela, 2018.",
         ]
       : [
-          "EF SET English C2 Certificate.",
+          "EF SET English Certificate, 79/100, C2 Proficient.",
           "MBA, Universidad Isabel I, Barcelona, Spain, 2020.",
           "Master in Big Data and Business Intelligence, ISEB, Barcelona, Spain, 2019. Cum Laude.",
           "Industrial Engineering Degree, Universidad Yacambu, Barquisimeto, Venezuela, 2018.",
@@ -67,7 +67,7 @@ export function ResumeClient() {
               <p>{profile.email}</p>
               <p>{profile.phone}</p>
               <p>linkedin.com/in/mickollmarin</p>
-              <p>mickoll-interactive-cv.vercel.app</p>
+              <p>Portfolio: mickoll-interactive-cv.vercel.app</p>
             </div>
           </div>
         </header>
@@ -110,7 +110,7 @@ export function ResumeClient() {
         <ResumeSection title={ui.selectedExperience}>
           <div className="space-y-6 print:space-y-2">
             {professionalExperience.map((item) => (
-              <div key={item.organization} className="break-inside-avoid">
+              <div key={`${item.organization}-${item.role}`} className="break-inside-avoid">
                 <div className="flex flex-col justify-between gap-1 sm:flex-row sm:items-baseline">
                   <div>
                     <h3 className="text-sm font-black text-slate-950 print:text-[10px] print:leading-4">{item.role}</h3>
@@ -132,10 +132,14 @@ export function ResumeClient() {
         <ResumeSection title={ui.projectExamples}>
           <div className="grid gap-4 md:grid-cols-2 print:grid-cols-2 print:gap-1">
             {caseStudies.map((caseStudy) => (
-              <div key={caseStudy.slug} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 print:border-0 print:bg-white print:p-0">
+              <Link
+                key={caseStudy.slug}
+                className="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-cyan-500/40 focus:outline-none focus:ring-2 focus:ring-cyan-500 print:border-0 print:bg-white print:p-0"
+                href={localizedHref(`/case-studies/${caseStudy.slug}`)}
+              >
                 <h3 className="font-black text-slate-950 print:text-[9px] print:leading-3">{caseStudy.title}</h3>
                 <p className="mt-1 text-sm leading-6 text-slate-700 print:text-[8px] print:leading-3">{caseStudy.output}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </ResumeSection>
@@ -147,6 +151,17 @@ export function ResumeClient() {
             ))}
           </ul>
         </ResumeSection>
+
+        <div className="no-print mt-8 flex flex-wrap gap-3 border-t border-slate-200 pt-5">
+          <a className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-slate-950 px-4 text-sm font-bold text-white" download="Mickoll_Marin_CV_ATS.pdf" href={profile.cvUrl}>
+            <ArrowDownToLine className="h-4 w-4" />
+            {ui.downloadCv}
+          </a>
+          <a className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-slate-300 px-4 text-sm font-bold text-slate-800" href={`mailto:${profile.email}`}>
+            <Mail className="h-4 w-4" />
+            {ui.email}
+          </a>
+        </div>
       </article>
     </main>
   );

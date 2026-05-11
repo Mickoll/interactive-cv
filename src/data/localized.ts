@@ -44,7 +44,10 @@ export const uiText = {
     systemBehavior: "System behavior",
     outputs: "Outputs",
     observableImpact: "Measurable or observable impact",
+    roleRelevance: "Role relevance",
     skillsProven: "Skills proven",
+    before: "Before",
+    after: "After",
     privacySanitization: "Privacy / sanitization note",
     improveNext: "What I would improve next",
     previousCase: "Previous case study",
@@ -124,7 +127,10 @@ export const uiText = {
     systemBehavior: "Comportamiento del sistema",
     outputs: "Salidas",
     observableImpact: "Impacto medible u observable",
+    roleRelevance: "Relevancia para roles",
     skillsProven: "Habilidades demostradas",
+    before: "Antes",
+    after: "Después",
     privacySanitization: "Privacidad y anonimización",
     improveNext: "Qué mejoraría después",
     previousCase: "Caso anterior",
@@ -197,8 +203,11 @@ const profileEs = {
   recruiterSnapshot: [
     {
       label: "Mejor encaje",
-      value:
-        "Implementación / soluciones; operaciones de producto / producto técnico; RevOps / pricing / operaciones de datos; BI/Data con foco operativo",
+      value: [
+        "Nivel 1: consultor de implementación; consultor de soluciones; consultor técnico.",
+        "Nivel 2: operaciones de producto; especialista técnico de producto.",
+        "Nivel 3: RevOps / pricing / Revenue Operations; BI/Data con foco operativo.",
+      ].join(" "),
     },
     { label: "Ubicación", value: "Remoto desde España para equipos de la UE, UK y globales" },
     { label: "Idiomas", value: "Español nativo, inglés C2, portugués C1" },
@@ -291,7 +300,7 @@ const experienceEs: ProfessionalExperience[] = [
   {
     period: "Junio 2023 - Junio 2025",
     organization: "PriceLabs",
-    role: "SaaS remoto de precios, ingresos y operaciones de producto",
+    role: "Product Specialist",
     context: "SaaS de gestión de ingresos para precios de alquileres de corta estancia.",
     bullets: [
       "Trabajé con análisis de precios, investigación de mercado, investigación de comportamiento de producto, dudas de clientes y procesos de gestión de ingresos.",
@@ -300,9 +309,9 @@ const experienceEs: ProfessionalExperience[] = [
     ],
   },
   {
-    period: "2021 - 2023",
+    period: "Mayo 2022 - Mayo 2023",
     organization: "PerchPeek",
-    role: "Operaciones remotas de cliente y producto SaaS",
+    role: "Customer Success Specialist",
     context: "Entorno de tecnología de relocation con procesos operativos de cara al cliente.",
     bullets: [
       "Apoyé operaciones SaaS remotas con comunicación con clientes, seguimiento y resolución de incidencias de producto.",
@@ -312,7 +321,7 @@ const experienceEs: ProfessionalExperience[] = [
   {
     period: "Mayo 2021 - Enero 2023",
     organization: "Padme Yoga",
-    role: "Manager y cofundador",
+    role: "Manager y Co-founder",
     context: "Negocio local de bienestar con operaciones, agenda, seguimiento comercial y coordinación de equipo.",
     bullets: [
       "Gestioné operaciones diarias, agenda, comunicación con clientes, iniciativas de ingresos y coordinación de equipo.",
@@ -320,13 +329,23 @@ const experienceEs: ProfessionalExperience[] = [
     ],
   },
   {
-    period: "2018 - 2021",
-    organization: "Amazon y operaciones de servicio",
-    role: "Operaciones, logística, QA y liderazgo de equipo",
-    context: "Entornos operativos de alto volumen con responsabilidad sobre KPIs y disciplina de procesos.",
+    period: "Octubre 2020 - Febrero 2021",
+    organization: "Amazon",
+    role: "Area Manager",
+    context: "Liderazgo operativo de alto volumen con responsabilidad sobre KPIs y disciplina de procesos.",
     bullets: [
-      "Lideré y coordiné trabajo operativo incluyendo un equipo Amazon de 107 personas, seguimiento QA, control de inventario, KPIs y planes de acción.",
-      "Desarrollé la disciplina de trabajo que ahora aplico en implementación, operaciones de producto, BI y automatización.",
+      "Lideré y coordiné un equipo operativo de 107 personas, incluyendo seguimiento QA, control de inventario, KPIs y planes de acción.",
+      "Desarrollé la disciplina operativa que ahora aplico en implementación, operaciones de producto, BI y automatización.",
+    ],
+  },
+  {
+    period: "Julio 2019 - Octubre 2020",
+    organization: "Amazon",
+    role: "Logistics Specialist",
+    context: "Operaciones logísticas y fulfillment con ejecución diaria, calidad y seguimiento de procesos.",
+    bullets: [
+      "Trabajé en operaciones logísticas, seguimiento de incidencias, procesos de inventario y control de rendimiento.",
+      "Desarrollé criterio práctico sobre cuellos de botella, traspasos y datos necesarios para decisiones diarias.",
     ],
   },
   {
@@ -340,9 +359,9 @@ const experienceEs: ProfessionalExperience[] = [
     ],
   },
   {
-    period: "2017 - 2018",
-    organization: "Ingeniería industrial y mejora de producción",
-    role: "Ingeniero industrial",
+    period: "Enero 2017 - Diciembre 2017",
+    organization: "Organizacion El Tunal",
+    role: "Industrial Engineering Intern and Thesis Project",
     context: "Mejora de procesos en producción alimentaria y soporte al lanzamiento de línea.",
     bullets: [
       "Trabajé en automatización de producción, coordinación de operadores, análisis OEE, reducción de ciclos, soporte al lanzamiento de línea y mejora de capacidad.",
@@ -361,6 +380,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     cardBuilt:
       "Constructor local de reportes con React/TypeScript + FastAPI, almacenamiento por proyecto, cargas, anotación de imágenes, OCR, catálogos, mapas/geocoding y exportación DOCX.",
     cardValue: "Mejor trazabilidad entre evidencia y reporte, con menos formateo repetido.",
+    cardRoleRelevance: "Mejor para: implementación, automatización documental, consultoría técnica",
     recruiterSummary:
       "Herramienta local para reportes de inspección que conecta material fuente, anotaciones, catálogos de incidencias y documentos DOCX generados.",
     businessProblem:
@@ -376,6 +396,8 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "Más trazabilidad entre evidencia de campo y secciones del reporte.",
       "Una herramienta web interna para un proceso que antes dependía de carpetas y ediciones manuales.",
     ],
+    roleRelevance:
+      "Este proyecto apoya roles de Implementation Consultant, Solutions Consultant, Technical Consultant y automatización de procesos porque muestra levantamiento de requisitos, diseño de procesos documentales, trazabilidad de fuente a salida y entrega práctica de herramientas.",
     skillsProven: [
       "Levantamiento de requisitos",
       "Automatización documental",
@@ -388,13 +410,28 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "Añadir permisos de revisión e historial de versiones para reportes generados.",
       "Mejorar la gestión de plantillas para generar distintos tipos de reporte desde los mismos datos.",
     ],
+    sampleCaption:
+      "La herramienta soporta flujos ES/EN; esta captura demo anonimizada usa etiquetas de interfaz en español.",
+    beforeAfter: {
+      before: [
+        "Carpetas, ediciones en Word y evidencia dispersa.",
+        "Manejo manual de imágenes y reportes.",
+        "Trazabilidad débil entre fuente y reporte final.",
+      ],
+      after: [
+        "Registros de proyecto estructurados.",
+        "Revisión de archivos y generación DOCX.",
+        "Rastro auditable de fuente a reporte.",
+      ],
+    },
+    extraNotes: [],
     metrics: ["export DOCX", "OCR", "revisión de archivos"],
     sampleAlt: "Captura anonimizada de la herramienta local de reportes de inspección con un proyecto demo.",
     input: "fotos, PDFs, certificados, listas de incidencias y notas del proyecto",
     system: "app React/FastAPI local con almacenamiento de proyectos, estados de revisión, OCR y generación DOCX",
     problem:
       "Los reportes de inspección pueden convertirse en carpetas, fotos, ediciones de Word, listas de incidencias y certificados dispersos. Lo difícil es mantener cada hallazgo trazable hasta el reporte final.",
-    role: "Implementador full-stack",
+    role: "Builder de automatización enfocado en implementación",
     output: "Proyectos de inspección revisables, catalogables y exportables a DOCX",
     constraints: [
       "Había que preservar la fiabilidad de un proceso muy dependiente de documentos.",
@@ -433,6 +470,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "PWA con Next.js/TypeScript, paneles, calendario, tablas de proyectos, contactos, mapas, gastos, reportes, ajustes, importaciones CSV/Excel, autenticación, Prisma/Neon y scripts QA.",
     cardValue:
       "Demuestra criterio de operaciones de producto, despliegue, modelado de estados y responsabilidad operativa.",
+    cardRoleRelevance: "Mejor para: operaciones de producto, implementación, producto técnico",
     recruiterSummary:
       "PWA desplegada para planificar visitas solares, asignar asesores, seguir reportes y mantener visible el trabajo pendiente.",
     businessProblem:
@@ -448,6 +486,8 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "Muestra despliegue real con persistencia, autenticación, importaciones y scripts QA.",
       "Sirve como ejemplo concreto para conversaciones de implementación y operaciones de producto.",
     ],
+    roleRelevance:
+      "Este proyecto apoya roles de Product Operations, Technical Product Specialist, Implementation Consultant y Technical Consultant porque muestra mapeo de procesos, modelado de estados, importaciones, dashboards, seguimiento de usuarios, despliegue, persistencia y scripts QA.",
     skillsProven: [
       "Operaciones de producto",
       "Diseño de procesos",
@@ -459,6 +499,15 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     improveNext: [
       "Añadir permisos por rol para distintos usuarios operativos.",
       "Añadir historial de cambios para estados de reporte y registros importados.",
+    ],
+    sampleCaption:
+      "La app desplegada es privada porque contiene registros operativos. Este caso público usa capturas anonimizadas y etiquetas demo.",
+    extraNotes: [
+      {
+        title: "Relevancia para implementación",
+        body:
+          "Este proyecto muestra cómo abordo trabajo de implementación: entender el proceso, definir responsables y estados, importar registros con fricción, crear visibilidad operativa y probar que el sistema persiste la información correcta.",
+      },
     ],
     metrics: ["desplegada", "PWA", "varias vistas"],
     sampleAlt: "Vista anonimizada de SolarTrack basada en la app local de organización de proyectos.",
@@ -474,7 +523,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "Tenía que manejar importaciones y registros editables manteniendo el despliegue en Vercel.",
     ],
     built: [
-      "PWA Next.js 16 y TypeScript con KPIs, calendario, tablas de proyectos, contactos, mapas, gastos, reportes y ajustes.",
+      "PWA Next.js / TypeScript con KPIs, calendario, tablas de proyectos, contactos, mapas, gastos, reportes y ajustes.",
       "Importación CSV/Excel, detalles editables de visitas, filtros por año/mes/asesor/cliente/estado y progreso visual de reportes.",
       "Autenticación, Neon/PostgreSQL, Prisma, despliegue en Vercel y scripts de prueba/persistencia en la app de producto.",
     ],
@@ -504,6 +553,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     cardBuilt:
       "Scraping/ETL en Python, PostgreSQL/PostGIS, deduplicación, métricas de confianza/frescura, paneles y reportes diarios/semanales.",
     cardValue: "Convierte observaciones de mercado fragmentadas en contexto útil de pricing.",
+    cardRoleRelevance: "Mejor para: RevOps, pricing, BI/data, inteligencia de mercado",
     recruiterSummary:
       "MVP de producto de datos que convierte listados públicos fragmentados en contexto de pricing con frescura, confianza, geografía y reportes.",
     businessProblem:
@@ -519,6 +569,8 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "Hace explícitos los riesgos de frescura, geografía y duplicados.",
       "Da una mejor base para conversaciones comerciales y de mercado.",
     ],
+    roleRelevance:
+      "Este proyecto apoya roles de RevOps, Pricing Analyst, Revenue Operations, BI/Data Analyst y producto de datos porque muestra ETL, calidad de datos, geografía, deduplicación, scoring de confianza/frescura y reporting.",
     skillsProven: [
       "Calidad de datos",
       "ETL",
@@ -530,6 +582,20 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     improveNext: [
       "Añadir paneles más claros de calidad por fuente para usuarios no técnicos.",
       "Automatizar la revisión de ubicaciones no resueltas y duplicados de alto impacto.",
+    ],
+    sampleCaption:
+      "Vista anonimizada de inteligencia de pricing basada en salidas del MVP local, con zonas exactas y fuentes generalizadas.",
+    extraNotes: [
+      {
+        title: "Nota de gobernanza / ética de datos",
+        body:
+          "Construido como MVP con datos públicos y ejemplos anonimizados. Un uso productivo requeriría revisar cumplimiento por fuente, límites de frecuencia, permisos y reglas claras de gobernanza de datos.",
+      },
+      {
+        title: "Ejemplo de salida",
+        body:
+          "Resumen diario de mercado por zona/tipo de propiedad, alertas de frescura, flags de riesgo de duplicado, notas de confianza y vistas de contexto de pricing para conversaciones de mercado.",
+      },
     ],
     metrics: ["ETL", "PostGIS", "reportes de mercado"],
     sampleAlt: "Vista anonimizada del dashboard de inteligencia de pricing basada en el MVP local.",
@@ -575,6 +641,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     cardBuilt:
       "Índice maestro, catálogos cerrados, mapas de cobertura, reportes de anomalías, resúmenes de validación, flujos SQLite/Pandas, scripts de aprobación QA y salidas Excel trazables.",
     cardValue: "La muestra pública cubre 1.594 registros, 98 sistemas y 13.351 checks.",
+    cardRoleRelevance: "Mejor para: operaciones de datos, QA/QC, implementación, BI",
     recruiterSummary:
       "Proyecto de automatización QA/QC que convierte registros industriales y documentos en índices, controles, resúmenes y exports trazables.",
     businessProblem:
@@ -588,8 +655,10 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     observableImpact: [
       "Menos reconciliación manual entre hojas de cálculo y PDFs.",
       "Estado de validación y trazabilidad más fáciles de revisar.",
-      "La muestra pública cubre 1.594 registros, 98 sistemas y 13.351 checks.",
+      "Muestra pública: 1.594 registros, 98 sistemas, 13.351 checks.",
     ],
+    roleRelevance:
+      "Este proyecto apoya roles de Data Operations, BI/Data Analyst, Implementation Consultant, QA/QC y automatización operativa porque muestra normalización documental, pipelines de validación, detección de anomalías, trazabilidad y exports listos para revisión.",
     skillsProven: [
       "Datos industriales",
       "Pipelines de validación",
@@ -601,6 +670,20 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     improveNext: [
       "Añadir una pequeña interfaz de revisión para aprobar anomalías y resultados de extracción.",
       "Añadir logs de ejecución más claros para entender qué cambió entre exports.",
+    ],
+    sampleCaption:
+      "Vista anonimizada del índice maestro QA/QC basada en salidas de validación generadas. No se muestran nombres privados de archivos fuente.",
+    extraNotes: [
+      {
+        title: "Valor de negocio",
+        body:
+          "El valor no fue solo automatizar; hizo que el estado documental, la cobertura faltante, las referencias repetidas y la preparación para revisión fueran más fáciles de confiar.",
+      },
+      {
+        title: "Ejemplo de trazabilidad",
+        body:
+          "PDF/registro fuente -> registro normalizado -> check de validación -> flag de anomalía -> export Excel listo para revisión.",
+      },
     ],
     metrics: ["1.594 registros", "98 sistemas", "13.351 checks"],
     sampleAlt: "Vista anonimizada del índice maestro QA/QC basada en salidas de validación generadas.",

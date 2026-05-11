@@ -48,6 +48,24 @@ print("\\n".join(page.get_text() for page in doc))
   return null;
 }
 
+function metadataWithPython(command, argsPrefix = []) {
+  const code = `
+import json, sys
+try:
+    import fitz
+except Exception as exc:
+    print("PYMUPDF_IMPORT_ERROR:" + str(exc), file=sys.stderr)
+    sys.exit(2)
+doc = fitz.open(sys.argv[1])
+print(json.dumps(doc.metadata or {}))
+`;
+  const result = run(command, [...argsPrefix, "-c", code, pdfPath]);
+  if (result.status === 0 && result.stdout.trim()) {
+    return JSON.parse(result.stdout);
+  }
+  return null;
+}
+
 function extractText() {
   return (
     extractWithPdfToText() ??
@@ -64,12 +82,22 @@ if (!text) {
   );
 }
 
+const metadata =
+  metadataWithPython("py", ["-3.12"]) ??
+  metadataWithPython("py", ["-3"]) ??
+  metadataWithPython("python");
+
 const required = [
   "Mickoll Marin",
   "Amazon",
   "PriceLabs",
   "PerchPeek",
   "EF SET",
+  "79/100",
+  "Product Specialist",
+  "Customer Success Specialist",
+  "Area Manager",
+  "Logistics Specialist",
   "Implementation",
   "Spanish",
   "English",
@@ -90,6 +118,10 @@ const forbidden = [
   "[red" + "acted]",
   "TO" + "DO",
   "lor" + "em",
+  "automation work.Manager",
+  "Download CV CV",
+  "mickoll-interactive-ijdca54lo",
+  "otchos-projects",
 ];
 
 const lowerText = text.toLowerCase();
@@ -102,13 +134,28 @@ for (const group of requiredGroups) {
 
 const foundForbidden = forbidden.filter((item) => lowerText.includes(item.toLowerCase()));
 
-if (missing.length || foundForbidden.length) {
+const metadataErrors = [];
+if (!metadata) {
+  metadataErrors.push("Could not read PDF metadata with PyMuPDF.");
+} else {
+  if (metadata.title !== "Mickoll Marin CV") {
+    metadataErrors.push(`Expected PDF title "Mickoll Marin CV", found "${metadata.title || ""}".`);
+  }
+  if (metadata.author !== "Mickoll Marin") {
+    metadataErrors.push(`Expected PDF author "Mickoll Marin", found "${metadata.author || ""}".`);
+  }
+}
+
+if (missing.length || foundForbidden.length || metadataErrors.length) {
   const messages = [];
   if (missing.length) {
     messages.push(`Missing expected text: ${missing.join(", ")}`);
   }
   if (foundForbidden.length) {
     messages.push(`Found forbidden text: ${foundForbidden.join(", ")}`);
+  }
+  if (metadataErrors.length) {
+    messages.push(metadataErrors.join("\n"));
   }
   throw new Error(messages.join("\n"));
 }

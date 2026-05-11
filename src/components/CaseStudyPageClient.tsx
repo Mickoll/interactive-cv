@@ -92,7 +92,7 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
 
           <div>
             <CaseStudyVisual caseStudy={caseStudy} dark />
-            <p className="mt-3 text-sm leading-6 text-slate-400">{caseStudy.sampleAlt}</p>
+            <p className="mt-3 text-sm leading-6 text-slate-400">{caseStudy.sampleCaption}</p>
           </div>
         </div>
       </section>
@@ -133,14 +133,37 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
             </div>
           </div>
 
+          {caseStudy.beforeAfter ? (
+            <section className="mt-8 grid gap-6 lg:grid-cols-2">
+              <DetailBlock title={ui.before} icon={<ArrowLeft className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.beforeAfter.before} />
+              <DetailBlock title={ui.after} icon={<ArrowRight className={`h-5 w-5 ${accent.text}`} />} items={caseStudy.beforeAfter.after} />
+            </section>
+          ) : null}
+
+          {caseStudy.extraNotes.length ? (
+            <section className="mt-8 grid gap-6 lg:grid-cols-2">
+              {caseStudy.extraNotes.map((note) => (
+                <section key={note.title} className="module-card rounded-[22px] p-6">
+                  <h2 className="text-xl font-black text-slate-950">{note.title}</h2>
+                  <p className="mt-4 text-base leading-7 text-slate-600">{note.body}</p>
+                </section>
+              ))}
+            </section>
+          ) : null}
+
           <section className="mt-8 grid gap-6 lg:grid-cols-[1fr_0.86fr]">
             <section className={`rounded-[22px] border ${accent.border} ${accent.bg} p-6`}>
               <div className="flex items-center gap-3">
                 <div className="grid h-10 w-10 place-items-center rounded-xl border border-white/70 bg-white">
                   <Sparkles className={`h-5 w-5 ${accent.text}`} />
                 </div>
-                <h2 className="text-xl font-black text-slate-950">{ui.skillsProven}</h2>
+                <h2 className="text-xl font-black text-slate-950">{ui.roleRelevance}</h2>
               </div>
+              <p className="mt-5 text-base font-black leading-7 text-slate-800">{caseStudy.roleRelevance}</p>
+            </section>
+
+            <section className="rounded-[22px] border border-slate-200 bg-[#f4efe4] p-6">
+              <h2 className="text-xl font-black text-slate-950">{ui.skillsProven}</h2>
               <div className="mt-5 flex flex-wrap gap-2">
                 {caseStudy.skillsProven.map((skill) => (
                   <span key={skill} className="rounded-lg border border-white/70 bg-white px-3 py-2 text-sm font-black text-slate-800 shadow-sm">
@@ -150,18 +173,18 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
               </div>
               <p className="mt-5 text-base font-black leading-7 text-slate-800">{caseStudy.hiringTakeaway}</p>
             </section>
+          </section>
 
-            <section className="rounded-[22px] border border-slate-200 bg-[#f4efe4] p-6">
-              <p className="section-kicker text-slate-500">{ui.stackEvidence}</p>
-              <h2 className="mt-2 text-2xl font-black text-slate-950">{ui.toolsUsed}</h2>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {caseStudy.stack.map((tech) => (
-                  <span key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </section>
+          <section className="mt-8 rounded-[22px] border border-slate-200 bg-[#f4efe4] p-6">
+            <p className="section-kicker text-slate-500">{ui.stackEvidence}</p>
+            <h2 className="mt-2 text-2xl font-black text-slate-950">{ui.toolsUsed}</h2>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {caseStudy.stack.map((tech) => (
+                <span key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm">
+                  {tech}
+                </span>
+              ))}
+            </div>
           </section>
 
           <section className="mt-8 grid gap-6 lg:grid-cols-2">

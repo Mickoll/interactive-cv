@@ -31,7 +31,7 @@ type EditorialCopy = {
     downloadCv: string;
     email: string;
     linkedIn: string;
-    industrialEngineer: string;
+    subtitle: string;
   };
   hero: {
     eyebrow: string;
@@ -56,6 +56,7 @@ type EditorialCopy = {
     problem: string;
     built: string;
     value: string;
+    roleRelevance: string;
     stack: string;
     open: string;
   };
@@ -83,7 +84,7 @@ const copy: Record<"en" | "es", EditorialCopy> = {
       downloadCv: "Download CV",
       email: "Email",
       linkedIn: "LinkedIn",
-      industrialEngineer: "Industrial Engineer",
+      subtitle: "SaaS Implementation & Operations Automation",
     },
     hero: {
       eyebrow: "SaaS Implementation & Operations Automation Specialist",
@@ -134,6 +135,7 @@ const copy: Record<"en" | "es", EditorialCopy> = {
       problem: "Problem",
       built: "What I built",
       value: "Business value",
+      roleRelevance: "Role relevance",
       stack: "Stack",
       open: "Open case study",
     },
@@ -170,7 +172,7 @@ const copy: Record<"en" | "es", EditorialCopy> = {
       downloadCv: "Descargar CV",
       email: "Email",
       linkedIn: "LinkedIn",
-      industrialEngineer: "Ingeniero industrial",
+      subtitle: "Implementación SaaS y automatización de operaciones",
     },
     hero: {
       eyebrow: "Especialista en implementación SaaS y automatización de operaciones",
@@ -221,6 +223,7 @@ const copy: Record<"en" | "es", EditorialCopy> = {
       problem: "Problema",
       built: "Qué construí",
       value: "Valor de negocio",
+      roleRelevance: "Relevancia para roles",
       stack: "Stack",
       open: "Abrir caso",
     },
@@ -252,10 +255,10 @@ const copy: Record<"en" | "es", EditorialCopy> = {
 };
 
 const projectOrder = [
-  "solartrack-workflow-pwa",
   "inspection-report-automation",
-  "real-estate-pricing-intelligence",
+  "solartrack-workflow-pwa",
   "industrial-qaqc-data-automation",
+  "real-estate-pricing-intelligence",
 ];
 
 export function EditorialHomepage() {
@@ -302,17 +305,20 @@ function TopNavigation({
   ];
 
   return (
-    <header className="flex min-h-20 items-center justify-between gap-4 border-b border-[rgba(13,24,40,0.10)] px-5 py-4 md:px-10 lg:px-16">
+    <header
+      className="flex min-h-20 flex-col justify-between gap-4 border-b border-[rgba(13,24,40,0.10)] px-5 py-4 md:flex-row md:items-center md:px-10 lg:px-16"
+      role="banner"
+    >
       <a className="min-w-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#08A8C7]" href="#top">
         <p className="truncate text-lg font-extrabold tracking-[-0.015em] text-[#0D1828]">Mickoll Marin</p>
-        <p className="truncate text-sm font-medium text-[#516070]">{copy.nav.industrialEngineer}</p>
+        <p className="truncate text-sm font-medium text-[#516070]">{copy.nav.subtitle}</p>
       </a>
 
-      <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary navigation">
+      <nav className="flex w-full flex-wrap items-center gap-2 md:w-auto md:justify-end lg:gap-5" aria-label="Primary navigation">
         {navItems.map((item) => (
           <Link
             key={item.label}
-            className="inline-flex min-h-[44px] items-center justify-center rounded-md px-1 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-md px-2 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
             href={item.href}
           >
             {item.label}
@@ -340,16 +346,6 @@ function TopNavigation({
           {copy.nav.linkedIn}
         </a>
       </nav>
-
-      <a
-        className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-amber-400/55 px-3 text-sm font-extrabold text-[#0D1828] transition hover:-translate-y-0.5 hover:border-amber-500 focus:outline-none focus:ring-2 focus:ring-[#08A8C7] md:px-4"
-        download="Mickoll_Marin_CV_ATS.pdf"
-        href={profile.cvUrl}
-      >
-        <Download className="h-4 w-4 text-[#F5A623]" />
-        <span className="hidden sm:inline">{copy.nav.downloadCv}</span>
-        <span className="sm:hidden">CV</span>
-      </a>
     </header>
   );
 }
@@ -571,6 +567,10 @@ function ProjectCard({
             <dt className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#047857]">{copy.projects.value}</dt>
             <dd className="mt-1 font-semibold text-[#0D1828]">{caseStudy.cardValue}</dd>
           </div>
+          <div>
+            <dt className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#0D1828]">{copy.projects.roleRelevance}</dt>
+            <dd className="mt-1 font-semibold text-[#516070]">{caseStudy.cardRoleRelevance}</dd>
+          </div>
         </dl>
         <div className="mt-5 flex flex-wrap gap-2">
           {caseStudy.stack.slice(0, 4).map((item) => (
@@ -640,7 +640,7 @@ function SiteFooter({
   profile: ReturnType<typeof getLocalizedProfile>;
 }) {
   return (
-    <footer className="border-t border-white/12 bg-[#071526] px-5 py-8 text-white md:px-10 lg:px-16">
+    <footer className="border-t border-white/12 bg-[#071526] px-5 py-8 text-white md:px-10 lg:px-16" role="contentinfo">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
         <div>
           <p className="text-lg font-extrabold">Mickoll Marin</p>

@@ -27,7 +27,7 @@ npm run test:e2e
 
 ## CV PDF
 
-The default public CV file lives at `public/Mickoll_Marin_CV_ATS.pdf` and is generated from the printable `/resume` route. `public/Mickoll_Marin_CV.pdf` is refreshed at the same time as a legacy route so older links keep working.
+The default public CV file lives at `public/Mickoll_Marin_CV_ATS.pdf`. The source ATS PDF is `public/Mickoll_Marin_CV.pdf`; running `npm run pdf:cv` copies it to the ATS endpoint and normalizes PDF metadata. The legacy `/Mickoll_Marin_CV.pdf` route remains available so older links keep working.
 
 ```powershell
 npm run build
@@ -41,7 +41,7 @@ npm run pdf:cv
 npm run pdf:verify
 ```
 
-`pdf:cv` uses an installed Chrome or Edge binary directly and does not add a browser automation dependency. `pdf:verify` checks the extracted PDF text with `pdftotext` when available, then falls back to local Python with PyMuPDF if present.
+`pdf:verify` checks extracted PDF text and metadata with `pdftotext` when available, then falls back to local Python with PyMuPDF if present.
 
 ## Localization
 

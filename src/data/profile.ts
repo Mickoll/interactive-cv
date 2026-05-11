@@ -40,14 +40,25 @@ export type CaseStudy = {
   cardProblem: string;
   cardBuilt: string;
   cardValue: string;
+  cardRoleRelevance: string;
   recruiterSummary: string;
   businessProblem: string;
   workflowInputs: string;
   systemBehavior: string;
   outputs: string;
   observableImpact: string[];
+  roleRelevance: string;
   skillsProven: string[];
   improveNext: string[];
+  sampleCaption: string;
+  beforeAfter?: {
+    before: string[];
+    after: string[];
+  };
+  extraNotes: Array<{
+    title: string;
+    body: string;
+  }>;
   input: string;
   system: string;
   problem: string;
@@ -100,8 +111,11 @@ export const profile = {
   recruiterSnapshot: [
     {
       label: "Best fit",
-      value:
-        "Implementation / Solutions Consultant; Product Operations / Technical Product Specialist; RevOps / Pricing / Data Operations; operations-heavy BI/Data Analyst",
+      value: [
+        "Tier 1: Implementation Consultant; Solutions Consultant; Technical Consultant.",
+        "Tier 2: Product Operations Specialist; Technical Product Specialist.",
+        "Tier 3: RevOps / Pricing / Revenue Operations Analyst; operations-heavy BI/Data Analyst.",
+      ].join(" "),
     },
     { label: "Location", value: "Remote from Spain for EU, UK, and global teams" },
     { label: "Languages", value: "Spanish native, English C2, Portuguese C1" },
@@ -219,7 +233,7 @@ export const professionalExperience: ProfessionalExperience[] = [
   {
     period: "June 2023 - June 2025",
     organization: "PriceLabs",
-    role: "Remote SaaS pricing, revenue, and product operations",
+    role: "Product Specialist",
     context: "Revenue-management SaaS for short-term rental pricing.",
     bullets: [
       "Worked with pricing analysis, market research, product behavior investigation, customer-facing product questions, and revenue-management processes.",
@@ -228,9 +242,9 @@ export const professionalExperience: ProfessionalExperience[] = [
     ],
   },
   {
-    period: "2021 - 2023",
+    period: "May 2022 - May 2023",
     organization: "PerchPeek",
-    role: "Remote SaaS customer and product operations",
+    role: "Customer Success Specialist",
     context: "Relocation-technology environment with customer-facing operations.",
     bullets: [
       "Supported remote SaaS operations through customer communication, follow-up, and product troubleshooting.",
@@ -240,7 +254,7 @@ export const professionalExperience: ProfessionalExperience[] = [
   {
     period: "May 2021 - January 2023",
     organization: "Padme Yoga",
-    role: "Manager and co-founder",
+    role: "Manager and Co-founder",
     context: "Local wellness business with operations, scheduling, commercial follow-up, and team coordination.",
     bullets: [
       "Managed day-to-day operations, scheduling, customer communication, revenue initiatives, and team coordination.",
@@ -248,13 +262,23 @@ export const professionalExperience: ProfessionalExperience[] = [
     ],
   },
   {
-    period: "2018 - 2021",
-    organization: "Amazon and service operations",
-    role: "Operations, logistics, QA, and team leadership",
-    context: "High-volume operational environments with KPI ownership and process discipline.",
+    period: "October 2020 - February 2021",
+    organization: "Amazon",
+    role: "Area Manager",
+    context: "High-volume operations leadership with KPI ownership and process discipline.",
     bullets: [
-      "Led and coordinated operational work including a 107-person Amazon team, QA follow-up, inventory control, KPI tracking, and action planning.",
-      "Developed the discipline that now informs implementation, product operations, BI, and automation work.",
+      "Led and coordinated a 107-person operations team, including quality follow-up, inventory control, KPI tracking, and action planning.",
+      "Built the operational discipline that now informs implementation, product operations, BI, and automation work.",
+    ],
+  },
+  {
+    period: "July 2019 - October 2020",
+    organization: "Amazon",
+    role: "Logistics Specialist",
+    context: "Logistics and fulfillment operations with daily execution, quality, and process follow-up.",
+    bullets: [
+      "Worked across logistics operations, issue follow-up, inventory processes, and performance tracking.",
+      "Developed practical judgment around operational bottlenecks, handoffs, and data needed for daily decisions.",
     ],
   },
   {
@@ -268,9 +292,9 @@ export const professionalExperience: ProfessionalExperience[] = [
     ],
   },
   {
-    period: "2017 - 2018",
-    organization: "Industrial engineering and production improvement",
-    role: "Industrial engineer",
+    period: "January 2017 - December 2017",
+    organization: "Organizacion El Tunal",
+    role: "Industrial Engineering Intern and Thesis Project",
     context: "Food-production process improvement and line-launch support.",
     bullets: [
       "Worked on production automation, operator coordination, OEE analysis, cycle-time reduction, line launch support, and capacity improvement.",
@@ -290,6 +314,7 @@ export const caseStudies: CaseStudy[] = [
     cardBuilt:
       "React/TypeScript + FastAPI local-first report builder with project storage, uploads, image annotation, OCR, catalog management, map/geocoding support, and DOCX export.",
     cardValue: "Improved evidence-to-report traceability and reduced repeated report formatting.",
+    cardRoleRelevance: "Best for: Implementation, workflow automation, technical consulting",
     recruiterSummary:
       "A local-first inspection report builder that keeps source material, annotations, issue catalogs, and generated DOCX reports connected.",
     businessProblem:
@@ -305,6 +330,8 @@ export const caseStudies: CaseStudy[] = [
       "Improved traceability between field evidence and final report sections.",
       "Created a browser-based tool around a process that would otherwise rely on folders and manual edits.",
     ],
+    roleRelevance:
+      "This project supports Implementation Consultant, Solutions Consultant, Technical Consultant, and workflow automation roles because it shows requirements discovery, document workflow design, source-to-output traceability, and practical tool delivery.",
     skillsProven: [
       "Requirements discovery",
       "Document workflow automation",
@@ -317,11 +344,26 @@ export const caseStudies: CaseStudy[] = [
       "Add stronger review permissions and version history for generated reports.",
       "Improve template management so different report types can be generated from the same project data.",
     ],
+    sampleCaption:
+      "The tool supports ES/EN workflows; this sanitized demo screenshot uses Spanish UI labels.",
+    beforeAfter: {
+      before: [
+        "Folders, Word edits, scattered evidence.",
+        "Manual image/report handling.",
+        "Weak traceability from source to final report.",
+      ],
+      after: [
+        "Structured project records.",
+        "Asset review and DOCX generation.",
+        "Source-to-report audit trail.",
+      ],
+    },
+    extraNotes: [],
     input: "photos, PDFs, certificates, issue lists, project notes",
     system: "local React/FastAPI app with project storage, review states, OCR, and DOCX generation",
     problem:
       "Inspection reports can turn into a pile of folders, photos, Word edits, issue lists, and certificates. The hard part is keeping every finding traceable from source material to final report.",
-    role: "Full-stack builder",
+    role: "Implementation-focused automation builder",
     output: "Inspection projects can be reviewed, cataloged, and exported as DOCX reports",
     constraints: [
       "Needed to preserve reliability of an existing document-heavy process.",
@@ -367,6 +409,7 @@ export const caseStudies: CaseStudy[] = [
       "Next.js/TypeScript PWA with dashboards, calendar, project tables, contacts, maps, expenses, reports, settings, CSV/Excel imports, authentication, Prisma/Neon, and QA scripts.",
     cardValue:
       "Demonstrates product operations thinking, deployment, status modeling, and operational accountability.",
+    cardRoleRelevance: "Best for: Product operations, implementation, technical product",
     recruiterSummary:
       "A deployed operations PWA for planning solar visits, assigning advisors, tracking reports, and keeping follow-up visible.",
     businessProblem:
@@ -382,6 +425,8 @@ export const caseStudies: CaseStudy[] = [
       "Shows deployment experience with persistence, authentication, imports, and QA scripts.",
       "Gives a concrete product example for implementation and product operations conversations.",
     ],
+    roleRelevance:
+      "This project supports Product Operations, Technical Product Specialist, Implementation Consultant, and Technical Consultant roles because it shows workflow mapping, status modeling, imports, dashboards, user follow-up, deployment, persistence, and QA scripts.",
     skillsProven: [
       "Product operations",
       "Workflow design",
@@ -393,6 +438,15 @@ export const caseStudies: CaseStudy[] = [
     improveNext: [
       "Add cleaner role-based permissions for different operational users.",
       "Add audit history for report status changes and imported records.",
+    ],
+    sampleCaption:
+      "The deployed app is private because it contains operational records. This public case study uses sanitized screenshots and demo labels.",
+    extraNotes: [
+      {
+        title: "Implementation relevance",
+        body:
+          "This project shows how I approach implementation work: understand the workflow, define ownership and statuses, import messy records, create operational visibility, and test that the system persists the right information.",
+      },
     ],
     input: "visit schedules, advisor assignments, report status, contacts, imports, expenses",
     system: "Next.js PWA with dashboards, calendar, maps, records, filters, imports, auth, and persistence checks",
@@ -406,7 +460,7 @@ export const caseStudies: CaseStudy[] = [
       "Had to handle imports and editable records while remaining deployable on Vercel.",
     ],
     built: [
-      "Next.js 16 and TypeScript PWA with dashboard KPIs, calendar views, project tables, contact directory, maps, expenses, reports, and settings.",
+      "Next.js / TypeScript PWA with dashboard KPIs, calendar views, project tables, contact directory, maps, expenses, reports, and settings.",
       "CSV/Excel import, editable visit details, filters by year/month/advisor/client/status, and visual report progress.",
       "Authentication, Neon/PostgreSQL, Prisma, Vercel deployment, and smoke/persistence QA scripts in the existing product app.",
     ],
@@ -443,6 +497,7 @@ export const caseStudies: CaseStudy[] = [
     cardBuilt:
       "Python scraping/ETL, PostgreSQL/PostGIS, deduplication, confidence/freshness metrics, dashboarding, and daily/weekly reporting.",
     cardValue: "Turns fragmented market observations into usable pricing context.",
+    cardRoleRelevance: "Best for: RevOps, pricing, BI/data, market intelligence",
     recruiterSummary:
       "A data product MVP that turns fragmented public listing data into pricing context with freshness, confidence, geography, and reporting layers.",
     businessProblem:
@@ -458,6 +513,8 @@ export const caseStudies: CaseStudy[] = [
       "Made source freshness, geography, and duplicate risk explicit.",
       "Created a more useful basis for pricing and market conversations.",
     ],
+    roleRelevance:
+      "This project supports RevOps, Pricing Analyst, Revenue Operations, BI/Data Analyst, and data-product roles because it shows ETL, data quality, geospatial thinking, deduplication, confidence/freshness scoring, and reporting.",
     skillsProven: [
       "Data quality",
       "ETL",
@@ -469,6 +526,20 @@ export const caseStudies: CaseStudy[] = [
     improveNext: [
       "Add clearer source-quality dashboards for non-technical users.",
       "Automate exception review for unresolved locations and high-impact duplicates.",
+    ],
+    sampleCaption:
+      "Sanitized pricing-intelligence preview based on local MVP outputs, with exact zones and source names generalized.",
+    extraNotes: [
+      {
+        title: "Data governance / ethics note",
+        body:
+          "Built as a public-data MVP using sanitized examples. Production use would require source-by-source compliance checks, rate limits, permission review, and clear data-governance rules.",
+      },
+      {
+        title: "Example output",
+        body:
+          "Daily market summary by area/property type, freshness warnings, duplicate-risk flags, confidence notes, and pricing-context views for market conversations.",
+      },
     ],
     input: "public listings, source snapshots, zone names, prices, geography, freshness checks",
     system: "multi-source ingestion, PostgreSQL/PostGIS model, deduplication, confidence scoring, reports",
@@ -519,6 +590,7 @@ export const caseStudies: CaseStudy[] = [
     cardBuilt:
       "Master document index, closed catalogs, coverage maps, anomaly reports, validation summaries, SQLite/Pandas workflows, QA approval scripts, and traceable Excel outputs.",
     cardValue: "Public sample covers 1,594 records, 98 systems, and 13,351 checks.",
+    cardRoleRelevance: "Best for: Data operations, QA/QC, implementation, BI",
     recruiterSummary:
       "A QA/QC automation project that converts industrial records and document sets into traceable indexes, checks, summaries, and exports.",
     businessProblem:
@@ -532,8 +604,10 @@ export const caseStudies: CaseStudy[] = [
     observableImpact: [
       "Reduced manual reconciliation across spreadsheets and PDF sets.",
       "Made validation status and traceability easier to review.",
-      "Public sample covers 1,594 records, 98 systems, and 13,351 checks.",
+      "Public sample: 1,594 records, 98 systems, 13,351 checks.",
     ],
+    roleRelevance:
+      "This project supports Data Operations, BI/Data Analyst, Implementation Consultant, QA/QC, and operations automation roles because it shows document-heavy data normalization, validation pipelines, anomaly detection, traceability, and stakeholder-ready exports.",
     skillsProven: [
       "Industrial data",
       "Validation pipelines",
@@ -545,6 +619,20 @@ export const caseStudies: CaseStudy[] = [
     improveNext: [
       "Add a small review UI for approving anomalies and equipment extraction results.",
       "Add clearer run logs so non-technical reviewers can understand what changed between exports.",
+    ],
+    sampleCaption:
+      "Sanitized QA/QC master index preview based on generated validation outputs. Private source filenames are not shown.",
+    extraNotes: [
+      {
+        title: "Business value",
+        body:
+          "The value was not just automation; it made document status, missing coverage, repeated references, and review readiness easier to trust.",
+      },
+      {
+        title: "Traceability example",
+        body:
+          "Source PDF/register -> normalized record -> validation check -> anomaly flag -> review-ready Excel export.",
+      },
     ],
     input: "Excel registers, PDF document sets, system lists, weak references, anomalies",
     system: "master index, closed catalogs, coverage maps, validation summaries, reviewable exports",
@@ -586,9 +674,12 @@ export const caseStudies: CaseStudy[] = [
 ];
 
 export const roleFit = [
-  "Implementation / Solutions Consultant",
-  "Product Operations / Technical Product Specialist",
-  "RevOps / Data Operations Analyst",
+  "Implementation Consultant",
+  "Solutions Consultant",
+  "Technical Consultant",
+  "Product Operations Specialist",
+  "Technical Product Specialist",
+  "RevOps / Revenue Operations / Pricing Analyst",
   "Operations-heavy BI/Data Analyst",
 ];
 
