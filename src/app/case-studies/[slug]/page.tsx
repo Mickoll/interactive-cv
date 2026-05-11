@@ -15,7 +15,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${caseStudy.title} | Mickoll Marin`,
-    description: caseStudy.summary,
+    description: caseStudy.recruiterSummary,
+    alternates: {
+      canonical: `/case-studies/${caseStudy.slug}`,
+      languages: {
+        en: `/case-studies/${caseStudy.slug}`,
+        es: `/case-studies/${caseStudy.slug}?lang=es`,
+      },
+    },
+    openGraph: {
+      title: `${caseStudy.title} | Mickoll Marin`,
+      description: caseStudy.recruiterSummary,
+      url: `https://mickoll-interactive-cv.vercel.app/case-studies/${caseStudy.slug}`,
+      type: "article",
+    },
   };
 }
 

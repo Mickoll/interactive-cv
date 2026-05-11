@@ -16,15 +16,33 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mickoll Marin | Remote Operations & Data Automation",
+  title: "Mickoll Marin | SaaS Implementation & Operations Automation",
   description:
-    "Interactive CV and portfolio for Mickoll Marin, focused on remote operations, data automation, SaaS implementation, RevOps, product operations, and BI/data roles.",
+    "Recruiter-facing CV and portfolio for Mickoll Marin, focused on SaaS implementation, operations automation, product operations, RevOps, pricing, and BI/data roles.",
   metadataBase: new URL("https://mickoll-interactive-cv.vercel.app"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      en: "/",
+      es: "/?lang=es",
+    },
+  },
   openGraph: {
-    title: "Mickoll Marin | Remote Operations & Data Automation",
+    title: "Mickoll Marin | SaaS Implementation & Operations Automation",
     description:
-      "Interactive CV with case studies in report automation, dashboards, pricing intelligence, and QA/QC data systems.",
+      "Portfolio and ATS CV with case studies in SaaS implementation, reporting tools, pricing intelligence, dashboards, and QA/QC automation.",
     type: "website",
+    url: "https://mickoll-interactive-cv.vercel.app",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mickoll Marin | SaaS Implementation & Operations Automation",
+    description:
+      "Recruiter-facing portfolio for SaaS implementation, operations automation, product operations, RevOps, pricing, and BI/data roles.",
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
   icons: {
     icon: "/favicon.svg",

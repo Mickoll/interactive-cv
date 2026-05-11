@@ -1,15 +1,21 @@
-import { existsSync, mkdirSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
 
 const root = process.cwd();
 const sourceUrl = "http://localhost:3000/resume";
-const outputPath = path.resolve(root, "public", "Mickoll_Marin_CV.pdf");
-const expectedOutput = path.join(root, "public", "Mickoll_Marin_CV.pdf");
+const outputPath = path.resolve(root, "public", "Mickoll_Marin_CV_ATS.pdf");
+const legacyOutputPath = path.resolve(root, "public", "Mickoll_Marin_CV.pdf");
+const expectedOutput = path.join(root, "public", "Mickoll_Marin_CV_ATS.pdf");
+const expectedLegacyOutput = path.join(root, "public", "Mickoll_Marin_CV.pdf");
 
 if (outputPath !== expectedOutput) {
   throw new Error(`Refusing to write PDF outside the expected public CV path: ${outputPath}`);
+}
+
+if (legacyOutputPath !== expectedLegacyOutput) {
+  throw new Error(`Refusing to write PDF outside the expected legacy public CV path: ${legacyOutputPath}`);
 }
 
 async function assertServerIsReady() {
@@ -83,12 +89,16 @@ function runBrowser(candidate) {
 
 await assertServerIsReady();
 rmSync(outputPath, { force: true });
+rmSync(legacyOutputPath, { force: true });
 
 const failures = [];
 for (const candidate of browserCandidates()) {
   const result = await runBrowser(candidate);
   if (result.ok) {
-    console.log(`Generated ${path.relative(root, outputPath)} using ${result.candidate}`);
+    copyFileSync(outputPath, legacyOutputPath);
+    console.log(
+      `Generated ${path.relative(root, outputPath)} and refreshed ${path.relative(root, legacyOutputPath)} using ${result.candidate}`
+    );
     process.exit(0);
   }
   failures.push(`${result.candidate}: ${result.error}`);

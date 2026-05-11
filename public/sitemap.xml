@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://mickoll-interactive-cv.vercel.app/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mickoll-interactive-cv.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mickoll-interactive-cv.vercel.app/?lang=es" />
+  </url>
+  <url>
+    <loc>https://mickoll-interactive-cv.vercel.app/resume</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mickoll-interactive-cv.vercel.app/resume" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mickoll-interactive-cv.vercel.app/resume?lang=es" />
+  </url>
+  <url>
+    <loc>https://mickoll-interactive-cv.vercel.app/case-studies/inspection-report-automation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mickoll-interactive-cv.vercel.app/case-studies/inspection-report-automation" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mickoll-interactive-cv.vercel.app/case-studies/inspection-report-automation?lang=es" />
+  </url>
+  <url>
+    <loc>https://mickoll-interactive-cv.vercel.app/case-studies/solartrack-workflow-pwa</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mickoll-interactive-cv.vercel.app/case-studies/solartrack-workflow-pwa" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mickoll-interactive-cv.vercel.app/case-studies/solartrack-workflow-pwa?lang=es" />
+  </url>
+  <url>
+    <loc>https://mickoll-interactive-cv.vercel.app/case-studies/real-estate-pricing-intelligence</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mickoll-interactive-cv.vercel.app/case-studies/real-estate-pricing-intelligence" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mickoll-interactive-cv.vercel.app/case-studies/real-estate-pricing-intelligence?lang=es" />
+  </url>
+  <url>
+    <loc>https://mickoll-interactive-cv.vercel.app/case-studies/industrial-qaqc-data-automation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mickoll-interactive-cv.vercel.app/case-studies/industrial-qaqc-data-automation" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://mickoll-interactive-cv.vercel.app/case-studies/industrial-qaqc-data-automation?lang=es" />
+  </url>
+</urlset>

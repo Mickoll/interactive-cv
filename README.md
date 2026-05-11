@@ -1,6 +1,6 @@
 # Mickoll Interactive CV
 
-Standalone interactive CV and portfolio site for remote operations, data automation, SaaS implementation, RevOps, product operations, and BI/data roles.
+Standalone interactive CV and portfolio site for SaaS implementation, operations automation, RevOps/pricing, product operations, and BI/data roles.
 
 ## Stack
 
@@ -22,11 +22,12 @@ npm run dev
 ```powershell
 npm run lint
 npm run build
+npm run test:e2e
 ```
 
 ## CV PDF
 
-The public CV file lives at `public/Mickoll_Marin_CV.pdf` and is generated from the printable `/resume` route.
+The default public CV file lives at `public/Mickoll_Marin_CV_ATS.pdf` and is generated from the printable `/resume` route. `public/Mickoll_Marin_CV.pdf` is refreshed at the same time as a legacy route so older links keep working.
 
 ```powershell
 npm run build

@@ -37,6 +37,17 @@ export type CaseStudy = {
   shortTitle: string;
   eyebrow: string;
   summary: string;
+  cardProblem: string;
+  cardBuilt: string;
+  cardValue: string;
+  recruiterSummary: string;
+  businessProblem: string;
+  workflowInputs: string;
+  systemBehavior: string;
+  outputs: string;
+  observableImpact: string[];
+  skillsProven: string[];
+  improveNext: string[];
   input: string;
   system: string;
   problem: string;
@@ -67,31 +78,43 @@ export type CapabilityGroup = {
 
 export const profile = {
   name: "Mickoll Marin",
-  role: "Remote Operations & Data Automation Specialist",
+  role: "SaaS Implementation & Operations Automation Specialist",
   location: "Badajoz, Spain",
-  availability: "Remote from Spain | EU and global teams",
+  availability: "Remote from Spain for EU, UK, and global teams",
   email: "mickmaring@gmail.com",
   phone: "+34 603 687200",
   linkedin: "https://www.linkedin.com/in/mickollmarin/",
-  cvUrl: "/Mickoll_Marin_CV.pdf",
+  portfolio: "https://mickoll-interactive-cv.vercel.app",
+  cvUrl: "/Mickoll_Marin_CV_ATS.pdf",
   headline:
-    "Industrial engineer with Amazon operations leadership, remote SaaS experience, and hands-on projects in reports, dashboards, pricing data, QA/QC, and automation.",
+    "Industrial Engineer with Amazon operations leadership, remote SaaS product experience, and hands-on automation projects across reporting, pricing, QA/QC, dashboards, and document workflows.",
   targetRoles: [
-    "Implementation / Solutions Consultant",
-    "Product Operations / Technical Product Specialist",
-    "RevOps / Data Operations Analyst",
+    "Implementation Consultant",
+    "Solutions Consultant",
+    "Technical Consultant",
+    "Product Operations Specialist",
+    "Technical Product Specialist",
+    "RevOps / Revenue Operations / Pricing Analyst",
     "Operations-heavy BI/Data Analyst",
   ],
   recruiterSnapshot: [
-    { label: "Role fit", value: "Implementation, product operations, RevOps, and BI/data roles" },
-    { label: "Availability", value: "Remote from Spain for EU, UK, and global teams" },
+    {
+      label: "Best fit",
+      value:
+        "Implementation / Solutions Consultant; Product Operations / Technical Product Specialist; RevOps / Pricing / Data Operations; operations-heavy BI/Data Analyst",
+    },
+    { label: "Location", value: "Remote from Spain for EU, UK, and global teams" },
     { label: "Languages", value: "Spanish native, English C2, Portuguese C1" },
-    { label: "Work setup", value: "Comfortable with customers, internal teams, async documentation, and handoffs" },
+    {
+      label: "Evidence anchors",
+      value:
+        "Amazon 107-person team, PriceLabs SaaS/product/pricing experience, PerchPeek remote customer operations, 4 automation case studies",
+    },
   ],
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/mickollmarin/" },
     { label: "Email", href: "mailto:mickmaring@gmail.com" },
-    { label: "Download CV", href: "/Mickoll_Marin_CV.pdf" },
+    { label: "Download CV", href: "/Mickoll_Marin_CV_ATS.pdf" },
   ] satisfies ProfileLink[],
 };
 
@@ -185,12 +208,12 @@ export const professionalExperience: ProfessionalExperience[] = [
   {
     period: "July 2025 - Present",
     organization: "Independent Operations & Data Automation Projects",
-    role: "Remote data, automation, and web tools builder",
+    role: "Independent Operations & Data Automation Projects",
     context: "Spain-based independent project work for real business processes.",
     bullets: [
-      "Built tools for inspection reporting, solar project organization, real-estate pricing intelligence, QA/QC traceability, equipment-data extraction, dashboards, and document automation.",
+      "Built practical tools for inspection reporting, solar project organization, real-estate pricing intelligence, QA/QC traceability, equipment-data extraction, dashboards, and document automation.",
       "Worked across React/TypeScript, Next.js, FastAPI, Python, SQL/PostgreSQL, SQLite, PDF/OCR, DOCX generation, and spreadsheet automation.",
-      "Focused on tools that reduce manual checking, keep records clear, and make reporting easier to repeat.",
+      "Focused on implementation details that reduce manual checking, keep records clear, and make reporting easier to repeat.",
     ],
   },
   {
@@ -263,6 +286,37 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Inspection reports",
     summary:
       "I built a local report builder for inspection projects: photos, PDFs, annotations, issue catalogs, OCR, and DOCX generation in one place.",
+    cardProblem: "Field/reporting work scattered across photos, PDFs, certificates, issue lists, and Word edits.",
+    cardBuilt:
+      "React/TypeScript + FastAPI local-first report builder with project storage, uploads, image annotation, OCR, catalog management, map/geocoding support, and DOCX export.",
+    cardValue: "Improved evidence-to-report traceability and reduced repeated report formatting.",
+    recruiterSummary:
+      "A local-first inspection report builder that keeps source material, annotations, issue catalogs, and generated DOCX reports connected.",
+    businessProblem:
+      "Inspection reporting depends on many small pieces of evidence. Photos, PDFs, certificates, issue lists, annotations, and Word edits can easily drift apart unless the tool keeps a clean chain from source material to final report.",
+    workflowInputs:
+      "Photos, PDFs, certificates, project notes, issue lists, image annotations, OCR text, catalog entries, maps, and report settings.",
+    systemBehavior:
+      "The app stores projects locally, organizes uploaded assets, supports image annotation and OCR review, keeps catalogs available, and prepares the material for repeatable report generation.",
+    outputs:
+      "DOCX inspection reports, reviewed assets, issue catalogs, processed images, and project folders that can be audited later.",
+    observableImpact: [
+      "Reduced repeated formatting work in Word-based reports.",
+      "Improved traceability between field evidence and final report sections.",
+      "Created a browser-based tool around a process that would otherwise rely on folders and manual edits.",
+    ],
+    skillsProven: [
+      "Requirements discovery",
+      "Document workflow automation",
+      "Traceability",
+      "React/FastAPI",
+      "DOCX/OCR",
+      "QA review",
+    ],
+    improveNext: [
+      "Add stronger review permissions and version history for generated reports.",
+      "Improve template management so different report types can be generated from the same project data.",
+    ],
     input: "photos, PDFs, certificates, issue lists, project notes",
     system: "local React/FastAPI app with project storage, review states, OCR, and DOCX generation",
     problem:
@@ -307,6 +361,39 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Deployed organizer",
     summary:
       "A deployed Next.js PWA for solar-project visits: calendars, advisor assignments, report status, contacts, maps, imports, and follow-up.",
+    cardProblem:
+      "Solar-project visits need calendar planning, advisor assignment, report status, contacts, maps, imports, and follow-up accountability.",
+    cardBuilt:
+      "Next.js/TypeScript PWA with dashboards, calendar, project tables, contacts, maps, expenses, reports, settings, CSV/Excel imports, authentication, Prisma/Neon, and QA scripts.",
+    cardValue:
+      "Demonstrates product operations thinking, deployment, status modeling, and operational accountability.",
+    recruiterSummary:
+      "A deployed operations PWA for planning solar visits, assigning advisors, tracking reports, and keeping follow-up visible.",
+    businessProblem:
+      "Solar project work creates many small open loops: scheduled visits, advisor ownership, pending reports, contact details, map context, imports, expenses, and follow-up. The tool was built to make that status easier to see and update.",
+    workflowInputs:
+      "Visit dates, advisor assignments, project records, report status, contact data, map context, expenses, CSV/Excel imports, and editable operational notes.",
+    systemBehavior:
+      "The PWA groups the work into dashboards, calendar views, project tables, contact views, reports, settings, imports, authentication, and persistence checks.",
+    outputs:
+      "Project visibility, report follow-up lists, advisor/project filters, imported records, dashboards, and status views for daily operations.",
+    observableImpact: [
+      "Made follow-up work easier to find across projects, advisors, reports, and contacts.",
+      "Shows deployment experience with persistence, authentication, imports, and QA scripts.",
+      "Gives a concrete product example for implementation and product operations conversations.",
+    ],
+    skillsProven: [
+      "Product operations",
+      "Workflow design",
+      "Dashboarding",
+      "Status tracking",
+      "Imports",
+      "Deployment and persistence checks",
+    ],
+    improveNext: [
+      "Add cleaner role-based permissions for different operational users.",
+      "Add audit history for report status changes and imported records.",
+    ],
     input: "visit schedules, advisor assignments, report status, contacts, imports, expenses",
     system: "Next.js PWA with dashboards, calendar, maps, records, filters, imports, auth, and persistence checks",
     problem:
@@ -351,6 +438,38 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Market data product",
     summary:
       "A pricing-intelligence MVP for real-estate listings: scraping, ETL, PostGIS storage, deduplication, confidence checks, dashboards, and reports.",
+    cardProblem:
+      "Public listing data is duplicated, inconsistent, geographically uneven, and affected by currency/freshness issues.",
+    cardBuilt:
+      "Python scraping/ETL, PostgreSQL/PostGIS, deduplication, confidence/freshness metrics, dashboarding, and daily/weekly reporting.",
+    cardValue: "Turns fragmented market observations into usable pricing context.",
+    recruiterSummary:
+      "A data product MVP that turns fragmented public listing data into pricing context with freshness, confidence, geography, and reporting layers.",
+    businessProblem:
+      "Real-estate listing data is noisy. The same property can appear in several places, locations are not always clean, currency can change quickly, and stale listings can distort pricing decisions.",
+    workflowInputs:
+      "Public listings, source snapshots, prices, property attributes, location data, zone labels, currency context, freshness dates, and duplicate candidates.",
+    systemBehavior:
+      "The pipeline captures source observations, stores geospatial data, separates raw records from publishable metrics, flags freshness/confidence issues, and prepares dashboards and reports.",
+    outputs:
+      "Pricing context by area and property type, deduplicated records, confidence/freshness indicators, dashboards, and daily/weekly market reports.",
+    observableImpact: [
+      "Separated raw observations from analysis-ready pricing views.",
+      "Made source freshness, geography, and duplicate risk explicit.",
+      "Created a more useful basis for pricing and market conversations.",
+    ],
+    skillsProven: [
+      "Data quality",
+      "ETL",
+      "Geospatial analysis",
+      "Pricing context",
+      "Deduplication",
+      "Reporting",
+    ],
+    improveNext: [
+      "Add clearer source-quality dashboards for non-technical users.",
+      "Automate exception review for unresolved locations and high-impact duplicates.",
+    ],
     input: "public listings, source snapshots, zone names, prices, geography, freshness checks",
     system: "multi-source ingestion, PostgreSQL/PostGIS model, deduplication, confidence scoring, reports",
     problem:
@@ -395,6 +514,38 @@ export const caseStudies: CaseStudy[] = [
     eyebrow: "Industrial data",
     summary:
       "Automation for industrial QA/QC records: Excel registers, PDF dossiers, tolerance checks, equipment lists, validation summaries, and traceable exports.",
+    cardProblem:
+      "QA/QC records spread across Excel registers, PDF dossiers, weak references, equipment lists, and manual checks.",
+    cardBuilt:
+      "Master document index, closed catalogs, coverage maps, anomaly reports, validation summaries, SQLite/Pandas workflows, QA approval scripts, and traceable Excel outputs.",
+    cardValue: "Public sample covers 1,594 records, 98 systems, and 13,351 checks.",
+    recruiterSummary:
+      "A QA/QC automation project that converts industrial records and document sets into traceable indexes, checks, summaries, and exports.",
+    businessProblem:
+      "QA/QC documentation is difficult to trust when records are split between spreadsheets, PDF dossiers, repeated references, equipment lists, and manual checks. The work needed a repeatable way to index, validate, and review the material.",
+    workflowInputs:
+      "Excel registers, PDF dossiers, system lists, equipment records, weak references, tolerance data, anomaly candidates, and approval checks.",
+    systemBehavior:
+      "The scripts build a master index, normalize catalogs, compare coverage, flag anomalies, stage equipment extraction, and prepare validation summaries and Excel outputs.",
+    outputs:
+      "Traceable QA/QC registers, coverage maps, anomaly reports, equipment data, validation summaries, approval exports, and review-ready Excel files.",
+    observableImpact: [
+      "Reduced manual reconciliation across spreadsheets and PDF sets.",
+      "Made validation status and traceability easier to review.",
+      "Public sample covers 1,594 records, 98 systems, and 13,351 checks.",
+    ],
+    skillsProven: [
+      "Industrial data",
+      "Validation pipelines",
+      "Excel/PDF processing",
+      "Anomaly detection",
+      "Traceability",
+      "Review-ready exports",
+    ],
+    improveNext: [
+      "Add a small review UI for approving anomalies and equipment extraction results.",
+      "Add clearer run logs so non-technical reviewers can understand what changed between exports.",
+    ],
     input: "Excel registers, PDF document sets, system lists, weak references, anomalies",
     system: "master index, closed catalogs, coverage maps, validation summaries, reviewable exports",
     problem:

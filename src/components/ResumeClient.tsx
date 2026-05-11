@@ -18,6 +18,20 @@ export function ResumeClient() {
   const professionalExperience = getLocalizedExperience(locale);
   const caseStudies = getLocalizedCaseStudies(locale);
   const signalCards = getLocalizedSignalCards(locale);
+  const educationItems =
+    locale === "es"
+      ? [
+          "EF SET English C2 Certificate.",
+          "MBA, Universidad Isabel I, Barcelona, España, 2020.",
+          "Máster en Big Data and Business Intelligence, ISEB, Barcelona, España, 2019. Cum Laude.",
+          "Ingeniería Industrial, Universidad Yacambú, Barquisimeto, Venezuela, 2018.",
+        ]
+      : [
+          "EF SET English C2 Certificate.",
+          "MBA, Universidad Isabel I, Barcelona, Spain, 2020.",
+          "Master in Big Data and Business Intelligence, ISEB, Barcelona, Spain, 2019. Cum Laude.",
+          "Industrial Engineering Degree, Universidad Yacambu, Barquisimeto, Venezuela, 2018.",
+        ];
 
   return (
     <main className="min-h-screen bg-[#f4efe4] text-slate-950 print:bg-white">
@@ -28,7 +42,7 @@ export function ResumeClient() {
             {ui.back}
           </Link>
           <div className="flex gap-3">
-            <a className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-3 py-2 text-sm font-bold text-slate-950" href={profile.cvUrl}>
+            <a className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-3 py-2 text-sm font-bold text-slate-950" download="Mickoll_Marin_CV_ATS.pdf" href={profile.cvUrl}>
               <ArrowDownToLine className="h-4 w-4" />
               {ui.pdf}
             </a>
@@ -53,6 +67,7 @@ export function ResumeClient() {
               <p>{profile.email}</p>
               <p>{profile.phone}</p>
               <p>linkedin.com/in/mickollmarin</p>
+              <p>mickoll-interactive-cv.vercel.app</p>
             </div>
           </div>
         </header>
@@ -127,9 +142,9 @@ export function ResumeClient() {
 
         <ResumeSection title={ui.education}>
           <ul className="list-disc space-y-1 pl-5 text-sm leading-6 text-slate-700 print:space-y-0 print:text-[9px] print:leading-4">
-            <li>MBA, Universidad Isabel I, Barcelona, Spain, 2020.</li>
-            <li>Master in Big Data and Business Intelligence, ISEB, Barcelona, Spain, 2019. Cum Laude.</li>
-            <li>Industrial Engineering Degree, Universidad Yacambu, Barquisimeto, Venezuela, 2018.</li>
+            {educationItems.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
           </ul>
         </ResumeSection>
       </article>

@@ -20,7 +20,7 @@ export const uiText = {
   en: {
     language: "Language",
     remoteFromSpain: "Remote from Spain",
-    downloadCv: "Download CV",
+    downloadCv: "Download ATS CV",
     recruiterScan: "Hiring snapshot",
     contact: "Contact",
     email: "Email",
@@ -37,6 +37,19 @@ export const uiText = {
     systemBuilt: "What I built",
     roleLabel: "Role",
     resultLabel: "Output",
+    recruiterSummary: "Recruiter summary",
+    businessProblem: "Business problem",
+    myRole: "My role",
+    dataWorkflowInputs: "Data / workflow inputs",
+    systemBehavior: "System behavior",
+    outputs: "Outputs",
+    observableImpact: "Measurable or observable impact",
+    skillsProven: "Skills proven",
+    privacySanitization: "Privacy / sanitization note",
+    improveNext: "What I would improve next",
+    previousCase: "Previous case study",
+    nextCase: "Next case study",
+    backToHome: "Back to Home",
     situation: "The situation",
     inPractice: "In practice",
     inputsLabel: "Inputs",
@@ -82,12 +95,12 @@ export const uiText = {
     selectedExperience: "Selected experience",
     projectExamples: "Project examples",
     education: "Education",
-    pdf: "PDF",
+    pdf: "ATS PDF",
   },
   es: {
     language: "Idioma",
     remoteFromSpain: "Remoto desde España",
-    downloadCv: "Descargar CV",
+    downloadCv: "Descargar CV ATS",
     recruiterScan: "Resumen para contratación",
     contact: "Contacto",
     email: "Email",
@@ -104,6 +117,19 @@ export const uiText = {
     systemBuilt: "Qué construí",
     roleLabel: "Rol",
     resultLabel: "Salida",
+    recruiterSummary: "Resumen para reclutadores",
+    businessProblem: "Problema de negocio",
+    myRole: "Mi rol",
+    dataWorkflowInputs: "Datos y entradas del proceso",
+    systemBehavior: "Comportamiento del sistema",
+    outputs: "Salidas",
+    observableImpact: "Impacto medible u observable",
+    skillsProven: "Habilidades demostradas",
+    privacySanitization: "Privacidad y anonimización",
+    improveNext: "Qué mejoraría después",
+    previousCase: "Caso anterior",
+    nextCase: "Caso siguiente",
+    backToHome: "Volver al inicio",
     situation: "Situación",
     inPractice: "En la práctica",
     inputsLabel: "Entradas",
@@ -149,27 +175,38 @@ export const uiText = {
     selectedExperience: "Experiencia seleccionada",
     projectExamples: "Proyectos destacados",
     education: "Educación",
-    pdf: "PDF",
+    pdf: "PDF ATS",
   },
 } as const;
 
 const profileEs = {
-  role: "Especialista remoto en operaciones y automatización de datos",
+  role: "Especialista en Implementación SaaS y Automatización de Operaciones",
   location: "Badajoz, España",
-  availability: "Remoto desde España | equipos UE y globales",
+  availability: "Remoto desde España para equipos de la UE, UK y globales",
   headline:
-    "Ingeniero industrial con experiencia liderando operaciones, trabajando en SaaS remoto y construyendo herramientas para reportes, paneles, datos de precios, QA/QC y automatización.",
+    "Ingeniero industrial con liderazgo operativo en Amazon, experiencia remota en producto SaaS y proyectos de automatización en reportes, pricing, QA/QC, paneles y procesos documentales.",
   targetRoles: [
-    "Consultoría de implementación / soluciones",
-    "Operaciones de producto / soporte técnico de producto",
-    "RevOps / operaciones de datos",
-    "BI/Data con foco operativo",
+    "Consultor de implementación",
+    "Consultor de soluciones",
+    "Consultor técnico",
+    "Especialista de operaciones de producto",
+    "Especialista técnico de producto",
+    "RevOps / Revenue Operations / pricing",
+    "BI/Data Analyst con foco operativo",
   ],
   recruiterSnapshot: [
-    { label: "Encaje", value: "Implementación, operaciones de producto, RevOps y BI/data" },
-    { label: "Disponibilidad", value: "Remoto desde España para equipos UE, UK y globales" },
+    {
+      label: "Mejor encaje",
+      value:
+        "Implementación / soluciones; operaciones de producto / producto técnico; RevOps / pricing / operaciones de datos; BI/Data con foco operativo",
+    },
+    { label: "Ubicación", value: "Remoto desde España para equipos de la UE, UK y globales" },
     { label: "Idiomas", value: "Español nativo, inglés C2, portugués C1" },
-    { label: "Modo de trabajo", value: "Cómodo con clientes, equipos internos, documentación asíncrona y traspasos" },
+    {
+      label: "Evidencia",
+      value:
+        "Equipo Amazon de 107 personas, experiencia SaaS/producto/pricing en PriceLabs, operaciones remotas en PerchPeek y 4 casos de automatización",
+    },
   ],
 };
 
@@ -320,6 +357,39 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     eyebrow: "Reportes de inspección",
     summary:
       "Construí una herramienta local para reportes de inspección: fotos, PDFs, anotaciones, catálogos de incidencias, OCR y generación DOCX en un solo lugar.",
+    cardProblem: "El trabajo de campo y reporte estaba repartido entre fotos, PDFs, certificados, incidencias y ediciones en Word.",
+    cardBuilt:
+      "Constructor local de reportes con React/TypeScript + FastAPI, almacenamiento por proyecto, cargas, anotación de imágenes, OCR, catálogos, mapas/geocoding y exportación DOCX.",
+    cardValue: "Mejor trazabilidad entre evidencia y reporte, con menos formateo repetido.",
+    recruiterSummary:
+      "Herramienta local para reportes de inspección que conecta material fuente, anotaciones, catálogos de incidencias y documentos DOCX generados.",
+    businessProblem:
+      "Los reportes de inspección dependen de muchas piezas pequeñas de evidencia. Fotos, PDFs, certificados, incidencias, anotaciones y ediciones en Word pueden separarse si la herramienta no mantiene una cadena clara hasta el reporte final.",
+    workflowInputs:
+      "Fotos, PDFs, certificados, notas del proyecto, incidencias, anotaciones de imagen, texto OCR, catálogos, mapas y ajustes del reporte.",
+    systemBehavior:
+      "La app guarda proyectos localmente, organiza archivos subidos, permite anotar imágenes y revisar OCR, mantiene catálogos disponibles y prepara el material para generar reportes repetibles.",
+    outputs:
+      "Reportes DOCX, archivos revisados, catálogos de incidencias, imágenes procesadas y carpetas de proyecto auditables.",
+    observableImpact: [
+      "Menos trabajo repetido de formateo en reportes Word.",
+      "Más trazabilidad entre evidencia de campo y secciones del reporte.",
+      "Una herramienta web interna para un proceso que antes dependía de carpetas y ediciones manuales.",
+    ],
+    skillsProven: [
+      "Levantamiento de requisitos",
+      "Automatización documental",
+      "Trazabilidad",
+      "React/FastAPI",
+      "DOCX/OCR",
+      "Revisión QA",
+    ],
+    improveNext: [
+      "Añadir permisos de revisión e historial de versiones para reportes generados.",
+      "Mejorar la gestión de plantillas para generar distintos tipos de reporte desde los mismos datos.",
+    ],
+    metrics: ["export DOCX", "OCR", "revisión de archivos"],
+    sampleAlt: "Captura anonimizada de la herramienta local de reportes de inspección con un proyecto demo.",
     input: "fotos, PDFs, certificados, listas de incidencias y notas del proyecto",
     system: "app React/FastAPI local con almacenamiento de proyectos, estados de revisión, OCR y generación DOCX",
     problem:
@@ -357,6 +427,41 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     eyebrow: "Organizador desplegado",
     summary:
       "Una PWA desplegada en Next.js para visitas solares: calendario, asignación de asesores, estado de reportes, contactos, mapas, importaciones y seguimiento.",
+    cardProblem:
+      "Las visitas de proyectos solares necesitan calendario, asignación de asesores, estado de reportes, contactos, mapas, importaciones y seguimiento.",
+    cardBuilt:
+      "PWA con Next.js/TypeScript, paneles, calendario, tablas de proyectos, contactos, mapas, gastos, reportes, ajustes, importaciones CSV/Excel, autenticación, Prisma/Neon y scripts QA.",
+    cardValue:
+      "Demuestra criterio de operaciones de producto, despliegue, modelado de estados y responsabilidad operativa.",
+    recruiterSummary:
+      "PWA desplegada para planificar visitas solares, asignar asesores, seguir reportes y mantener visible el trabajo pendiente.",
+    businessProblem:
+      "Los proyectos solares generan muchos pendientes pequeños: visitas, asesores, reportes, contactos, mapas, importaciones, gastos y seguimiento. La herramienta organiza ese estado para verlo y actualizarlo con menos fricción.",
+    workflowInputs:
+      "Fechas de visita, asesores, proyectos, estado de reportes, contactos, mapas, gastos, importaciones CSV/Excel y notas operativas editables.",
+    systemBehavior:
+      "La PWA agrupa el trabajo en paneles, calendario, tablas de proyectos, contactos, reportes, ajustes, importaciones, autenticación y pruebas de persistencia.",
+    outputs:
+      "Visibilidad de proyectos, listas de reportes pendientes, filtros por asesor/proyecto, registros importados, paneles y vistas de estado.",
+    observableImpact: [
+      "Hace más fácil encontrar pendientes entre proyectos, asesores, reportes y contactos.",
+      "Muestra despliegue real con persistencia, autenticación, importaciones y scripts QA.",
+      "Sirve como ejemplo concreto para conversaciones de implementación y operaciones de producto.",
+    ],
+    skillsProven: [
+      "Operaciones de producto",
+      "Diseño de procesos",
+      "Paneles",
+      "Seguimiento de estados",
+      "Importaciones",
+      "Despliegue y pruebas de persistencia",
+    ],
+    improveNext: [
+      "Añadir permisos por rol para distintos usuarios operativos.",
+      "Añadir historial de cambios para estados de reporte y registros importados.",
+    ],
+    metrics: ["desplegada", "PWA", "varias vistas"],
+    sampleAlt: "Vista anonimizada de SolarTrack basada en la app local de organización de proyectos.",
     input: "calendarios de visita, asesores, estado de reportes, contactos, importaciones y gastos",
     system: "PWA en Next.js con panel, calendario, mapas, registros, filtros, importaciones, autenticación y pruebas de persistencia",
     problem:
@@ -394,6 +499,40 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     eyebrow: "Producto de datos de mercado",
     summary:
       "Un MVP de inteligencia de precios inmobiliarios: scraping, ETL, almacenamiento PostGIS, deduplicación, controles de confianza, paneles y reportes.",
+    cardProblem:
+      "Los datos públicos de listados están duplicados, son inconsistentes, tienen geografía irregular y se ven afectados por moneda y frescura.",
+    cardBuilt:
+      "Scraping/ETL en Python, PostgreSQL/PostGIS, deduplicación, métricas de confianza/frescura, paneles y reportes diarios/semanales.",
+    cardValue: "Convierte observaciones de mercado fragmentadas en contexto útil de pricing.",
+    recruiterSummary:
+      "MVP de producto de datos que convierte listados públicos fragmentados en contexto de pricing con frescura, confianza, geografía y reportes.",
+    businessProblem:
+      "Los datos inmobiliarios públicos son ruidosos. Una propiedad puede repetirse, las ubicaciones no siempre están limpias, la moneda cambia y los anuncios antiguos pueden distorsionar decisiones de pricing.",
+    workflowInputs:
+      "Listados públicos, capturas por fuente, precios, atributos de propiedades, ubicación, zonas, moneda, fechas de frescura y posibles duplicados.",
+    systemBehavior:
+      "El pipeline captura observaciones, almacena datos geoespaciales, separa registros crudos de métricas publicables, marca problemas de frescura/confianza y prepara paneles y reportes.",
+    outputs:
+      "Contexto de precios por zona y tipo de propiedad, registros deduplicados, indicadores de confianza/frescura, paneles y reportes de mercado.",
+    observableImpact: [
+      "Separa observaciones crudas de vistas de pricing listas para análisis.",
+      "Hace explícitos los riesgos de frescura, geografía y duplicados.",
+      "Da una mejor base para conversaciones comerciales y de mercado.",
+    ],
+    skillsProven: [
+      "Calidad de datos",
+      "ETL",
+      "Análisis geoespacial",
+      "Contexto de pricing",
+      "Deduplicación",
+      "Reportes",
+    ],
+    improveNext: [
+      "Añadir paneles más claros de calidad por fuente para usuarios no técnicos.",
+      "Automatizar la revisión de ubicaciones no resueltas y duplicados de alto impacto.",
+    ],
+    metrics: ["ETL", "PostGIS", "reportes de mercado"],
+    sampleAlt: "Vista anonimizada del dashboard de inteligencia de pricing basada en el MVP local.",
     input: "listados públicos, snapshots de fuente, zonas, precios, geografía y frescura",
     system: "ingesta multi-fuente, modelo PostgreSQL/PostGIS, deduplicación, scoring de confianza y reportes",
     problem:
@@ -431,6 +570,40 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     eyebrow: "Datos industriales",
     summary:
       "Automatización para registros industriales QA/QC: hojas Excel, dossiers PDF, tolerancias, listas de equipos, resúmenes de validación y exportaciones trazables.",
+    cardProblem:
+      "Los registros QA/QC estaban repartidos entre Excel, dossiers PDF, referencias débiles, listas de equipos y revisiones manuales.",
+    cardBuilt:
+      "Índice maestro, catálogos cerrados, mapas de cobertura, reportes de anomalías, resúmenes de validación, flujos SQLite/Pandas, scripts de aprobación QA y salidas Excel trazables.",
+    cardValue: "La muestra pública cubre 1.594 registros, 98 sistemas y 13.351 checks.",
+    recruiterSummary:
+      "Proyecto de automatización QA/QC que convierte registros industriales y documentos en índices, controles, resúmenes y exports trazables.",
+    businessProblem:
+      "La documentación QA/QC es difícil de confiar cuando vive entre hojas de cálculo, dossiers PDF, referencias repetidas, equipos y revisiones manuales. Hacía falta una forma repetible de indexar, validar y revisar el material.",
+    workflowInputs:
+      "Registros Excel, dossiers PDF, listas de sistemas, equipos, referencias débiles, tolerancias, anomalías y controles de aprobación.",
+    systemBehavior:
+      "Los scripts crean un índice maestro, normalizan catálogos, comparan cobertura, detectan anomalías, preparan extracción de equipos y generan resúmenes de validación y salidas Excel.",
+    outputs:
+      "Registros QA/QC trazables, mapas de cobertura, reportes de anomalías, datos de equipos, resúmenes de validación, exports de aprobación y Excels revisables.",
+    observableImpact: [
+      "Menos reconciliación manual entre hojas de cálculo y PDFs.",
+      "Estado de validación y trazabilidad más fáciles de revisar.",
+      "La muestra pública cubre 1.594 registros, 98 sistemas y 13.351 checks.",
+    ],
+    skillsProven: [
+      "Datos industriales",
+      "Pipelines de validación",
+      "Procesamiento Excel/PDF",
+      "Detección de anomalías",
+      "Trazabilidad",
+      "Exports revisables",
+    ],
+    improveNext: [
+      "Añadir una pequeña interfaz de revisión para aprobar anomalías y resultados de extracción.",
+      "Añadir logs de ejecución más claros para entender qué cambió entre exports.",
+    ],
+    metrics: ["1.594 registros", "98 sistemas", "13.351 checks"],
+    sampleAlt: "Vista anonimizada del índice maestro QA/QC basada en salidas de validación generadas.",
     input: "registros Excel, sets PDF, listas de sistemas, referencias débiles y anomalías",
     system: "índice maestro, catálogos cerrados, mapas de cobertura, resúmenes de validación y exportaciones revisables",
     problem:
@@ -465,9 +638,11 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
 };
 
 const roleFitEs = [
-  "Consultoría de implementación / soluciones",
-  "Operaciones de producto / soporte técnico de producto",
-  "RevOps / operaciones de datos",
+  "Consultor de implementación",
+  "Consultor de soluciones",
+  "Consultor técnico",
+  "Operaciones de producto / producto técnico",
+  "RevOps / Revenue Operations / pricing",
   "BI/Data con foco operativo",
 ];
 

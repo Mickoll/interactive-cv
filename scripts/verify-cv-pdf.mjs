@@ -3,10 +3,15 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 
 const root = process.cwd();
-const pdfPath = path.resolve(root, "public", "Mickoll_Marin_CV.pdf");
+const pdfPath = path.resolve(root, "public", "Mickoll_Marin_CV_ATS.pdf");
+const legacyPdfPath = path.resolve(root, "public", "Mickoll_Marin_CV.pdf");
 
 if (!existsSync(pdfPath)) {
   throw new Error(`Missing ${path.relative(root, pdfPath)}. Generate it first with "npm run pdf:cv".`);
+}
+
+if (!existsSync(legacyPdfPath)) {
+  throw new Error(`Missing legacy route file ${path.relative(root, legacyPdfPath)}. Generate it first with "npm run pdf:cv".`);
 }
 
 function run(command, args) {
@@ -64,6 +69,7 @@ const required = [
   "Amazon",
   "PriceLabs",
   "PerchPeek",
+  "EF SET",
   "Implementation",
   "Spanish",
   "English",

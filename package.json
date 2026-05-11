@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "test:e2e": "playwright test",
     "pdf:cv": "node scripts/generate-cv-pdf.mjs",
     "pdf:verify": "node scripts/verify-cv-pdf.mjs"
   },
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^20.19.27",
     "@types/react": "^19.2.7",

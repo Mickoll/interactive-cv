@@ -7,9 +7,11 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   Cloud,
+  Download,
   FileText,
   Globe2,
   Grid2X2,
+  Linkedin,
   Mail,
   MapPin,
   ShieldCheck,
@@ -17,38 +19,45 @@ import {
   Timer,
   Wrench,
 } from "lucide-react";
-import {
-  getLocalizedCaseStudies,
-  getLocalizedProfile,
-} from "@/data/localized";
+import { getLocalizedCaseStudies, getLocalizedProfile } from "@/data/localized";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { CaseStudy } from "@/data/profile";
 
 type EditorialCopy = {
   nav: {
-    about: string;
+    home: string;
     projects: string;
-    experience: string;
-    cv: string;
-    contact: string;
-    connect: string;
+    resume: string;
+    downloadCv: string;
+    email: string;
+    linkedIn: string;
     industrialEngineer: string;
   };
   hero: {
     eyebrow: string;
     headline: string;
-    highlight: string;
     subheadline: string;
-    scanCv: string;
-    exploreProjects: string;
+    downloadCv: string;
+    viewCaseStudies: string;
+    emailMe: string;
+    linkedIn: string;
     location: string;
+    visualLabel: string;
+    publicLabel: string;
   };
   proof: Array<{ title: string; description: string; accent: string; icon: typeof BriefcaseBusiness }>;
+  snapshot: {
+    kicker: string;
+    title: string;
+  };
   projects: {
     kicker: string;
     title: string;
-    action: string;
-    cards: Record<string, { title: string; tag: string; description: string; stack: string[] }>;
+    problem: string;
+    built: string;
+    value: string;
+    stack: string;
+    open: string;
   };
   career: {
     title: string;
@@ -59,28 +68,35 @@ type EditorialCopy = {
     fitLine: string;
     items: Array<{ title: string; description: string; icon: typeof Timer }>;
   };
+  footer: {
+    updated: string;
+    rights: string;
+  };
 };
 
 const copy: Record<"en" | "es", EditorialCopy> = {
   en: {
     nav: {
-      about: "About",
+      home: "Home",
       projects: "Projects",
-      experience: "Experience",
-      cv: "CV",
-      contact: "Contact",
-      connect: "Let's connect",
+      resume: "Resume",
+      downloadCv: "Download CV",
+      email: "Email",
+      linkedIn: "LinkedIn",
       industrialEngineer: "Industrial Engineer",
     },
     hero: {
-      eyebrow: "Industrial engineer · Amazon ops leadership · SaaS & automation builder",
-      headline: "I build tools that make operations easier to run.",
-      highlight: "easier to run",
+      eyebrow: "SaaS Implementation & Operations Automation Specialist",
+      headline: "I help SaaS and operations teams implement better workflows, reporting, and internal tools.",
       subheadline:
-        "I turn real operational problems into simple tools for reporting, tracking, pricing, and follow-up.",
-      scanCv: "Scan CV",
-      exploreProjects: "Explore projects",
-      location: "Based in Spain · Open to remote opportunities",
+        "Industrial Engineer with Amazon operations leadership, remote SaaS product experience, and hands-on automation projects across reporting, pricing, QA/QC, dashboards, and document workflows.",
+      downloadCv: "Download ATS CV",
+      viewCaseStudies: "View case studies",
+      emailMe: "Email me",
+      linkedIn: "LinkedIn",
+      location: "Based in Spain - open to remote EU, UK, and global roles",
+      visualLabel: "Live work sample",
+      publicLabel: "public",
     },
     proof: [
       {
@@ -91,97 +107,83 @@ const copy: Record<"en" | "es", EditorialCopy> = {
       },
       {
         title: "SaaS & product experience",
-        description: "Worked with remote product, support, pricing, and data teams.",
+        description: "Remote work across pricing, product questions, support follow-up, and customer operations.",
         accent: "text-cyan-200",
         icon: Cloud,
       },
       {
         title: "Automation builder",
-        description: "Built practical tools for reports, pricing context, QA/QC, and tracking.",
+        description: "Built tools for reporting, tracking, pricing context, QA/QC, and document-heavy work.",
         accent: "text-emerald-300",
         icon: Wrench,
       },
       {
         title: "Languages & remote",
-        description: "Spanish native, English C2, Portuguese C1, comfortable with distributed teams.",
+        description: "Spanish native, English C2, Portuguese C1. Comfortable with distributed teams.",
         accent: "text-amber-300",
         icon: Globe2,
       },
     ],
+    snapshot: {
+      kicker: "Recruiter snapshot",
+      title: "Role fit, location, languages, and evidence in one scan.",
+    },
     projects: {
-      kicker: "Featured projects",
-      title: "Product-style evidence from real operational friction.",
-      action: "Open case",
-      cards: {
-        "solartrack-workflow-pwa": {
-          title: "SolarTrack",
-          tag: "PWA",
-          description:
-            "Field operations tracker for visits, report follow-up, contacts, maps, imports, and project visibility.",
-          stack: ["Next.js", "PWA", "Reports"],
-        },
-        "inspection-report-automation": {
-          title: "Report Builder",
-          tag: "Automation",
-          description:
-            "Local report-building app for inspection notes, photos, issue catalogs, OCR, and DOCX outputs.",
-          stack: ["FastAPI", "OCR", "DOCX"],
-        },
-        "real-estate-pricing-intelligence": {
-          title: "Pricing Intelligence",
-          tag: "Analytics",
-          description:
-            "Market and competitor pricing context from listings, attributes, geography, and freshness checks.",
-          stack: ["Python", "PostGIS", "Reports"],
-        },
-        "industrial-qaqc-data-automation": {
-          title: "QA/QC Automation",
-          tag: "Internal tool",
-          description:
-            "Dossier, register, tolerance, equipment, and validation support for document-heavy QA/QC work.",
-          stack: ["Excel", "PDF", "Validation"],
-        },
-      },
+      kicker: "Featured case studies",
+      title: "Four projects that show the work behind the positioning.",
+      problem: "Problem",
+      built: "What I built",
+      value: "Business value",
+      stack: "Stack",
+      open: "Open case study",
     },
     career: {
       title: "Career route",
       items: [
-        { label: "Industrial engineer", description: "Process and data foundation" },
-        { label: "Amazon operations leadership", description: "People, performance, and daily execution" },
-        { label: "SaaS / product experience", description: "Remote teams, support, pricing, and product questions" },
-        { label: "Automation builder", description: "Practical tools for real operational problems" },
+        { label: "Industrial engineer", description: "Process, data, and production foundation" },
+        { label: "Amazon operations leadership", description: "People, performance, quality, and daily execution" },
+        { label: "Remote SaaS experience", description: "Product questions, pricing, customer follow-up, and distributed teams" },
+        { label: "Independent automation projects", description: "Tools for reporting, tracking, pricing, QA/QC, and documents" },
       ],
     },
     strengths: {
       title: "Core strengths",
-      fitLine: "Best fit: implementation, product operations, RevOps, BI/data, and technical product roles.",
+      fitLine:
+        "Best fit: implementation, solutions, product operations, technical product, RevOps/pricing, and operations-heavy BI/data roles.",
       items: [
-        { title: "Operational excellence", description: "Process design, KPIs, field work, and execution.", icon: Timer },
-        { title: "Data to decisions", description: "Pricing, reporting, QA, and operational analysis.", icon: ShieldCheck },
-        { title: "Product mindset", description: "User needs, prioritization, and useful delivery.", icon: Target },
-        { title: "Builder mentality", description: "Automate, iterate, simplify, and ship.", icon: Wrench },
+        { title: "Implementation judgment", description: "Map real operating steps, then shape the process or tool around them.", icon: Timer },
+        { title: "Data to decisions", description: "Clean records, compare options, and turn reporting into action.", icon: ShieldCheck },
+        { title: "Product sense", description: "Understand user friction and translate it into useful product behavior.", icon: Target },
+        { title: "Builder mindset", description: "Automate repetitive work and ship lightweight tools that people can actually use.", icon: Wrench },
       ],
+    },
+    footer: {
+      updated: "Portfolio updated May 2026",
+      rights: "Public samples are sanitized and use demo labels where needed.",
     },
   },
   es: {
     nav: {
-      about: "Resumen",
+      home: "Inicio",
       projects: "Proyectos",
-      experience: "Experiencia",
-      cv: "CV",
-      contact: "Contacto",
-      connect: "Contactar",
+      resume: "CV",
+      downloadCv: "Descargar CV",
+      email: "Email",
+      linkedIn: "LinkedIn",
       industrialEngineer: "Ingeniero industrial",
     },
     hero: {
-      eyebrow: "Ingeniero industrial · liderazgo operativo en Amazon · SaaS y automatización",
-      headline: "Construyo herramientas que hacen las operaciones más fáciles.",
-      highlight: "más fáciles",
+      eyebrow: "Especialista en implementación SaaS y automatización de operaciones",
+      headline: "Ayudo a equipos SaaS y de operaciones a implementar mejores procesos, reportes y herramientas internas.",
       subheadline:
-        "Convierto problemas operativos reales en herramientas sencillas para reportes, seguimiento, precios y coordinación.",
-      scanCv: "Ver CV",
-      exploreProjects: "Explorar proyectos",
-      location: "Basado en España · Abierto a oportunidades remotas",
+        "Ingeniero industrial con liderazgo operativo en Amazon, experiencia remota en producto SaaS y proyectos de automatización en reportes, pricing, QA/QC, paneles y procesos documentales.",
+      downloadCv: "Descargar CV ATS",
+      viewCaseStudies: "Ver casos",
+      emailMe: "Email",
+      linkedIn: "LinkedIn",
+      location: "Basado en España - abierto a roles remotos en UE, UK y equipos globales",
+      visualLabel: "Muestra de trabajo",
+      publicLabel: "pública",
     },
     proof: [
       {
@@ -192,76 +194,59 @@ const copy: Record<"en" | "es", EditorialCopy> = {
       },
       {
         title: "Experiencia SaaS y producto",
-        description: "Trabajé con equipos remotos de producto, soporte, precios y datos.",
+        description: "Trabajo remoto en pricing, dudas de producto, seguimiento de soporte y operaciones de cliente.",
         accent: "text-cyan-200",
         icon: Cloud,
       },
       {
         title: "Automatización práctica",
-        description: "Construí herramientas para reportes, pricing, QA/QC y seguimiento operativo.",
+        description: "Herramientas para reportes, tracking, contexto de precios, QA/QC y trabajo documental.",
         accent: "text-emerald-300",
         icon: Wrench,
       },
       {
-        title: "Idiomas y trabajo remoto",
-        description: "Español nativo, inglés C2, portugués C1 y experiencia con equipos distribuidos.",
+        title: "Idiomas y remoto",
+        description: "Español nativo, inglés C2, portugués C1. Cómodo con equipos distribuidos.",
         accent: "text-amber-300",
         icon: Globe2,
       },
     ],
+    snapshot: {
+      kicker: "Resumen para reclutadores",
+      title: "Encaje, ubicación, idiomas y evidencia en una lectura rápida.",
+    },
     projects: {
-      kicker: "Proyectos destacados",
-      title: "Muestras de producto nacidas de fricción operativa real.",
-      action: "Abrir caso",
-      cards: {
-        "solartrack-workflow-pwa": {
-          title: "SolarTrack",
-          tag: "PWA",
-          description:
-            "Tracker operativo para visitas, reportes pendientes, contactos, mapas, importaciones y visibilidad de proyectos.",
-          stack: ["Next.js", "PWA", "Reportes"],
-        },
-        "inspection-report-automation": {
-          title: "Report Builder",
-          tag: "Automatización",
-          description:
-            "App local para notas de inspección, fotos, catálogos de incidencias, OCR y salidas DOCX.",
-          stack: ["FastAPI", "OCR", "DOCX"],
-        },
-        "real-estate-pricing-intelligence": {
-          title: "Pricing Intelligence",
-          tag: "Análisis",
-          description:
-            "Contexto de precios de mercado a partir de listados, atributos, geografía y controles de frescura.",
-          stack: ["Python", "PostGIS", "Reportes"],
-        },
-        "industrial-qaqc-data-automation": {
-          title: "QA/QC Automation",
-          tag: "Herramienta interna",
-          description:
-            "Soporte para dossiers, registros, tolerancias, equipos y validación en trabajo QA/QC documental.",
-          stack: ["Excel", "PDF", "Validación"],
-        },
-      },
+      kicker: "Casos destacados",
+      title: "Cuatro proyectos que muestran el trabajo detrás del posicionamiento.",
+      problem: "Problema",
+      built: "Qué construí",
+      value: "Valor de negocio",
+      stack: "Stack",
+      open: "Abrir caso",
     },
     career: {
       title: "Ruta profesional",
       items: [
-        { label: "Ingeniero industrial", description: "Base de procesos y datos" },
-        { label: "Liderazgo operativo en Amazon", description: "Personas, rendimiento y ejecución diaria" },
-        { label: "Experiencia SaaS / producto", description: "Equipos remotos, soporte, precios y preguntas de producto" },
-        { label: "Builder de automatización", description: "Herramientas prácticas para problemas operativos reales" },
+        { label: "Ingeniero industrial", description: "Base de procesos, datos y producción" },
+        { label: "Liderazgo operativo en Amazon", description: "Personas, rendimiento, calidad y ejecución diaria" },
+        { label: "Experiencia SaaS remota", description: "Producto, pricing, seguimiento a clientes y equipos distribuidos" },
+        { label: "Proyectos independientes", description: "Herramientas para reportes, tracking, pricing, QA/QC y documentos" },
       ],
     },
     strengths: {
       title: "Fortalezas principales",
-      fitLine: "Mejor encaje: implementación, operaciones de producto, RevOps, BI/data y roles técnicos de producto.",
+      fitLine:
+        "Mejor encaje: implementación, soluciones, operaciones de producto, producto técnico, RevOps/pricing y BI/data con foco operativo.",
       items: [
-        { title: "Excelencia operativa", description: "Procesos, KPIs, trabajo de campo y ejecución.", icon: Timer },
-        { title: "Datos para decidir", description: "Precios, reportes, QA y análisis operativo.", icon: ShieldCheck },
-        { title: "Criterio de producto", description: "Necesidades de usuario, prioridad y entrega útil.", icon: Target },
-        { title: "Mentalidad builder", description: "Automatizar, iterar, simplificar y lanzar.", icon: Wrench },
+        { title: "Criterio de implementación", description: "Mapeo cómo ocurre el trabajo y adapto el proceso o la herramienta a esa realidad.", icon: Timer },
+        { title: "Datos para decidir", description: "Ordeno registros, comparo opciones y convierto reportes en acción.", icon: ShieldCheck },
+        { title: "Criterio de producto", description: "Entiendo la fricción de usuario y la traduzco en comportamiento útil del producto.", icon: Target },
+        { title: "Mentalidad builder", description: "Automatizo trabajo repetido y lanzo herramientas ligeras que la gente puede usar.", icon: Wrench },
       ],
+    },
+    footer: {
+      updated: "Portfolio actualizado en mayo de 2026",
+      rights: "Las muestras públicas están anonimizadas y usan etiquetas demo cuando hace falta.",
     },
   },
 };
@@ -285,18 +270,17 @@ export function EditorialHomepage() {
   return (
     <main className="min-h-screen bg-[#F6F1E8] px-3 py-4 text-[#0D1828] md:px-8 md:py-8 xl:px-12">
       <div className="mx-auto max-w-[1440px] overflow-hidden rounded-[18px] border border-[rgba(20,35,50,0.08)] bg-[#FFFCF7] shadow-[0_24px_80px_rgba(13,18,32,0.10)]">
-        <TopNavigation copy={t} email={profile.email} localizedHref={localizedHref} />
-        <HeroControlRoom copy={t} cvUrl={localizedHref("/resume")} />
+        <TopNavigation copy={t} profile={profile} localizedHref={localizedHref} />
+        <HeroControlRoom copy={t} profile={profile} />
         <ProofStrip items={t.proof} />
+        <RecruiterSnapshot copy={t} profile={profile} />
         <FeaturedProjects
-          actionLabel={t.projects.action}
-          cards={t.projects.cards}
+          copy={t}
           caseStudies={orderedProjects}
-          kicker={t.projects.kicker}
           localizedHref={localizedHref}
-          title={t.projects.title}
         />
         <CareerAndStrengths copy={t} />
+        <SiteFooter copy={t} profile={profile} />
       </div>
     </main>
   );
@@ -304,18 +288,17 @@ export function EditorialHomepage() {
 
 function TopNavigation({
   copy,
-  email,
+  profile,
   localizedHref,
 }: {
   copy: EditorialCopy;
-  email: string;
+  profile: ReturnType<typeof getLocalizedProfile>;
   localizedHref: (href: string) => string;
 }) {
   const navItems = [
-    { label: copy.nav.about, href: "#cv-summary" },
+    { label: copy.nav.home, href: localizedHref("/") },
     { label: copy.nav.projects, href: "#projects" },
-    { label: copy.nav.experience, href: "#career" },
-    { label: copy.nav.cv, href: localizedHref("/resume") },
+    { label: copy.nav.resume, href: localizedHref("/resume") },
   ];
 
   return (
@@ -325,38 +308,67 @@ function TopNavigation({
         <p className="truncate text-sm font-medium text-[#516070]">{copy.nav.industrialEngineer}</p>
       </a>
 
-      <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
+      <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary navigation">
         {navItems.map((item) => (
           <Link
             key={item.label}
-            className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-1 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
+            className="inline-flex min-h-[44px] items-center justify-center rounded-md px-1 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
             href={item.href}
           >
             {item.label}
           </Link>
         ))}
+        <a
+          className="inline-flex min-h-[44px] items-center justify-center rounded-md px-1 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
+          download="Mickoll_Marin_CV_ATS.pdf"
+          href={profile.cvUrl}
+        >
+          {copy.nav.downloadCv}
+        </a>
+        <a
+          className="inline-flex min-h-[44px] items-center justify-center rounded-md px-1 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
+          href={`mailto:${profile.email}`}
+        >
+          {copy.nav.email}
+        </a>
+        <a
+          className="inline-flex min-h-[44px] items-center justify-center rounded-md px-1 text-sm font-bold text-[#0D1828] transition hover:text-[#08A8C7] focus:outline-none focus:ring-2 focus:ring-[#08A8C7]"
+          href={profile.linkedin}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {copy.nav.linkedIn}
+        </a>
       </nav>
 
       <a
-        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-lg border border-amber-400/55 px-3 text-sm font-extrabold text-[#0D1828] transition hover:-translate-y-0.5 hover:border-amber-500 focus:outline-none focus:ring-2 focus:ring-[#08A8C7] md:px-4"
-        href={`mailto:${email}`}
+        className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-lg border border-amber-400/55 px-3 text-sm font-extrabold text-[#0D1828] transition hover:-translate-y-0.5 hover:border-amber-500 focus:outline-none focus:ring-2 focus:ring-[#08A8C7] md:px-4"
+        download="Mickoll_Marin_CV_ATS.pdf"
+        href={profile.cvUrl}
       >
-        <Mail className="h-4 w-4 text-[#F5A623]" />
-        <span className="hidden sm:inline">{copy.nav.connect}</span>
+        <Download className="h-4 w-4 text-[#F5A623]" />
+        <span className="hidden sm:inline">{copy.nav.downloadCv}</span>
+        <span className="sm:hidden">CV</span>
       </a>
     </header>
   );
 }
 
-function HeroControlRoom({ copy, cvUrl }: { copy: EditorialCopy; cvUrl: string }) {
+function HeroControlRoom({
+  copy,
+  profile,
+}: {
+  copy: EditorialCopy;
+  profile: ReturnType<typeof getLocalizedProfile>;
+}) {
   return (
     <section
       className="relative overflow-hidden bg-[#071526] px-5 py-10 text-white md:px-10 md:py-14 lg:px-16 lg:py-16"
       id="top"
     >
-      <div className="absolute inset-0 opacity-75">
+      <div className="absolute inset-0 opacity-75" aria-hidden="true">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:32px_32px]" />
-        <svg className="absolute inset-0 h-full w-full" aria-hidden="true" viewBox="0 0 1200 620" preserveAspectRatio="none">
+        <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1200 620" preserveAspectRatio="none">
           <path d="M710 410 C820 250 955 230 1090 150" fill="none" stroke="rgba(104,231,242,0.22)" strokeWidth="2" />
           <path d="M650 205 C790 320 920 365 1120 330" fill="none" stroke="rgba(245,166,35,0.20)" strokeWidth="2" />
           <path d="M790 470 C860 420 960 445 1065 515" fill="none" stroke="rgba(20,184,132,0.18)" strokeWidth="2" />
@@ -366,61 +378,70 @@ function HeroControlRoom({ copy, cvUrl }: { copy: EditorialCopy; cvUrl: string }
         </svg>
       </div>
 
-      <div className="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div className="relative grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div>
           <p className="max-w-3xl text-xs font-extrabold uppercase tracking-[0.08em] text-[#F5A623]">
             {copy.hero.eyebrow}
           </p>
-          <h1 className="mt-5 max-w-[700px] text-[38px] font-extrabold leading-[1.08] tracking-[-0.035em] text-[#F7FBFF] md:text-[56px] md:leading-[1.05] md:tracking-[-0.04em]">
-            {copy.hero.headline.split(copy.hero.highlight)[0]}
-            <span className="text-[#68E7F2]">{copy.hero.highlight}</span>
-            {copy.hero.headline.split(copy.hero.highlight)[1]}
+          <h1 className="mt-5 max-w-[820px] text-[36px] font-extrabold leading-[1.08] tracking-[-0.035em] text-[#F7FBFF] md:text-[54px] md:leading-[1.05] md:tracking-[-0.04em]">
+            {copy.hero.headline}
           </h1>
-          <p className="mt-5 max-w-[560px] text-[17px] leading-7 text-[#D8E3EF]">
+          <p className="mt-5 max-w-[650px] text-[17px] leading-7 text-[#D8E3EF]">
             {copy.hero.subheadline}
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 xl:flex xl:flex-wrap">
+            <a
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/15 bg-[#08A8C7] px-6 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:brightness-105 focus:outline-none focus:ring-4 focus:ring-cyan-300/35"
-              href={cvUrl}
+              download="Mickoll_Marin_CV_ATS.pdf"
+              href={profile.cvUrl}
             >
-              <FileText className="h-4 w-4" />
-              {copy.hero.scanCv}
-            </Link>
+              <Download className="h-4 w-4" />
+              {copy.hero.downloadCv}
+            </a>
             <a
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-cyan-200/55 px-6 text-sm font-extrabold text-[#F7FBFF] transition hover:-translate-y-0.5 hover:border-cyan-100 focus:outline-none focus:ring-4 focus:ring-cyan-300/35"
               href="#projects"
             >
               <Grid2X2 className="h-4 w-4" />
-              {copy.hero.exploreProjects}
+              {copy.hero.viewCaseStudies}
+            </a>
+            <a
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/20 px-6 text-sm font-extrabold text-[#F7FBFF] transition hover:-translate-y-0.5 hover:border-amber-200 focus:outline-none focus:ring-4 focus:ring-cyan-300/35"
+              href={`mailto:${profile.email}`}
+            >
+              <Mail className="h-4 w-4" />
+              {copy.hero.emailMe}
+            </a>
+            <a
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/20 px-6 text-sm font-extrabold text-[#F7FBFF] transition hover:-translate-y-0.5 hover:border-amber-200 focus:outline-none focus:ring-4 focus:ring-cyan-300/35"
+              href={profile.linkedin}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Linkedin className="h-4 w-4" />
+              {copy.hero.linkedIn}
             </a>
           </div>
         </div>
 
-        <div className="relative hidden min-h-[360px] rounded-[18px] border border-white/12 bg-[#0B1B2D]/80 p-5 shadow-[0_24px_80px_rgba(5,12,22,0.28)] lg:block">
-          <div className="grid h-full grid-rows-[auto_1fr_auto] gap-5">
-            <div className="flex items-center justify-between">
-              <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-cyan-100">Operations map</p>
-              <span className="rounded-full bg-emerald-300/12 px-3 py-1 text-xs font-bold text-emerald-200">remote</span>
-            </div>
-            <div className="grid place-items-center">
-              <div className="relative h-52 w-52 rounded-full border border-white/10">
-                <div className="absolute inset-8 rounded-full border border-cyan-200/20" />
-                <div className="absolute left-5 top-9 rounded-lg border border-cyan-200/25 bg-white/8 px-3 py-2 text-xs font-extrabold text-cyan-100">reports</div>
-                <div className="absolute right-1 top-20 rounded-lg border border-amber-200/25 bg-white/8 px-3 py-2 text-xs font-extrabold text-amber-100">pricing</div>
-                <div className="absolute bottom-7 left-4 rounded-lg border border-emerald-200/25 bg-white/8 px-3 py-2 text-xs font-extrabold text-emerald-100">tracking</div>
-                <div className="absolute bottom-16 right-8 rounded-lg border border-white/20 bg-white/8 px-3 py-2 text-xs font-extrabold text-slate-100">QA/QC</div>
-                <div className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#FFFCF7] text-center text-sm font-extrabold leading-4 text-[#071526] shadow-[0_18px_42px_rgba(104,231,242,0.16)]">
-                  ops
-                  <br />
-                  tools
-                </div>
-              </div>
-            </div>
-            <div className="inline-flex items-center justify-end gap-2 text-sm font-semibold text-[#D8E3EF]">
-              <MapPin className="h-4 w-4 text-[#F5A623]" />
-              {copy.hero.location}
-            </div>
+        <div className="relative rounded-[18px] border border-white/12 bg-[#0B1B2D]/80 p-4 shadow-[0_24px_80px_rgba(5,12,22,0.28)] md:p-5">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-cyan-100">{copy.hero.visualLabel}</p>
+            <span className="rounded-full bg-emerald-300/12 px-3 py-1 text-xs font-bold text-emerald-200">{copy.hero.publicLabel}</span>
+          </div>
+          <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-[14px] border border-white/10 bg-slate-950">
+            <Image
+              alt="Sanitized SolarTrack dashboard preview showing operations status, visits, reports, and project follow-up."
+              className="h-full w-full object-cover"
+              height={760}
+              priority
+              src="/work-samples/solartrack-dashboard.svg"
+              width={1200}
+            />
+          </div>
+          <div className="mt-4 inline-flex items-center justify-end gap-2 text-sm font-semibold text-[#D8E3EF]">
+            <MapPin className="h-4 w-4 text-[#F5A623]" />
+            {copy.hero.location}
           </div>
         </div>
       </div>
@@ -445,28 +466,51 @@ function ProofStrip({ items }: { items: EditorialCopy["proof"] }) {
   );
 }
 
-function FeaturedProjects({
-  actionLabel,
-  cards,
-  caseStudies,
-  kicker,
-  localizedHref,
-  title,
+function RecruiterSnapshot({
+  copy,
+  profile,
 }: {
-  actionLabel: string;
-  cards: EditorialCopy["projects"]["cards"];
+  copy: EditorialCopy;
+  profile: ReturnType<typeof getLocalizedProfile>;
+}) {
+  return (
+    <section className="border-b border-[rgba(13,24,40,0.10)] bg-[#F9F4EC] px-5 py-9 md:px-10 lg:px-16">
+      <div className="grid gap-6 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+        <div>
+          <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#A16207]">{copy.snapshot.kicker}</p>
+          <h2 className="mt-3 max-w-xl text-2xl font-extrabold leading-8 tracking-[-0.02em] text-[#0D1828]">
+            {copy.snapshot.title}
+          </h2>
+        </div>
+        <div className="grid gap-3 md:grid-cols-2">
+          {profile.recruiterSnapshot.map((item) => (
+            <article key={item.label} className="rounded-xl border border-[rgba(13,24,40,0.10)] bg-[#FFFCF7] p-4 shadow-[0_10px_28px_rgba(13,18,32,0.06)]">
+              <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#087D92]">{item.label}</p>
+              <p className="mt-2 text-sm font-semibold leading-6 text-[#516070]">{item.value}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedProjects({
+  copy,
+  caseStudies,
+  localizedHref,
+}: {
+  copy: EditorialCopy;
   caseStudies: CaseStudy[];
-  kicker: string;
   localizedHref: (href: string) => string;
-  title: string;
 }) {
   return (
     <section className="border-b border-[rgba(13,24,40,0.10)] bg-[#FFFCF7] px-5 py-10 md:px-10 md:py-12 lg:px-16" id="projects">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
-          <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#A16207]">{kicker}</p>
+          <p className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#A16207]">{copy.projects.kicker}</p>
           <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-0.02em] text-[#0D1828] md:text-[32px]">
-            {title}
+            {copy.projects.title}
           </h2>
         </div>
       </div>
@@ -474,9 +518,8 @@ function FeaturedProjects({
       <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {caseStudies.map((caseStudy) => (
           <ProjectCard
-            actionLabel={actionLabel}
+            copy={copy}
             caseStudy={caseStudy}
-            content={cards[caseStudy.slug]}
             href={localizedHref(`/case-studies/${caseStudy.slug}`)}
             key={caseStudy.slug}
           />
@@ -487,20 +530,18 @@ function FeaturedProjects({
 }
 
 function ProjectCard({
-  actionLabel,
+  copy,
   caseStudy,
-  content,
   href,
 }: {
-  actionLabel: string;
+  copy: EditorialCopy;
   caseStudy: CaseStudy;
-  content: EditorialCopy["projects"]["cards"][string];
   href: string;
 }) {
   return (
     <Link
-      aria-label={`${actionLabel}: ${content.title}`}
-      className="group overflow-hidden rounded-xl border border-[rgba(13,24,40,0.10)] bg-[#FFFCF7] shadow-[0_12px_32px_rgba(13,18,32,0.08)] transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-[0_18px_42px_rgba(13,18,32,0.12)] focus:outline-none focus:ring-4 focus:ring-cyan-500/20"
+      aria-label={`${copy.projects.open}: ${caseStudy.title}`}
+      className="group flex h-full flex-col overflow-hidden rounded-xl border border-[rgba(13,24,40,0.10)] bg-[#FFFCF7] shadow-[0_12px_32px_rgba(13,18,32,0.08)] transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-[0_18px_42px_rgba(13,18,32,0.12)] focus:outline-none focus:ring-4 focus:ring-cyan-500/20"
       href={href}
     >
       <div className="relative aspect-video overflow-hidden bg-[#F9F4EC]">
@@ -512,20 +553,36 @@ function ProjectCard({
           width={1200}
         />
       </div>
-      <div className="p-5">
-        <div className="flex items-center justify-between gap-3">
-          <span className="rounded-full bg-[#E6F7FB] px-3 py-1 text-xs font-extrabold text-[#087D92]">{content.tag}</span>
-          <ArrowUpRight className="h-4 w-4 text-[#516070] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-lg font-extrabold leading-6 tracking-[-0.015em] text-[#0D1828]">{caseStudy.title}</h3>
+          <ArrowUpRight className="mt-1 h-4 w-4 flex-none text-[#516070] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
-        <h3 className="mt-4 text-lg font-extrabold leading-6 tracking-[-0.015em] text-[#0D1828]">{content.title}</h3>
-        <p className="mt-2 text-sm leading-6 text-[#516070]">{content.description}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {content.stack.map((item) => (
+        <dl className="mt-4 space-y-3 text-sm leading-6">
+          <div>
+            <dt className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#A16207]">{copy.projects.problem}</dt>
+            <dd className="mt-1 text-[#516070]">{caseStudy.cardProblem}</dd>
+          </div>
+          <div>
+            <dt className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#087D92]">{copy.projects.built}</dt>
+            <dd className="mt-1 text-[#516070]">{caseStudy.cardBuilt}</dd>
+          </div>
+          <div>
+            <dt className="text-xs font-extrabold uppercase tracking-[0.08em] text-[#047857]">{copy.projects.value}</dt>
+            <dd className="mt-1 font-semibold text-[#0D1828]">{caseStudy.cardValue}</dd>
+          </div>
+        </dl>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {caseStudy.stack.slice(0, 4).map((item) => (
             <span key={item} className="rounded-md border border-[rgba(13,24,40,0.10)] bg-[#F9F4EC] px-2.5 py-1 text-xs font-bold text-[#516070]">
               {item}
             </span>
           ))}
         </div>
+        <span className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm font-extrabold text-[#08A8C7]">
+          {copy.projects.open}
+          <ArrowUpRight className="h-4 w-4" />
+        </span>
       </div>
     </Link>
   );
@@ -572,5 +629,39 @@ function CareerAndStrengths({ copy }: { copy: EditorialCopy }) {
         </div>
       </article>
     </section>
+  );
+}
+
+function SiteFooter({
+  copy,
+  profile,
+}: {
+  copy: EditorialCopy;
+  profile: ReturnType<typeof getLocalizedProfile>;
+}) {
+  return (
+    <footer className="border-t border-white/12 bg-[#071526] px-5 py-8 text-white md:px-10 lg:px-16">
+      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
+        <div>
+          <p className="text-lg font-extrabold">Mickoll Marin</p>
+          <p className="mt-1 text-sm font-semibold text-[#B8C7D8]">{copy.footer.updated}</p>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[#B8C7D8]">{copy.footer.rights}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <a className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/18 px-4 text-sm font-bold text-white hover:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-300" href={`mailto:${profile.email}`}>
+            <Mail className="h-4 w-4" />
+            {copy.nav.email}
+          </a>
+          <a className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/18 px-4 text-sm font-bold text-white hover:border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-300" href={profile.linkedin} rel="noreferrer" target="_blank">
+            <Linkedin className="h-4 w-4" />
+            {copy.nav.linkedIn}
+          </a>
+          <a className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-white px-4 text-sm font-extrabold text-[#071526] focus:outline-none focus:ring-2 focus:ring-cyan-300" download="Mickoll_Marin_CV_ATS.pdf" href={profile.cvUrl}>
+            <FileText className="h-4 w-4" />
+            {copy.nav.downloadCv}
+          </a>
+        </div>
+      </div>
+    </footer>
   );
 }
