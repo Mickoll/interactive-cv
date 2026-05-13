@@ -572,13 +572,13 @@ function ProjectCard({
             <dd className="mt-1 font-semibold text-[#516070]">{caseStudy.cardRoleRelevance}</dd>
           </div>
         </dl>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <ul aria-label={`${copy.projects.stack}: ${caseStudy.stack.slice(0, 4).join(", ")}`} className="mt-5 flex flex-wrap gap-2">
           {caseStudy.stack.slice(0, 4).map((item) => (
-            <span key={item} className="rounded-md border border-[rgba(13,24,40,0.10)] bg-[#F9F4EC] px-2.5 py-1 text-xs font-bold text-[#516070]">
+            <li key={item} className="rounded-md border border-[rgba(13,24,40,0.10)] bg-[#F9F4EC] px-2.5 py-1 text-xs font-bold text-[#516070]">
               {item}
-            </span>
+            </li>
           ))}
-        </div>
+        </ul>
         <span className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-sm font-extrabold text-[#08A8C7]">
           {copy.projects.open}
           <ArrowUpRight className="h-4 w-4" />

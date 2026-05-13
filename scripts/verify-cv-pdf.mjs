@@ -98,6 +98,8 @@ const required = [
   "Customer Success Specialist",
   "Area Manager",
   "Logistics Specialist",
+  "Used operational metrics and cross-functional communication to support service reliability and process execution.",
+  "Manager | Badajoz Speed Queen",
   "Implementation",
   "Spanish",
   "English",
@@ -118,10 +120,13 @@ const forbidden = [
   "[red" + "acted]",
   "TO" + "DO",
   "lor" + "em",
-  "automation work.Manager",
-  "Download CV CV",
-  "mickoll-interactive-ijdca54lo",
-  "otchos-projects",
+  ["automation work.", "Manager"].join(""),
+  ["process execution.", "Manager"].join(""),
+  ["Download", " CV CV"].join(""),
+  ["mickoll-interactive", "-ijdca54lo"].join(""),
+  ["otchos", "-projects"].join(""),
+  "C:\\Users",
+  ["file", "://"].join(""),
 ];
 
 const lowerText = text.toLowerCase();
@@ -133,6 +138,13 @@ for (const group of requiredGroups) {
 }
 
 const foundForbidden = forbidden.filter((item) => lowerText.includes(item.toLowerCase()));
+
+const pageBreakErrors = [];
+if (!/process execution\.\s*(?:\r?\n|\f)+\s*Manager \| Badajoz Speed Queen/i.test(text)) {
+  pageBreakErrors.push(
+    'Expected a newline or page break between "process execution." and "Manager | Badajoz Speed Queen".'
+  );
+}
 
 const metadataErrors = [];
 if (!metadata) {
@@ -146,7 +158,7 @@ if (!metadata) {
   }
 }
 
-if (missing.length || foundForbidden.length || metadataErrors.length) {
+if (missing.length || foundForbidden.length || metadataErrors.length || pageBreakErrors.length) {
   const messages = [];
   if (missing.length) {
     messages.push(`Missing expected text: ${missing.join(", ")}`);
@@ -156,6 +168,9 @@ if (missing.length || foundForbidden.length || metadataErrors.length) {
   }
   if (metadataErrors.length) {
     messages.push(metadataErrors.join("\n"));
+  }
+  if (pageBreakErrors.length) {
+    messages.push(pageBreakErrors.join("\n"));
   }
   throw new Error(messages.join("\n"));
 }

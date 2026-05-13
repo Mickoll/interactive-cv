@@ -85,13 +85,13 @@ export function ResumeClient() {
         </ResumeSection>
 
         <ResumeSection title={ui.targetRoles}>
-          <div className="flex flex-wrap gap-2 print:gap-1">
+          <ul aria-label={`${ui.targetRoles}: ${profile.targetRoles.join(", ")}`} className="flex flex-wrap gap-2 print:gap-1">
             {profile.targetRoles.map((role) => (
-              <span key={role} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700 print:px-1.5 print:py-0.5 print:text-[8px]">
+              <li key={role} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-bold text-slate-700 print:px-1.5 print:py-0.5 print:text-[8px]">
                 {role}
-              </span>
+              </li>
             ))}
-          </div>
+          </ul>
         </ResumeSection>
 
         <ResumeSection title={ui.coreSkills}>

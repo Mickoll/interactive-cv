@@ -316,7 +316,7 @@ export const caseStudies: CaseStudy[] = [
     cardValue: "Improved evidence-to-report traceability and reduced repeated report formatting.",
     cardRoleRelevance: "Best for: Implementation, workflow automation, technical consulting",
     recruiterSummary:
-      "A local-first inspection report builder that keeps source material, annotations, issue catalogs, and generated DOCX reports connected.",
+      "This project shows how I turn document-heavy field work into a structured reporting workflow with source-to-output traceability, repeatable DOCX generation, and reviewable project records.",
     businessProblem:
       "Inspection reporting depends on many small pieces of evidence. Photos, PDFs, certificates, issue lists, annotations, and Word edits can easily drift apart unless the tool keeps a clean chain from source material to final report.",
     workflowInputs:
@@ -411,7 +411,7 @@ export const caseStudies: CaseStudy[] = [
       "Demonstrates product operations thinking, deployment, status modeling, and operational accountability.",
     cardRoleRelevance: "Best for: Product operations, implementation, technical product",
     recruiterSummary:
-      "A deployed operations PWA for planning solar visits, assigning advisors, tracking reports, and keeping follow-up visible.",
+      "This project shows product-operations thinking: mapping visits, ownership, report status, imports, dashboards, and follow-up into a deployed workflow tool.",
     businessProblem:
       "Solar project work creates many small open loops: scheduled visits, advisor ownership, pending reports, contact details, map context, imports, expenses, and follow-up. The tool was built to make that status easier to see and update.",
     workflowInputs:
@@ -499,7 +499,7 @@ export const caseStudies: CaseStudy[] = [
     cardValue: "Turns fragmented market observations into usable pricing context.",
     cardRoleRelevance: "Best for: RevOps, pricing, BI/data, market intelligence",
     recruiterSummary:
-      "A data product MVP that turns fragmented public listing data into pricing context with freshness, confidence, geography, and reporting layers.",
+      "This project shows how I turn noisy public market data into pricing context through ETL, data quality checks, geospatial structure, confidence/freshness signals, and reporting.",
     businessProblem:
       "Real-estate listing data is noisy. The same property can appear in several places, locations are not always clean, currency can change quickly, and stale listings can distort pricing decisions.",
     workflowInputs:
@@ -592,7 +592,7 @@ export const caseStudies: CaseStudy[] = [
     cardValue: "Public sample covers 1,594 records, 98 systems, and 13,351 checks.",
     cardRoleRelevance: "Best for: Data operations, QA/QC, implementation, BI",
     recruiterSummary:
-      "A QA/QC automation project that converts industrial records and document sets into traceable indexes, checks, summaries, and exports.",
+      "This project shows how I convert document-heavy industrial records into traceable indexes, validation checks, anomaly flags, and review-ready exports.",
     businessProblem:
       "QA/QC documentation is difficult to trust when records are split between spreadsheets, PDF dossiers, repeated references, equipment lists, and manual checks. The work needed a repeatable way to index, validate, and review the material.",
     workflowInputs:

@@ -93,6 +93,7 @@ export const uiText = {
     experienceHighlights: "Experience highlights",
     nextStep: "Next step",
     returnToCv: "Back to the CV",
+    returnToPortfolio: "Back to portfolio",
     home: "Home",
     coreSkills: "Core skills",
     selectedExperience: "Selected experience",
@@ -176,6 +177,7 @@ export const uiText = {
     experienceHighlights: "Experiencia destacada",
     nextStep: "Siguiente paso",
     returnToCv: "Volver al CV",
+    returnToPortfolio: "Volver al portfolio",
     home: "Inicio",
     coreSkills: "Habilidades principales",
     selectedExperience: "Experiencia seleccionada",
@@ -382,7 +384,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     cardValue: "Mejor trazabilidad entre evidencia y reporte, con menos formateo repetido.",
     cardRoleRelevance: "Mejor para: implementación, automatización documental, consultoría técnica",
     recruiterSummary:
-      "Herramienta local para reportes de inspección que conecta material fuente, anotaciones, catálogos de incidencias y documentos DOCX generados.",
+      "Este proyecto muestra cómo convierto trabajo documental de campo en un flujo de reportes con trazabilidad desde la fuente hasta la salida, generación DOCX repetible y registros revisables por proyecto.",
     businessProblem:
       "Los reportes de inspección dependen de muchas piezas pequeñas de evidencia. Fotos, PDFs, certificados, incidencias, anotaciones y ediciones en Word pueden separarse si la herramienta no mantiene una cadena clara hasta el reporte final.",
     workflowInputs:
@@ -472,7 +474,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
       "Demuestra criterio de operaciones de producto, despliegue, modelado de estados y responsabilidad operativa.",
     cardRoleRelevance: "Mejor para: operaciones de producto, implementación, producto técnico",
     recruiterSummary:
-      "PWA desplegada para planificar visitas solares, asignar asesores, seguir reportes y mantener visible el trabajo pendiente.",
+      "Este proyecto muestra criterio de operaciones de producto: visitas, responsables, estado de reportes, importaciones, paneles y seguimiento dentro de una herramienta desplegada.",
     businessProblem:
       "Los proyectos solares generan muchos pendientes pequeños: visitas, asesores, reportes, contactos, mapas, importaciones, gastos y seguimiento. La herramienta organiza ese estado para verlo y actualizarlo con menos fricción.",
     workflowInputs:
@@ -555,7 +557,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     cardValue: "Convierte observaciones de mercado fragmentadas en contexto útil de pricing.",
     cardRoleRelevance: "Mejor para: RevOps, pricing, BI/data, inteligencia de mercado",
     recruiterSummary:
-      "MVP de producto de datos que convierte listados públicos fragmentados en contexto de pricing con frescura, confianza, geografía y reportes.",
+      "Este proyecto muestra cómo convierto datos públicos de mercado en contexto de pricing mediante ETL, controles de calidad, estructura geoespacial, señales de confianza/frescura y reportes.",
     businessProblem:
       "Los datos inmobiliarios públicos son ruidosos. Una propiedad puede repetirse, las ubicaciones no siempre están limpias, la moneda cambia y los anuncios antiguos pueden distorsionar decisiones de pricing.",
     workflowInputs:
@@ -643,7 +645,7 @@ const caseStudyEs: Record<string, Partial<CaseStudy>> = {
     cardValue: "La muestra pública cubre 1.594 registros, 98 sistemas y 13.351 checks.",
     cardRoleRelevance: "Mejor para: operaciones de datos, QA/QC, implementación, BI",
     recruiterSummary:
-      "Proyecto de automatización QA/QC que convierte registros industriales y documentos en índices, controles, resúmenes y exports trazables.",
+      "Este proyecto muestra cómo convierto registros industriales documentales en índices trazables, validaciones, alertas de anomalías y exports listos para revisión.",
     businessProblem:
       "La documentación QA/QC es difícil de confiar cuando vive entre hojas de cálculo, dossiers PDF, referencias repetidas, equipos y revisiones manuales. Hacía falta una forma repetible de indexar, validar y revisar el material.",
     workflowInputs:

@@ -110,6 +110,9 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
                   <h2 className="mt-1 text-2xl font-black text-slate-950">{ui.businessProblem}</h2>
                 </div>
               </div>
+              <p className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-base font-bold leading-7 text-slate-800">
+                {caseStudy.recruiterSummary}
+              </p>
               <p className="mt-5 text-base leading-7 text-slate-600">{caseStudy.businessProblem}</p>
               <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
                 <p className="section-kicker text-slate-500">{ui.roleLabel}</p>
@@ -164,27 +167,26 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
 
             <section className="rounded-[22px] border border-slate-200 bg-[#f4efe4] p-6">
               <h2 className="text-xl font-black text-slate-950">{ui.skillsProven}</h2>
-              <div className="mt-5 flex flex-wrap gap-2">
+              <ul aria-label={`${ui.skillsProven}: ${caseStudy.skillsProven.join(", ")}`} className="mt-5 flex flex-wrap gap-2">
                 {caseStudy.skillsProven.map((skill) => (
-                  <span key={skill} className="rounded-lg border border-white/70 bg-white px-3 py-2 text-sm font-black text-slate-800 shadow-sm">
+                  <li key={skill} className="rounded-lg border border-white/70 bg-white px-3 py-2 text-sm font-black text-slate-800 shadow-sm">
                     {skill}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
               <p className="mt-5 text-base font-black leading-7 text-slate-800">{caseStudy.hiringTakeaway}</p>
             </section>
           </section>
 
           <section className="mt-8 rounded-[22px] border border-slate-200 bg-[#f4efe4] p-6">
-            <p className="section-kicker text-slate-500">{ui.stackEvidence}</p>
-            <h2 className="mt-2 text-2xl font-black text-slate-950">{ui.toolsUsed}</h2>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <h2 className="text-2xl font-black text-slate-950">{ui.toolsUsed}</h2>
+            <ul aria-label={`${ui.toolsUsed}: ${caseStudy.stack.join(", ")}`} className="mt-5 flex flex-wrap gap-2">
               {caseStudy.stack.map((tech) => (
-                <span key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm">
+                <li key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-700 shadow-sm">
                   {tech}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
           <section className="mt-8 grid gap-6 lg:grid-cols-2">
@@ -207,8 +209,7 @@ export function CaseStudyPageClient({ slug }: { slug: string }) {
       <section className="bg-slate-950 text-white">
         <div className="mx-auto grid max-w-[1320px] gap-6 px-5 py-10 md:px-8 lg:grid-cols-[1fr_auto] lg:items-center lg:px-10">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-300">{ui.nextStep}</p>
-            <h2 className="mt-2 text-2xl font-black">{ui.returnToCv}</h2>
+            <h2 className="text-2xl font-black">{ui.returnToPortfolio}</h2>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-950 focus:outline-none focus:ring-2 focus:ring-cyan-300" href={localizedHref("/")}>

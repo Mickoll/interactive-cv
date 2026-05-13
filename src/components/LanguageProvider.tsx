@@ -125,6 +125,7 @@ export function LanguageToggle() {
         {(["en", "es"] as const).map((nextLocale) => (
           <button
             key={nextLocale}
+            aria-label={nextLocale === "en" ? "Switch language to English" : "Cambiar idioma a español"}
             aria-pressed={locale === nextLocale}
             className={clsx(
               "min-h-[44px] min-w-[44px] rounded-xl px-3 py-2 text-xs font-black uppercase tracking-[0.12em] transition focus:outline-none focus:ring-2 focus:ring-cyan-300",
